@@ -1,3 +1,5 @@
+@import "./variables";
+
 /* Navbar button list */
 .navbar-nav {
     margin-left: auto;
@@ -16,7 +18,7 @@
 
         /* Login and SignUp button hover */
         .btn:hover {
-            background-color: $lightGreen;
+            background-color: $light-green;
         }
     }
 }

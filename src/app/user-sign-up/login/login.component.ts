@@ -1,21 +1,23 @@
-import { Component } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
 
-  ngOnInit(){
+  // ngOnInit method
+  ngOnInit(): void{
     this.loginForm = new FormGroup({
         email : new FormControl('', [Validators.required , Validators.email]),
         password : new FormControl('',[Validators.required])
     })
   }
 
+  // getter methods
   get email(){
     return this.loginForm.get('email');
   }
@@ -23,8 +25,8 @@ export class LoginComponent {
     return this.loginForm.get('password');
   }
 
-  onSubmit(){
-    console.log(this.loginForm);
+  // Form submit method
+  onSubmit(): void{
     this.loginForm.reset();
   }
 

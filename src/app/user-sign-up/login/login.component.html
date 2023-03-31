@@ -13,10 +13,10 @@
             <!-- Custom Validation for Email -->
                 <div class="validation" *ngIf="email?.invalid && email?.touched">
                     <small *ngIf="email?.hasError('required')">
-                        Email Required
+                        Email required
                     </small>
                     <small *ngIf="email?.hasError('email')">
-                        Please fill correct Email
+                        Please fill correct email
                     </small>
                 </div>
         </div>
@@ -28,7 +28,7 @@
             <!-- Custom Validation for Password -->
             <div class="validation" *ngIf="password?.invalid && password?.touched">
                 <small *ngIf="password?.hasError('required')">
-                    Password Required
+                    Password required
                 </small>
             </div>
         </div>

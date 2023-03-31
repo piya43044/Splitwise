@@ -1,9 +1,9 @@
-@import '../../layout/_color.scss';
+@import "../../layout/variables";
 
 /* Log in Form container */
 .form-container {
     border-radius: 15px;
-    box-shadow: $offBlack 0px 5px 15px;
+    box-shadow: 0 5px 15px $off-black;
     padding: 20px;
     width: 400px;
 
@@ -13,19 +13,24 @@
         flex-direction: column;
     
         /* Email and password input */
-        input[type=password], [type=email] {
+        input[type=password], 
+        [type=email] {
             width: 100%;
             padding: 12px 20px;
             margin: 5px 0;
             display: inline-block;
-            border: 1px solid $lightGrey1;
+            border: 1px solid $off-grey;
             border-radius: 4px;
             box-sizing: border-box;
         }
 
         // Validation for input tag styling
-        input.ng-invalid.ng-touched {
-            border: 1px solid $red;
+        input {
+            &.ng-invalid {
+                &.ng-touched {
+                    border: 1px solid $red;
+                }
+            }
         }
 
         /* Validation message */
@@ -47,8 +52,10 @@
     }
     
     /* Submit button hover */
-    input[type=submit]:hover {
-        background-color: $lightGreen;
+    input[type=submit]{
+        &:hover {
+            background-color: $light-green;
+        }
     }
 
 
@@ -61,8 +68,10 @@
     }
 
     /* Forget password hover */
-    a:hover {
-        color: $lightGreen;
+    a {
+        &:hover {
+            color: $light-green;
+        }
     }
     
 }

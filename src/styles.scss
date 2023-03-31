@@ -1,13 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
-@import "./app/layout/color";
 @import "./app/layout/navbar";
-@import "./app/layout/variable";
+@import "./app/layout/variables";
 
+/* Univaersal styling*/
 * {
     box-sizing: border-box;
-    font-family: $fontFamily;
+    font-family: $font-family;
 }
 
+/* Html tag styling */
 html {
     height: 100%;
 
