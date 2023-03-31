@@ -1,0 +1,22 @@
+/* Navbar button list */
+.navbar-nav {
+    margin-left: auto;
+
+    /* Navbar button item in the list */
+    .nav-item {
+        padding: 5px 10px;
+        margin-left: auto;
+        
+        /* Login and Signup button */
+        .btn {
+            background-color: $green;
+            color: $white;
+            width: 90px;
+        }
+
+        /* Login and SignUp button hover */
+        .btn:hover {
+            background-color: $lightGreen;
+        }
+    }
+}
