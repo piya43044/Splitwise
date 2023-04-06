@@ -1,7 +1,8 @@
+/* import common styling file */
 @import "./app/layout/navbar";
 @import "./app/layout/variables";
 
-/* Univaersal styling*/
+/* Universal styling */
 * {
     box-sizing: border-box;
     font-family: $font-family;

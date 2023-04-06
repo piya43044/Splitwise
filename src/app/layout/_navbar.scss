@@ -1,3 +1,4 @@
+/* Import common styling */
 @import "./variables";
 
 /* Navbar button list */
@@ -14,11 +15,12 @@
             background-color: $green;
             color: $white;
             width: 90px;
+            
+            /* Login and SignUp button hover */
+            &:hover {
+                background-color: $light-green;
+            }
         }
 
-        /* Login and SignUp button hover */
-        .btn:hover {
-            background-color: $light-green;
-        }
     }
 }
