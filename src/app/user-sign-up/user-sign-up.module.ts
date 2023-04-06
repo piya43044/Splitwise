@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { UserSignUpRoutingModule } from './user-sign-up-routing.module';
 import { UserSignUpComponent } from './user-sign-up.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -15,11 +16,8 @@ import { UserSignUpComponent } from './user-sign-up.component';
   ],
   imports: [
     CommonModule,
-    UserSignUpRoutingModule
-  ],
-  exports: [
-    LoginComponent,
-    RegisterComponent
+    UserSignUpRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class UserSignUpModule { }

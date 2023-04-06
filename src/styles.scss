@@ -1,1 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
+/* import common styling file */
+@import "./app/layout/navbar";
+@import "./app/layout/variables";
+
+/* Universal styling */
+* {
+    box-sizing: border-box;
+    font-family: $font-family;
+}
+
+/* Html tag styling */
+html {
+    height: 100%;
+
+    body {
+        height: 100%;
+    }
+}

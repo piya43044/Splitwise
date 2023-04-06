@@ -1,0 +1,13 @@
+/* Splitwise Logo image */
+img {
+    width: 50px;
+}
+
+/* container for router-outlet */
+.router-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100% - 72px);
+    overflow: auto;
+}

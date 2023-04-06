@@ -6,5 +6,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./user-sign-up.component.scss']
 })
 export class UserSignUpComponent {
-
 }

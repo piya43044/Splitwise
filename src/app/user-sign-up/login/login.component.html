@@ -1,1 +1,43 @@
-<p>login works!</p>
+<div class="form-container">
+    <!-- Log in header -->
+    <h2 id="login">Log in</h2>
+    <hr>
+
+    <!-- Login Form -->
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+        <!-- Email Address -->
+        <div class="form-group mt-3">
+            <label for="email">Email Address</label>
+            <input type="email" class="form-control" id="email" placeholder="Enter email" formControlName="email">
+            <!-- Custom Validation for Email -->
+                <div class="validation" *ngIf="email?.invalid && email?.touched">
+                    <small *ngIf="email?.hasError('required')">
+                        Email required
+                    </small>
+                    <small *ngIf="email?.hasError('email')">
+                        Please fill correct email
+                    </small>
+                </div>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group mt-3 mb-2">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Enter password" formControlName="password">
+            <!-- Custom Validation for Password -->
+            <div class="validation" *ngIf="password?.invalid && password?.touched">
+                <small *ngIf="password?.hasError('required')">
+                    Password required
+                </small>
+            </div>
+        </div>
+
+
+        <!-- Login button -->
+        <input type="submit" value="Login" id="btn" [disabled]="!loginForm.valid">
+
+        <!-- Forget password link -->
+        <a href="#"> Forget your password?</a>
+    </form>
+</div>
