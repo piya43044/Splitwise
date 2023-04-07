@@ -7,7 +7,7 @@
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
         <!-- Email Address -->
-        <div class="form-group mt-3">
+        <div class="form-group flex flex-column mt-3">
             <label for="email">Email Address</label>
             <input type="email" class="form-control" id="email" placeholder="Enter email" formControlName="email">
             <!-- Custom Validation for Email -->
@@ -22,7 +22,7 @@
         </div>
 
         <!-- Password -->
-        <div class="form-group mt-3 mb-2">
+        <div class="form-group flex flex-column mt-3 mb-2">
             <label for="password">Password</label>
             <input type="password" class="form-control" id="password" placeholder="Enter password" formControlName="password">
             <!-- Custom Validation for Password -->

@@ -23,4 +23,33 @@
         }
 
     }
+
+    /* Media query for mobile size */
+    @media screen and (max-width: 575px) {
+
+        /* Navbar button item in the list */
+        .nav-item {
+            width: 100%;
+            text-align: center;
+
+            /* Navbar button item in the list hover*/
+            &:hover {
+                border: 1.5px solid $green;
+                border-radius: 10px;
+            }
+
+            /* Login and Signup button */
+            .btn {
+                background-color: transparent;
+                color: $green;
+                width: 100%;
+
+                /* Login and SignUp button hover */
+                &:hover {
+                    background-color: transparent;
+                    border: none;
+                }
+            }
+        }
+    }
 }

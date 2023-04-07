@@ -7,8 +7,8 @@
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
 
         <!-- User name -->
-        <div class="form-group mt-3">
-            <label for="name"><strong>Hi there! My name is</strong></label>
+        <div class="form-group flex flex-column mt-3">
+            <label for="name">Hi there! <strong>My name is</strong></label>
             <input type="text" class="form-control" id="name" placeholder="Enter your name" formControlName="name">
             <!-- Custom validation for user name -->
             <div class="validation" *ngIf="name?.invalid && name?.touched">
@@ -19,8 +19,8 @@
         </div>
 
         <!-- Email Address -->
-        <div class="form-group mt-3">
-            <label for="email">Here's my <strong>email address:</strong></label>
+        <div class="form-group flex flex-column mt-3">
+            <label for="email">Here's my <strong>Email Address:</strong></label>
             <input type="email" class="form-control" id="email" placeholder="Enter your email" formControlName="email">
             <!-- Custom Validation for Email -->
                 <div class="validation" *ngIf="email?.invalid && email?.touched">
@@ -34,8 +34,8 @@
         </div>
 
         <!-- Password -->
-        <div class="form-group mt-3 mb-2">
-            <label for="password">And here's my <strong>password:</strong></label>
+        <div class="form-group flex flex-column mt-3 mb-2">
+            <label for="password">And here's my <strong>Password:</strong></label>
             <input type="password" class="form-control" id="password" placeholder="Enter password" formControlName="password">
             <!-- Custom Validation for Password -->
             <div class="validation" *ngIf="password?.invalid && password?.touched">
