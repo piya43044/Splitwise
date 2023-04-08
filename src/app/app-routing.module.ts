@@ -6,6 +6,10 @@ const routes: Routes = [
   { path:'' , redirectTo:'login', pathMatch: 'full'}, 
   { path:'', loadChildren:() => import('./user-sign-up/user-sign-up.module')
     .then(mod => mod.UserSignUpModule)},
+  { path:'dashboard', loadChildren:() => import('./dashboard/dashboard.module')
+    .then(mod => mod.DashboardModule) },
+  { path:'group', loadChildren:() => import('./group/group.module')
+    .then(mod => mod.GroupModule) },
   { path:'**', component: PageErrorComponent}
 ];
 

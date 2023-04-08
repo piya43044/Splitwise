@@ -1,0 +1,33 @@
+/* Import common style */
+@import "../../layout/variables";
+
+/* Group container */
+.group-container {
+    border-radius: 15px;
+    box-shadow: 0 5px 15px $off-black;
+    background-color: $light-blue;
+    padding: 20px;
+    width: 600px;
+
+    /* Buttons */
+    .btn {
+        margin-right: 10px;
+    }
+}
+
+/* Media query */
+@media screen and (max-width: 900px) {
+    
+    .group-container {
+        width: auto;
+    }
+}
+
+/* Mediaquery for mobile size */
+@media screen and (max-width: 475px) {
+    .group-container {
+        .group-member {
+            flex-direction: column;
+        }
+    }
+}

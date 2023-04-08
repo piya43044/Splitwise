@@ -4,6 +4,7 @@ import { GroupAddEditComponent } from './group-add-edit/group-add-edit.component
 import { GroupListComponent } from './group-list/group-list.component';
 import { GroupComponent } from './group.component';
 import { GroupRoutingModule } from './group-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -15,7 +16,8 @@ import { GroupRoutingModule } from './group-routing.module';
   ],
   imports: [
     CommonModule,
-    GroupRoutingModule
+    GroupRoutingModule,
+    ReactiveFormsModule
   ],
   exports: [
     GroupAddEditComponent,
