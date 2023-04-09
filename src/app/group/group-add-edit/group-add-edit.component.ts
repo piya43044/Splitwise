@@ -27,7 +27,7 @@ export class GroupAddEditComponent implements OnInit {
     })
   }
 
-  // Add member name and member email Formgroup in add group form
+  // Add member name and member email formgroup in add group form
   memberNameAndEmailForm(): FormGroup{
     return new FormGroup({
       memberName : new FormControl(''),
@@ -45,19 +45,18 @@ export class GroupAddEditComponent implements OnInit {
     return this.addGroupForm.get('groupMember') as FormArray;
   }
 
-  // Add Skill Dynamically
+  // Add member dynamically
   addMemberNameAndEmail(): void{
     this.memberNameEmail.push(this.memberNameAndEmailForm());
   }
 
-  // Delete Skills and Experiene
+  // Delete member name and email
   deleteMemberNameAndEmail(i : number): void{
     this.memberNameEmail.removeAt(i);
   }
 
   // Submit method
   onSubmit(): void{
-    console.log(this.addGroupForm);
     this.addGroupForm.reset();
     this.router.navigate(['group']);
   }

@@ -9,7 +9,7 @@
         <div class="form-group d-flex flex-column mt-3">
             <label for="group-name">Group name </label>
             <input type="text" class="form-control" id="group-name" placeholder="Enter your group name" formControlName="groupName">
-            <!-- Custom Validation for Email -->
+            <!-- Custom validation for Email -->
             <div class="validation" *ngIf="groupName?.invalid && groupName?.touched">
                 <small *ngIf="groupName?.hasError('required')">
                     Group name required
