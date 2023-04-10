@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class TransactionComponent {
 
+  transactionList = [
+    { payer:'Priya', receiver:'Mayank',currency:'USD', amount:1000},
+    { payer:'Harish', receiver:'Mayank',currency:'USD', amount:2000},
+    { payer:'Nikita', receiver:'Priya',currency:'₹' , amount:3000}
+  ];
+  
 }
