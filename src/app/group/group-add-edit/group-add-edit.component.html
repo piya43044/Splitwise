@@ -1,1 +1,81 @@
-<p>group-add-edit works!</p>
+<div class="group-container">
+    <!-- Group heading -->
+    <h3>Start A New Group</h3>
+    <hr>
+
+    <!-- Add group form -->
+    <form [formGroup]="addGroupForm" (ngSubmit)="onSubmit()">
+        <!-- Group name -->
+        <div class="form-group d-flex flex-column mt-3">
+            <label for="group-name">Group name </label>
+            <input type="text" class="form-control" id="group-name" placeholder="Enter your group name" formControlName="groupName">
+            <!-- Custom validation for Email -->
+            <div class="validation" *ngIf="groupName?.invalid && groupName?.touched">
+                <small *ngIf="groupName?.hasError('required')">
+                    Group name required
+                </small>
+            </div>
+        </div>
+
+        <!-- Group share link -->
+        <div class="form-group d-flex flex-column mt-3">
+            <label for="share-link">Group share link</label>
+            <input type="text" class="form-control" id="share-link" placeholder="Group share link" formControlName="shareLink">
+        </div>
+
+        <!-- Group member -->
+        <div class="group-member-container d-flex justify-content-between align-items-center mt-3 mb-3">
+            <label for="group-member">Group Members</label>
+            <button class="btn btn-primary" type="button" (click)="addMemberNameAndEmail()">+ Add member</button>
+        </div>
+
+        <!-- Dynamically group member add-->
+        <ng-container>
+
+            <!-- Group member input fields -->
+            <div formArrayName="groupMember" *ngFor="let member of memberNameEmail.controls; let i=index">
+
+                <div class="group-member form-group d-flex justify-content-between" [formGroupName]="i">
+                    <!-- Group member name -->
+                    <div class="member-name">
+                        <input type="text" class="form-control" placeholder="Name" formControlName="memberName">
+                    </div>
+    
+                    <!-- Group member email -->
+                    <div class="member-email">
+                        <input type="email" class="form-control" placeholder="Email address" formControlName="memberEmail">
+                    </div>
+    
+                    <!-- Delete group member -->
+                    <div class="d-flex justify-content-center align-items-center">
+                        <button class="btn btn-danger h-75" type="button" (click)="deleteMemberNameAndEmail(i)"><i class='fas fa-trash'></i></button>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+
+        <!-- Group type -->
+        <div class="form-group d-flex flex-column mt-3 mb-3">
+            <label for="group-type">Group type</label>
+            <select class="form-control" id="group-type" formControlName="groupType">
+                <option value="Home">Home</option>
+                <option *ngFor="let type of groupTypeArray" [value]="type">{{type}}</option>
+            </select>
+        </div>
+
+        <!-- Simplify deft -->
+        <div class="form-check form-switch mt-4 mb-3">
+            <label class="form-check-label" for="simplify-debt">Simplify Group Debts?</label>
+            <input class="form-check-input border border-secondary" type="checkbox" role="switch" id="simplify-debt">
+        </div>
+
+        <!-- Save and cancel button -->
+        <div class="d-flex justify-content-end">
+            <!-- Save button -->
+            <button type="submit" class="btn btn-success w-20 h-25" [disabled]="!addGroupForm.valid">Save</button>
+    
+            <!-- Cancel button -->
+            <button routerLink="/group" type="button" class="btn btn-primary w-20 h-25">Cancel</button>
+        </div>
+    </form>
+</div>
