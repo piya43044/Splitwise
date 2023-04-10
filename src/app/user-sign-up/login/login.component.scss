@@ -1,5 +1,6 @@
 /* Import common styling */
 @import "../../layout/variables";
+@import "../../layout/button";
 
 /* Log in Form container */
 .form-container {
@@ -7,55 +8,6 @@
     box-shadow: 0 5px 15px $off-black;
     padding: 20px;
     width: 400px;
-
-    /* Form group contains input, label tags, validation */
-    .form-group {
-        display: flex;
-        flex-direction: column;
-    
-        /* Email and password input */
-        input[type=password], 
-        [type=email] {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 5px 0;
-            display: inline-block;
-            border: 1px solid $off-grey;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        // Validation for input tag styling
-        input {
-            &.ng-invalid {
-                &.ng-touched {
-                    border: 1px solid $red;
-                }
-            }
-        }
-
-        /* Validation message */
-        small {
-            color: $red;
-        }
-    }
-    
-    /*  Submit button*/
-    input[type=submit] {
-        width:100%;
-        background-color: $green;
-        color: $white;
-        padding: 14px 20px;
-        margin: 8px 0;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-
-        /* Submit button hover */
-        &:hover {
-            background-color: $light-green;
-        }
-    }
 
     /* Forget password */
     a {

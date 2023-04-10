@@ -1,1 +1,54 @@
-<p>register works!</p>
+<div class="form-container">
+    <!-- Register header -->
+    <h3 id="register">Introduce Yourself</h3>
+    <hr>
+
+    <!-- Register Form -->
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+        <!-- User name -->
+        <div class="form-group flex flex-column mt-3">
+            <label for="name">Hi there! <strong>My name is</strong></label>
+            <input type="text" class="form-control" id="name" placeholder="Enter your name" formControlName="name">
+            <!-- Custom validation for user name -->
+            <div class="validation" *ngIf="name?.invalid && name?.touched">
+                <small *ngIf="name?.hasError('required')">
+                    Name required
+                </small>
+            </div>
+        </div>
+
+        <!-- Email Address -->
+        <div class="form-group flex flex-column mt-3">
+            <label for="email">Here's my <strong>Email Address:</strong></label>
+            <input type="email" class="form-control" id="email" placeholder="Enter your email" formControlName="email">
+            <!-- Custom Validation for Email -->
+                <div class="validation" *ngIf="email?.invalid && email?.touched">
+                    <small *ngIf="email?.hasError('required')">
+                        Email required
+                    </small>
+                    <small *ngIf="email?.hasError('email')">
+                        Please fill correct email
+                    </small>
+                </div>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group flex flex-column mt-3 mb-2">
+            <label for="password">And here's my <strong>Password:</strong></label>
+            <input type="password" class="form-control" id="password" placeholder="Enter password" formControlName="password">
+            <!-- Custom Validation for Password -->
+            <div class="validation" *ngIf="password?.invalid && password?.touched">
+                <small *ngIf="password?.hasError('required')">
+                    Password required
+                </small>
+                <small *ngIf="password?.hasError('pattern')">
+                    Password must contain more than 8 characters with 1 upper case letter and 1 special character
+                </small>
+            </div>
+        </div>
+
+        <!-- Sign Up button -->
+        <input type="submit" value="Sign me up!" id="btn" [disabled]="!registerForm.valid">
+    </form>
+</div>

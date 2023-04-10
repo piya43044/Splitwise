@@ -1,0 +1,18 @@
+/* Import common styling */
+@import "../../layout/variables";
+@import "../../layout/button";
+
+/* Register Form container */
+.form-container {
+    border-radius: 15px;
+    box-shadow: 0 5px 15px $off-black;
+    padding: 20px;
+    width: 400px;
+}
+
+// Media Query for mobile size
+@media screen and (max-width: 425px) {
+    .form-container{
+        max-width: 300px;
+    }
+}
