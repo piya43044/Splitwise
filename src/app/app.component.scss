@@ -1,12 +1,82 @@
+@import "../app/layout/variables";
+
 /* Splitwise Logo image */
 img {
     width: 50px;
 }
 
-/* container for router-outlet */
+/* Sidebar nav button*/
+.side-nav-button {
+    cursor: pointer;
+    font-size: 20px;
+}
+
+/* Sidebar */
+.sidebar {
+    position: absolute;
+    left: 0;
+    width: 55px;
+    height: calc(100% - 72px);
+    background-color: $green;
+    border-top: 1px solid $white;
+    overflow-x: hidden;
+    white-space: nowrap;
+    transition: width 250ms ease-in;
+}
+
+/* When sidebar open */
+.sidebar-open {
+    width: 230px;
+}
+
+/* Container for router-outlet */
 .router-container {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 30px;
+    width: calc(100% - 55px);
+    position: absolute;
+    left: 55px;
+    transition: left 250ms ease-in,width 250ms ease-in;
 }
+
+/* Container for router-outlet when open the sidebar*/
+.router-container-shrink {
+    width: calc(100% - 230px);
+    left: 230px;
+}
+
+
+/* Small screen */
+@media screen and (max-width: 535px) {
+    /* Sidebar */
+    .sidebar {
+      width: 0;
+      border: none;
+    }
+  
+    /* When sidebar open */
+    .sidebar-open {
+      width: 100%;
+    }
+  
+    /* Container for router-outlet */
+    .router-container {
+      width: 100%;
+      left: 0;
+    }
+  
+    /* Container for router-outlet when open the sidebar*/
+    .router-container-shrink {
+      width: 100%;
+      left: 0;
+      visibility: hidden;
+      white-space: nowrap;
+    }
+  
+    /* Sidebar nav button*/
+    .side-nav-button {
+      font-size: 16px;
+    }
+  }

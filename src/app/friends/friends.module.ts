@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FriendsAddEditComponent } from './friends-add-edit/friends-add-edit.component';
 import { FriendsListComponent } from './friends-list/friends-list.component';
 import { FriendsComponent } from './friends.component';
-
+import { FriendsRoutingModule } from './friends-routing.module';
 
 
 @NgModule({
@@ -13,7 +13,8 @@ import { FriendsComponent } from './friends.component';
     FriendsComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FriendsRoutingModule
   ],
   exports: [
     FriendsAddEditComponent,

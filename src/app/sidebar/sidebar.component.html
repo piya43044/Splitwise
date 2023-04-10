@@ -1,0 +1,40 @@
+<div class="side-nav-content">
+    <ul class="nav-list p-0 m-0" [ngClass]="{'nav-list-open': sideNavStatus}">
+
+        <!-- Dashboard -->
+        <li class="nav-list-item" routerLink="/dashboard">
+            <i class="fa fa-home"></i>
+            <a>Dashboard</a>
+        </li>
+
+        <!-- Group -->
+        <li class="nav-list-item" routerLink="/group/group-list">
+            <i class="fas fa-user-friends"></i>
+            <a > Groups</a>
+        </li>
+
+        <!-- Friends -->
+        <li class="nav-list-item" routerLink="/friends/friends-list">
+            <i class='far fa-handshake'></i>
+            <a>Friends</a>
+        </li>
+
+        <!-- Transaction List-->
+        <li class="nav-list-item" routerLink="/transaction">
+            <i class='fas fa-tag'></i>
+            <a>Transaction List</a>
+        </li>
+
+        <!-- Expenses -->
+        <li class="nav-list-item"  routerLink="/expense/expense-list">
+            <i class="	fa fa-credit-card"></i>
+            <a>Expenses</a>
+        </li>
+
+        <!-- SettleUp -->
+        <li class="nav-list-item"  routerLink="/settleUp/transaction-pattern">
+            <i class="fab fa-stripe-s"></i>
+            <a>Settle Up</a>
+        </li>
+    </ul>
+</div>

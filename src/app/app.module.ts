@@ -5,12 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PageErrorComponent } from './page-error/page-error.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    PageErrorComponent
+    PageErrorComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,

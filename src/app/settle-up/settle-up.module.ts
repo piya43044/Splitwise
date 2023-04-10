@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { OweListComponent } from './owe-list/owe-list.component';
 import { TransactionPatternComponent } from './transaction-pattern/transaction-pattern.component';
 import { SettleUpComponent } from './settle-up.component';
-
+import { SettleUpRoutingModule } from './settle-up-routing.module';
 
 
 @NgModule({
@@ -13,7 +13,8 @@ import { SettleUpComponent } from './settle-up.component';
     SettleUpComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    SettleUpRoutingModule
   ],
   exports: [
     OweListComponent,

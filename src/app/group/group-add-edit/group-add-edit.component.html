@@ -1,6 +1,13 @@
 <div class="group-container">
     <!-- Group heading -->
-    <h3>Start A New Group</h3>
+    <div *ngIf="isGroupAddActive; then groupAdd else groupEdit">
+    </div>
+    <ng-template #groupAdd>
+        <h3>Start A New Group</h3>
+    </ng-template>
+    <ng-template #groupEdit>
+        <h3>Edit Group</h3>
+    </ng-template>
     <hr>
 
     <!-- Add group form -->
@@ -75,7 +82,7 @@
             <button type="submit" class="btn btn-success w-20 h-25" [disabled]="!addGroupForm.valid">Save</button>
     
             <!-- Cancel button -->
-            <button routerLink="/group" type="button" class="btn btn-primary w-20 h-25">Cancel</button>
+            <button routerLink="/group/group-list" type="button" class="btn btn-primary w-20 h-25">Cancel</button>
         </div>
     </form>
 </div>
