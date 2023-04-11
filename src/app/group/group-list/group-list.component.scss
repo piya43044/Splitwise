@@ -1,0 +1,55 @@
+/* Import common styling */
+@import "../../layout/variables";
+
+/* Group container */
+.groups-container {
+    width: 700px;
+    
+    /* Group table */
+    .table {
+        border-left: 1px solid $off-grey;
+        border-right: 1px solid $off-grey;
+
+        /* Buttons */
+        .btn {
+            margin-right: 5px;
+        }
+
+        /* Group name */
+        a {
+            text-decoration: none;
+            color: $black;
+    
+            /* Group name hover */
+            &:hover {
+                color: $blue;
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+/* Media querys */
+@media screen and (max-width: 1000px) {
+    .groups-container {
+        width: 500px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .groups-container {
+        width: 300px;
+
+        /* Add expense and settle up button */
+        .expense-settleup {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .groups-container {
+        width: 200px;
+    }
+}
