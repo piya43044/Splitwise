@@ -1,0 +1,33 @@
+/* Import common style */
+@import "../../layout/variables";
+
+/* Frien container */
+.friend-container {
+    border-radius: 15px;
+    box-shadow: 0 5px 15px $off-black;
+    background-color: $light-blue;
+    padding: 20px;
+    width: 600px;
+
+    /* Buttons */
+    .btn {
+        margin-right: 10px;
+    }
+}
+
+/* Media query */
+@media screen and (max-width: 900px) {
+    
+    .friend-container {
+        width: auto;
+    }
+}
+
+/* Mediaquery for mobile size */
+@media screen and (max-width: 475px) {
+    .friend-container {
+        .friend-member {
+            flex-direction: column;
+        }
+    }
+}

@@ -4,6 +4,7 @@ import { FriendsAddEditComponent } from './friends-add-edit/friends-add-edit.com
 import { FriendsListComponent } from './friends-list/friends-list.component';
 import { FriendsComponent } from './friends.component';
 import { FriendsRoutingModule } from './friends-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { FriendsRoutingModule } from './friends-routing.module';
   ],
   imports: [
     CommonModule,
-    FriendsRoutingModule
+    FriendsRoutingModule,
+    ReactiveFormsModule
   ],
   exports: [
     FriendsAddEditComponent,

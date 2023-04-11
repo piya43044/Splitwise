@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 
 @Component({
@@ -12,10 +12,11 @@ export class GroupAddEditComponent implements OnInit {
 
   addGroupForm !: FormGroup;
   groupTypeArray: string[] = ['Trip', 'Couple', 'Other'];
-  isGroupAddActive: Boolean = true;
+  isGroupAddActive: Boolean = false;
+  getActivatedRouteParam : String = '';
 
   // Constructor
-  constructor( private router: Router){};
+  constructor( private router: Router, private activatedRoute: ActivatedRoute){};
 
   // ngOnInit method
   ngOnInit(): void {
@@ -26,6 +27,18 @@ export class GroupAddEditComponent implements OnInit {
       groupMember: new FormArray([
         this.memberNameAndEmailForm()
       ]),
+    })
+
+    // get activatedRoute parameter using observable
+    this.activatedRoute.params.subscribe((param) =>{
+      this.getActivatedRouteParam = param['routerParam'];
+      console.log(this.getActivatedRouteParam)
+      if(this.getActivatedRouteParam === undefined ){
+        this.isGroupAddActive = true;
+      }
+      else{
+        this.isGroupAddActive = false;
+      }
     })
   }
 
@@ -60,6 +73,6 @@ export class GroupAddEditComponent implements OnInit {
   // Submit method
   onSubmit(): void{
     this.addGroupForm.reset();
-    this.router.navigate(['group']);
+    this.router.navigate(['group/group-list']);
   }
 }

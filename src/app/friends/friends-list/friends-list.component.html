@@ -1,1 +1,73 @@
-<p>friends-list works!</p>
+<div class="friend-container">
+ 
+    <!-- If friend detail is not active then it shows friend list -->
+    <ng-container *ngIf="!isFriendDetailActive">
+        
+        <table class="table table-bordered table-hover">
+            <!-- Friend header with add friend button -->
+            <thead class="table-info">
+              <tr>
+                <div class="d-flex justify-content-between align-items-center">
+                  <h4>Friends</h4>
+                  <button class="btn btn-primary" routerLink="/friends/friends-add">+ Add Friend</button>
+                </div>
+              </tr>
+            </thead>
+      
+            <!-- Friend list -->
+            <tbody>
+              <tr *ngFor="let friend of friends; let i=index">
+                <div class="d-flex justify-content-between align-items-center">
+                  <!-- friend name -->
+                  <a class="p-2" (click)="friendDetailShow(friend.friendName, i)">{{friend.friendName}}</a>
+      
+                  <!-- Edit and delete button -->
+                  <div>
+                    <!-- Edit button -->
+                    <button type="button" class="btn btn-outline-dark" (click)="navigateToEditForm(i)"><i class='fas fa-pen'></i></button>
+                    <!-- Delete button -->
+                    <button type="button" class="btn btn-outline-dark" (click)="deletefriend(i)"><i class='fas fa-trash'></i></button>
+                  </div>
+                </div>
+              </tr>
+            </tbody>
+        </table>
+        
+    </ng-container>
+
+    <!-- If friend detail is active then it shows friend detail with transaction and expense list -->
+    <ng-container *ngIf="isFriendDetailActive">
+        <table class="table table-hover">
+            <!-- friend header with add friend button -->
+            <thead class="table-info">
+              <tr>
+                <td colspan="3">
+                  <div class="d-flex justify-content-between align-items-center">
+  
+                    <!-- friend Name -->
+                    <h4>{{friendNameDetail}}</h4>
+  
+                    <!-- Add Expense and settle up button -->
+                    <div class="expense-settleup">
+                      <button class="btn btn-primary" type="button" routerLink="/expense/expense-add">Add Expense</button>
+                      <button class="btn btn-success" type="button" routerLink="/settleUp/transaction-pattern">Settle Up</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </thead>
+      
+            <!-- friend transaction list -->
+            <tbody>
+                <tr *ngFor="let detail of FriendDetailList">
+                    <td>
+                      <a routerLink="/group/group-list/{{detail.groupName}}">{{detail.groupName}}</a>
+                    </td>
+                    <td><em>{{detail.payer}} owes {{detail.receiver}}</em></td>
+                    <td><strong>{{detail.currency}}{{detail.amount}}</strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </ng-container>
+ 
+</div>
