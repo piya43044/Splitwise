@@ -1,1 +1,60 @@
-<p>Dashboard</p>
+<div class="dashboard-container">
+ 
+    <table class="table table-bordered table-hover">
+        <!-- Dashboard header -->
+        <thead class="table-info">
+          <tr>
+            <td colspan="3">
+                <div class="d-flex justify-content-between align-items-center">
+                  <h4>Dashboard</h4>
+    
+                  <div class="expense-settleup">
+                      <button class="btn btn-primary" routerLink="/expense/expense-add">Add Expense</button>
+                      <button class="btn btn-success" routerLink="/settleUp/transaction-pattern">Settle Up</button>
+                  </div>
+                </div>
+            </td>
+          </tr>
+        </thead>
+  
+        <!-- Dashboard Detail -->
+        <tbody>
+
+            <!-- Balance detail -->
+            <tr>
+                <th>
+                    <div>
+                        <p>Total balance:</p>
+                        <p>{{totalBalanceSign}}{{totalBalance}}</p>
+                    </div>
+                </th>
+                <th>
+                    <div>
+                        <p>You owe:</p>
+                        <p>{{totalOwe}}</p>
+                    </div>
+                </th>
+                <th>
+                    <div>
+                        <p>You are owed:</p>
+                        <p>{{totalOwed}}</p>
+                    </div>
+                </th>
+            </tr>
+
+            <!-- Owe/Owed Details -->
+            <tr *ngFor="let detail of balanceDetail">
+                <td colspan="3">
+                    <div *ngIf="detail.owe =='owe'" class="d-flex flex-column justify-content-center align-items-center">
+                        <a routerLink="/friends/friends-list/{{detail.person}}">{{detail.person}}</a>
+                        <p>You owe {{detail.currency}}{{detail.amount}}</p>
+                    </div>
+                    <div *ngIf="detail.owe == 'owed'" class="d-flex flex-column justify-content-center align-items-center">
+                        <a routerLink="/friends/friends-list/{{detail.person}}">{{detail.person}}</a>
+                        <p>owes you {{detail.currency}}{{detail.amount}}</p>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
