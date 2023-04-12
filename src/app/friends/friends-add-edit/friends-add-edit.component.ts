@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-friends-add-edit',
@@ -7,4 +9,45 @@ import { Component } from '@angular/core';
 })
 export class FriendsAddEditComponent {
 
+  addFriendForm !: FormGroup;
+  isFriendAddActive: Boolean = false;
+  getActivatedRouteParam : String = '';
+
+  // Constructor
+  constructor( private router: Router, private activatedRoute: ActivatedRoute){};
+  // ngOnInit method
+  ngOnInit(): void {
+    this.addFriendForm = new FormGroup({
+      friendName: new FormControl('', [Validators.required]),
+      friendEmail: new FormControl('', [Validators.required]),
+      friendMessage: new FormControl(''),
+    })
+
+    // get activatedRoute parameter using observable
+    this.activatedRoute.params.subscribe((param) =>{
+      this.getActivatedRouteParam = param['routerParam'];
+      console.log(this.getActivatedRouteParam)
+      if(this.getActivatedRouteParam === undefined ){
+        this.isFriendAddActive = false;
+      }
+      else{
+        this.isFriendAddActive = true;
+      }
+    })
+  }
+
+  // Getter methods
+  get friendEmail(){
+    return this.addFriendForm.get('friendEmail');
+  }
+
+  get friendName(){
+    return this.addFriendForm.get('friendName');
+  }
+
+  // Submit method
+  onSubmit(): void{
+    this.addFriendForm.reset();
+    this.router.navigate(['friends/friends-list']);
+  }
 }

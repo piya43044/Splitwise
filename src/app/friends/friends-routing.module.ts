@@ -8,6 +8,7 @@ const routes: Routes = [
   { path:'friends-add', component: FriendsAddEditComponent },
   { path:'friends-list', component: FriendsListComponent },
   { path:'friends-edit/:routerParam', component: FriendsAddEditComponent },
+  { path:'friends-list/:routerParam', component: FriendsListComponent },
 ];
 
 @NgModule({
