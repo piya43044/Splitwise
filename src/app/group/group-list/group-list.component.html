@@ -57,12 +57,27 @@
               </tr>
             </thead>
       
-            <!-- Group transaction list -->
+            <!-- Group transaction list and expense list -->
             <tbody>
                 <tr *ngFor="let transaction of transactionList">
                     <td>{{transaction.payer}} paid <strong>{{transaction.currency}}{{transaction.amount}}</strong> to {{transaction.receiver}}</td>
                     <td><em>{{transaction.payer}} paid</em></td>
                     <td><strong>{{transaction.currency}}{{transaction.amount}}</strong></td>
+                </tr>
+                <tr *ngFor="let expense of expenseList">
+                  <td><a routerLink="/expense/expense-edit/{{expense.expenseName}}">{{expense.expenseName}}</a></td>
+                  <td>
+                    <div class="d-flex flex-column">
+                      <p>{{expense.paidBy}} paid</p>
+                      <p>{{expense.currency}}{{expense.paidAmount}}</p>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex flex-column">
+                      <p>{{expense.paidBy}} lent {{expense.lent}}</p>
+                      <p>{{expense.currency}}{{expense.lentAmount}}</p>
+                    </div>
+                  </td>
                 </tr>
             </tbody>
         </table>

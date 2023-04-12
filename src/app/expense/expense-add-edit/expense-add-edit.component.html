@@ -1,1 +1,72 @@
-<p>expense-add-edit works!</p>
+<div class="expense-container">
+    <!-- expense heading -->
+    <div *ngIf="isExpenseAddActive; then expenseAdd else expenseEdit">
+    </div>
+    <ng-template #expenseAdd>
+        <h3>Add expense</h3>
+    </ng-template>
+    <ng-template #expenseEdit>
+        <h3>Edit expense</h3>
+    </ng-template>
+    <hr>
+
+    <!-- Add expense form -->
+    <form>
+
+        <!-- description about expense -->
+        <div class="form-group mt-2">
+            <label for="description">Description:</label>
+            <input type="text" class="form-control" id="description" name="description" placeholder="Enter a description" required>
+        </div>
+
+
+        <!-- Amount of expense -->
+        <div class="form-group mt-2">
+            <label for="amount">Amount:</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <select class="form-control" id="currency-type">
+                        <option value="₹">₹</option>
+                        <option *ngFor="let type of currency" [value]="type">{{type}}</option>
+                    </select>
+                </div>
+                <input type="number" class="form-control" id="amount" name="amount" min="0" placeholder="Enter amount" required>
+            </div>
+        </div>
+
+        <!-- Group selection -->
+        <div class="form-group mt-2">
+            <label for="group-type">Groups</label>
+            <select class="form-control" id="group-type">
+                <option value="no-group">No Group</option>
+                <option *ngFor="let group of groups" [value]="group">{{group}}</option>
+            </select>
+        </div>
+
+
+        <!-- split condition  -->
+        <div class="form-group mt-2">
+            <label for="split">Split:</label>
+            <select class="form-control" id="split" name="split">
+          <option value="equal">Split equally</option>
+          <option value="unequal">Split by amount</option>
+          <option value="shares">Split by %</option>
+        </select>
+        </div>
+
+        <!-- participants included -->
+        <div class="form-group mt-2">
+            <label for="participants">Participants:</label>
+            <input type="text" class="form-control" id="participants" name="participants" placeholder="Enter participant" required>
+        </div>
+
+        <!-- Save and cancel button -->
+        <div class="d-flex justify-content-end">
+            <!-- Save button -->
+            <button type="submit" class="btn btn-success w-20 h-25" routerLink="/expense/expense-list">Save</button>
+    
+            <!-- Cancel button -->
+            <button routerLink="/expense/expense-list" type="button" class="btn btn-primary w-20 h-25">Cancel</button>
+        </div>
+    </form>
+</div>

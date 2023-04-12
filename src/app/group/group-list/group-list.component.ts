@@ -24,6 +24,12 @@ export class GroupListComponent implements OnInit {
     { payer:'Nikita', receiver:'Priya',currency:'₹' , amount:3000}
   ];
 
+  expenseList = [
+    { expenseName:'Book', paidBy:'Mayank', lent:'Harish', paidAmount:'5000', lentAmount:'1666', currency:'₹'},
+    { expenseName:'Food', paidBy:'Priya', lent:'Nikita', paidAmount:'500', lentAmount:'166', currency:'₹'},
+    { expenseName:'Taxi', paidBy:'Harish', lent:'Nikita', paidAmount:'1000', lentAmount:'666', currency:'USD'}
+  ]
+
 
   // Constructor
   constructor( private router: Router, private activatedRoute: ActivatedRoute){};

@@ -27,8 +27,11 @@
         <!-- expense transaction list -->
         <tbody>
             <tr *ngFor="let expense of expenseList">
-                <td routerLink="/expense/expense-edit/expense.expenseName">
-                    <a>{{expense.expenseName}}</a>
+                <td>
+                  <div class="d-flex flex-column">
+                    <a routerLink="/expense/expense-edit/{{expense.expenseName}}">Expense: {{expense.expenseName}}</a>
+                    <a routerLink="/group/group-list/{{expense.groupName}}">Group: {{expense.groupName}}</a>
+                  </div>
                 </td>
                 <td><em>{{expense.paidBy}}</em></td>
                 <td>{{expense.lentOrBorrow}}</td>
