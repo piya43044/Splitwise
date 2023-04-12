@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-group-add-edit',
@@ -11,6 +12,7 @@ export class GroupAddEditComponent implements OnInit {
 
   addGroupForm !: FormGroup;
   groupTypeArray: string[] = ['Trip', 'Couple', 'Other'];
+  isGroupAddActive: Boolean = true;
 
   // Constructor
   constructor( private router: Router){};

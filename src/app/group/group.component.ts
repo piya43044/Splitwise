@@ -7,5 +7,5 @@ import { Router } from '@angular/router';
   styleUrls: ['./group.component.scss']
 })
 export class GroupComponent {
-
+  
 }

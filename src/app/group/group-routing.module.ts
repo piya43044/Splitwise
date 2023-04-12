@@ -8,6 +8,7 @@ const routes: Routes = [
   { path:'group-add', component: GroupAddEditComponent },
   { path:'group-list', component: GroupListComponent },
   { path:'group-edit/:routerParam', component: GroupAddEditComponent },
+  { path:'group-list/:routerParam', component: GroupListComponent}
 ];
 
 @NgModule({

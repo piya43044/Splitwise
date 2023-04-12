@@ -1,15 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, map } from 'rxjs';
 
 @Component({
   selector: 'app-group-list',
   templateUrl: './group-list.component.html',
   styleUrls: ['./group-list.component.scss']
 })
-export class GroupListComponent {
+export class GroupListComponent implements OnInit {
 
-  isGroupDetailActive!: Boolean;
+  isGroupDetailActive: Boolean = false;
+  getActivatedRouteParam : String = '';
   groupNameDetail!: string;
   groups = [
     { groupName: 'Mathura'},
@@ -19,7 +19,7 @@ export class GroupListComponent {
   ];
 
   transactionList = [
-    { payer: 'Priya', receiver:'Mayank',currency:'USD', amount:1000},
+    { payer:'Priya', receiver:'Mayank',currency:'USD', amount:1000},
     { payer:'Harish', receiver:'Mayank',currency:'USD', amount:2000},
     { payer:'Nikita', receiver:'Priya',currency:'₹' , amount:3000}
   ];
@@ -29,14 +29,19 @@ export class GroupListComponent {
   constructor( private router: Router, private activatedRoute: ActivatedRoute){};
 
   // ngOnInit method
-  ngOnInit() {
-    this.isGroupDetailActive = false;
+  ngOnInit(): void {
+    
+    // get activatedRoute parameter using observable
+    this.activatedRoute.params.subscribe((param) =>{
+      this.getActivatedRouteParam = param['routerParamId'];
+    })
   }
 
   // Group detail show
-  groupDetailShow(name: string): void{
+  groupDetailShow(name: string, index: number): void{
     this.isGroupDetailActive = true;
     this.groupNameDetail = name;
+    this.router.navigate(['group','group-list',index]);
   }
 
   // Navigate to edit form

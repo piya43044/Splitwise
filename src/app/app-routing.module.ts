@@ -10,6 +10,14 @@ const routes: Routes = [
     .then(mod => mod.DashboardModule) },
   { path:'group', loadChildren:() => import('./group/group.module')
     .then(mod => mod.GroupModule) },
+  { path:'transaction', loadChildren:() => import('./transaction/transaction.module')
+    .then(mod => mod.TransactionModule) },
+  { path:'friends', loadChildren:() => import('./friends/friends.module')
+    .then(mod => mod.FriendsModule) },
+  { path:'expense', loadChildren:() => import('./expense/expense.module')
+    .then(mod => mod.ExpenseModule) },
+  { path:'settleUp', loadChildren:() => import('./settle-up/settle-up.module')
+    .then(mod => mod.SettleUpModule) },
   { path:'**', component: PageErrorComponent}
 ];
 
