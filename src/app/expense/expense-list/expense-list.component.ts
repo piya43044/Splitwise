@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class ExpenseListComponent {
 
+  expenseList = [
+    { expenseName:'Books' , paidBy:'Priya', lentOrBorrow:'lent'},
+    { expenseName:'Food' , paidBy:'Mayank', lentOrBorrow:'borrow'},
+    { expenseName:'Notes' , paidBy:'Nikita', lentOrBorrow:'borrow'},
+    { expenseName:'Taxi' , paidBy:'Harish', lentOrBorrow:'lent'},
+  ]
 }
