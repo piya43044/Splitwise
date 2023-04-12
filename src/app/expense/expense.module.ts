@@ -4,6 +4,7 @@ import { ExpenseAddEditComponent } from './expense-add-edit/expense-add-edit.com
 import { ExpenseListComponent } from './expense-list/expense-list.component';
 import { ExpenseComponent } from './expense.component';
 import { ExpenseRoutingModule } from './expense-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -15,7 +16,8 @@ import { ExpenseRoutingModule } from './expense-routing.module';
   ],
   imports: [
     CommonModule,
-    ExpenseRoutingModule
+    ExpenseRoutingModule,
+    ReactiveFormsModule
   ],
   exports: [
     ExpenseAddEditComponent,

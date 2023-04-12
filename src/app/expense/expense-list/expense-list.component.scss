@@ -1,0 +1,49 @@
+/* Import common styling */
+@import "../../layout/variables";
+
+/* Expense container */
+.expense-container {
+    width: 700px;
+    
+    /* Buttons */
+    .btn {
+        margin-right: 5px;
+    }
+
+    /* Expense name */
+    a {
+        text-decoration: none;
+        color: $black;
+
+        /* Expense name hover */
+        &:hover {
+            color: $blue;
+            text-decoration: underline;
+        }
+    }
+}
+
+/* Media querys */
+@media screen and (max-width: 1000px) {
+    .expense-container {
+        width: 500px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .expense-container {
+        width: 300px;
+
+        /* Add expense and settle up button */
+        .expense-settleup {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .expense-container {
+        width: 200px;
+    }
+}

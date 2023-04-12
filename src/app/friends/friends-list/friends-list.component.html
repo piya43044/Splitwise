@@ -60,11 +60,15 @@
             <!-- friend transaction list -->
             <tbody>
                 <tr *ngFor="let detail of FriendDetailList">
-                    <td>
-                      <a routerLink="/group/group-list/{{detail.groupName}}">{{detail.groupName}}</a>
+                    <td *ngIf="friendNameDetail === detail.payer || friendNameDetail === detail.receiver">
+                      <div class="d-flex justify-content-between">
+                        <a routerLink="/group/group-list/{{detail.groupName}}">{{detail.groupName}}</a>
+                        <div class="d-flex flex-column">
+                          <em>{{detail.payer}} owes {{detail.receiver}}</em>
+                          <strong>{{detail.currency}}{{detail.amount}}</strong>
+                        </div>
+                      </div>
                     </td>
-                    <td><em>{{detail.payer}} owes {{detail.receiver}}</em></td>
-                    <td><strong>{{detail.currency}}{{detail.amount}}</strong></td>
                 </tr>
             </tbody>
         </table>
