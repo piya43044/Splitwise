@@ -1,1 +1,21 @@
-<p>transaction works!</p>
+<div class="container">
+    <table class="table table-hover">
+        <!-- Transaction List header -->
+        <thead class="table-info">
+          <tr>
+            <td colspan="3">
+                <h4>Transaction List</h4>
+            </td>
+          </tr>
+        </thead>
+    
+        <!-- Transaction list details -->
+        <tbody>
+            <tr *ngFor="let transaction of transactionList">
+                <td>{{transaction.payer}} paid <strong>{{transaction.currency}}{{transaction.amount}}</strong> to {{transaction.receiver}}</td>
+                <td><em>{{transaction.payer}} paid</em></td>
+                <td><strong>{{transaction.currency}}{{transaction.amount}}</strong></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

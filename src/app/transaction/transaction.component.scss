@@ -1,0 +1,37 @@
+/* Import common styling */
+@import "../layout/variables";
+
+/* Transaction list container */
+.container {
+    width: 700px;
+    
+    /* table */
+    .table {
+        border: 1px solid $off-grey;
+
+        /* Heading */
+        h4 {
+            margin: auto;
+            text-align: center;
+        }
+    }
+}
+
+/* Media querys */
+@media screen and (max-width: 1000px) {
+    .container {
+        width: 500px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .container {
+        width: 300px;
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .groups-container {
+        width: 200px;
+    }
+}

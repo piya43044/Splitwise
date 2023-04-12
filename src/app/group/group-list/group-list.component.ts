@@ -10,7 +10,7 @@ export class GroupListComponent implements OnInit {
 
   isGroupDetailActive: Boolean = false;
   getActivatedRouteParam : String = '';
-  groupNameDetail!: string;
+  groupNameDetail!: String;
   groups = [
     { groupName: 'Mathura'},
     { groupName: 'Vanaras'},
@@ -33,15 +33,21 @@ export class GroupListComponent implements OnInit {
     
     // get activatedRoute parameter using observable
     this.activatedRoute.params.subscribe((param) =>{
-      this.getActivatedRouteParam = param['routerParamId'];
+      this.getActivatedRouteParam = param['routerParam'];
+      if(this.getActivatedRouteParam === undefined ){
+        this.isGroupDetailActive = false;
+      }
+      else{
+        this.isGroupDetailActive = true;
+        this.groupNameDetail = this.getActivatedRouteParam;
+      }
     })
   }
 
   // Group detail show
   groupDetailShow(name: string, index: number): void{
-    this.isGroupDetailActive = true;
-    this.groupNameDetail = name;
-    this.router.navigate(['group','group-list',index]);
+    this.getActivatedRouteParam = name;
+    this.router.navigate(['group','group-list',name]);
   }
 
   // Navigate to edit form
