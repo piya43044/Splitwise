@@ -58,11 +58,20 @@
         </div>
 
         <!-- Group selection -->
-        <div class="form-group mt-2 mb-3">
+        <div class="form-group mt-2 mb-2">
             <label for="group-type">Groups</label>
             <select class="form-control" id="group-type">
                 <option value="no-group">No Group</option>
                 <option *ngFor="let group of groups" [value]="group">{{group}}</option>
+            </select>
+        </div>
+
+        <!-- Payment type -->
+        <div class="form-group mt-2 mb-3">
+            <label for="payment-type">Payment type</label>
+            <select class="form-control" id="payment-type">
+                <option value="cash">Cash</option>
+                <option value="paypal">PayPal</option>
             </select>
         </div>
 
