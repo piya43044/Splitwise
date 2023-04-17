@@ -1,0 +1,24 @@
+/* Import common style */
+@import "../layout/variables";
+
+/* SettleUp container */
+.container {
+    border-radius: 15px;
+    box-shadow: 0 5px 15px $off-black;
+    background-color: $light-blue;
+    padding: 20px;
+    width: 400px;
+
+    /* Buttons */
+    .btn {
+        margin-right: 10px;
+    }
+}
+
+/* Media query */
+@media screen and (max-width: 900px) {
+    
+    .container {
+        width: auto;
+    }
+}
