@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 })
 export class SettleUpComponent {
 
+  currency: String[] = ['MYR', 'SGD', 'USD'];
+  groups: String[] = ['Mathura', 'Vanaras', 'Goa'];
 }
