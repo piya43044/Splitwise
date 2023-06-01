@@ -33,7 +33,7 @@
         <!-- Group member -->
         <div class="group-member-container d-flex justify-content-between align-items-center mt-3 mb-3">
             <label for="group-member">Group Members</label>
-            <button class="btn btn-primary" type="button" (click)="addMemberNameAndEmail()">+ Add member</button>
+            <button class="btn btn-success" type="button" (click)="addMemberNameAndEmail()">+ Add member</button>
         </div>
 
         <!-- Dynamically group member add-->
@@ -55,7 +55,7 @@
     
                     <!-- Delete group member -->
                     <div class="d-flex justify-content-center align-items-center">
-                        <button class="btn btn-danger h-75" type="button" (click)="deleteMemberNameAndEmail(i)"><i class='fas fa-trash'></i></button>
+                        <button class="btn btn-danger h-75" type="button" (click)="deleteMemberNameAndEmail(i)"><i class='fa fa-trash'></i></button>
                     </div>
                 </div>
             </div>
@@ -82,7 +82,7 @@
             <button type="submit" class="btn btn-success w-20 h-25" [disabled]="!addGroupForm.valid">Save</button>
     
             <!-- Cancel button -->
-            <button routerLink="/group/group-list" type="button" class="btn btn-primary w-20 h-25">Cancel</button>
+            <button routerLink="/group/group-list" type="button" class="btn btn-danger w-20 h-25">Cancel</button>
         </div>
     </form>
 </div>

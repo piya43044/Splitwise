@@ -37,6 +37,7 @@
             </div>
         </div>
 
+        <!-- Message for friend -->
         <div class="friend-message mt-3 mb-3">
             <label for="friend-message">Message</label>
             <input type="text" class="form-control" id="friend-email" placeholder="Enter message" formControlName="friendMessage">
@@ -48,7 +49,7 @@
             <button type="submit" class="btn btn-success w-20 h-25" [disabled]="!addFriendForm.valid">Save</button>
     
             <!-- Cancel button -->
-            <button routerLink="/friends/friends-list" type="button" class="btn btn-primary w-20 h-25">Cancel</button>
+            <button routerLink="/friends/friends-list" type="button" class="btn btn-danger w-20 h-25">Cancel</button>
         </div>
     </form>
 </div>

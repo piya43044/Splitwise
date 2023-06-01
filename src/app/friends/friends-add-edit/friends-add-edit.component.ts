@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -7,7 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './friends-add-edit.component.html',
   styleUrls: ['./friends-add-edit.component.scss']
 })
-export class FriendsAddEditComponent {
+export class FriendsAddEditComponent implements OnInit {
 
   addFriendForm !: FormGroup;
   isFriendAddActive: Boolean = false;

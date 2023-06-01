@@ -14,15 +14,32 @@
         .btn {
             margin-right: 5px;
         }
+        
+        /* Action button */
+        .btn-action {
+            padding: 5px;
+            border: none;
+       
+            /* Edit / delete icon */
+            i {
+                font-size: 20px;
+            }
+        }
+
 
         /* Group name */
         a {
             text-decoration: none;
             color: $black;
     
+            /* Back icon */
+            i {
+                font-size: 24px;
+            }
+
             /* Group name hover */
             &:hover {
-                color: $blue;
+                color: $green;
                 text-decoration: underline;
             }
         }
@@ -38,18 +55,24 @@
 
 @media screen and (max-width: 700px) {
     .groups-container {
-        width: 300px;
+        width: 400px;
 
-        /* Add expense and settle up button */
-        .expense-settleup {
-            display: flex;
+        /* Group header with group name, add expense button and settle up button */
+        .group-header {
             flex-direction: column;
         }
+
+    }
+}
+
+@media screen and (max-width: 430px) {
+    .groups-container {
+        width: 350px;
     }
 }
 
 @media screen and (max-width: 300px) {
     .groups-container {
-        width: 200px;
+        width: 250px;
     }
 }

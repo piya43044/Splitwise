@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -6,17 +6,17 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './friends-list.component.html',
   styleUrls: ['./friends-list.component.scss']
 })
-export class FriendsListComponent {
+export class FriendsListComponent implements OnInit {
 
   
   isFriendDetailActive: Boolean = false;
   getActivatedRouteParam : String = '';
   friendNameDetail!: String;
   friends = [
-    { friendName: 'Harish'},
-    { friendName: 'Nikita'},
-    { friendName: 'Priya'},
-    { friendName: 'Mayank'}
+    { friendName: 'Harish', friendEmail: 'harish@gmail.com', friendMessage: 'Hii Harish'},
+    { friendName: 'Nikita', friendEmail: 'nikita@gmail.com', friendMessage: 'Hello Nikita'},
+    { friendName: 'Priya', friendEmail: 'priya@gmail.com', friendMessage: 'Hii Priya'},
+    { friendName: 'Mayank', friendEmail: 'mayank@gmail.com', friendMessage: 'Hii Mayank'}
   ];
 
   FriendDetailList = [
@@ -58,7 +58,7 @@ export class FriendsListComponent {
   }
 
   // Delete friend
-  deletefriend(index: number): void {
+  deleteFriend(index: number): void {
     this.friends.splice(index,1);
   }
 }

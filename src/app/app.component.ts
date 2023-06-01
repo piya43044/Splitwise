@@ -27,6 +27,7 @@ export class AppComponent implements OnInit {
             
             if(this.currentUrl === '/login' || this.currentUrl === '/register' || this.currentUrl === '/'){
               this.isLoginSignupActive = true;
+              this.sideNavStatus = false;
             }
             else{
               this.isLoginSignupActive = false;

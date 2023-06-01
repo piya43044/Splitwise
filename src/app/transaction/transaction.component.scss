@@ -26,12 +26,18 @@
 
 @media screen and (max-width: 700px) {
     .container {
-        width: 300px;
+        width: 400px;
     }
 }
 
-@media screen and (max-width: 300px) {
-    .groups-container {
-        width: 200px;
+@media screen and (max-width: 400px) {
+    .container {
+        width: 350px;
+    }
+}
+
+@media screen and (max-width: 310px) {
+    .container {
+        width: 220px;
     }
 }

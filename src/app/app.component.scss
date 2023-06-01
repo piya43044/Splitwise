@@ -9,6 +9,12 @@ img {
 .side-nav-button {
     cursor: pointer;
     font-size: 20px;
+    border: none;
+
+    /* Sidebar icon */
+    i {
+      font-size: 30px;
+    }
 }
 
 /* Sidebar */
@@ -19,7 +25,8 @@ img {
     height: calc(100% - 72px);
     background-color: $green;
     border-top: 1px solid $white;
-    overflow-x: hidden;
+    overflow: hidden;
+    position: fixed;
     white-space: nowrap;
     transition: width 250ms ease-in;
 }

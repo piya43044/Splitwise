@@ -22,7 +22,7 @@
     
             /* Dashboard name hover */
             &:hover {
-                color: $blue;
+                color: $green;
                 text-decoration: underline;
             }
         }
@@ -48,15 +48,39 @@
         width: 300px;
 
         /* Add expense and settle up button */
-        .expense-settleup {
+        .dashboard-header {
             display: flex;
             flex-direction: column;
+            margin: auto;
         }
+
+        /* Table element responsive */
+        .table, 
+        .table tr, 
+        .table td,
+        .table th {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
     }
 }
 
 @media screen and (max-width: 300px) {
     .dashboard-container {
         width: 200px;
+
+        /* Add expense and settle up button */
+        .expense-settleup {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            
+            /* Button */
+            .btn {
+                margin: 3px 0;
+            }
+        }
     }
 }

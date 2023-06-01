@@ -21,10 +21,12 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  // getter methods
+  // Getter methods for email
   get email(){
     return this.loginForm.get('email');
   }
+
+  // Getter methods for password
   get password(){
     return this.loginForm.get('password');
   }

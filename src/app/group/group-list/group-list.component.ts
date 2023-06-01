@@ -12,10 +12,10 @@ export class GroupListComponent implements OnInit {
   getActivatedRouteParam : String = '';
   groupNameDetail!: String;
   groups = [
-    { groupName: 'Mathura'},
-    { groupName: 'Vanaras'},
-    { groupName: 'Goa'},
-    { groupName: 'Mumbai'}
+    { groupName: 'Mathura', shareLink: 'dff-dfs-sdf', groupType: 'trip', groupMember: [{memberName: 'Priya'}, {memberName: 'Nikita'}]},
+    { groupName: 'Vanaras', shareLink: 'wff-dfs-sdf', groupType: 'home', groupMember: [{memberName: 'Mayank'}, {memberName: 'Harish'}]},
+    { groupName: 'Goa', shareLink: 'dff-qfs-sdf', groupType: 'trip', groupMember: [{memberName: 'Priya'}, {memberName: 'Mayank'}, {memberName: 'Harish'}, {memberName: 'Nikita'}]},
+    { groupName: 'Mumbai', shareLink: 'tff-dfs-sdf', groupType: 'home', groupMember: [{memberName: 'Priya'}, {memberName: 'Mayank'}, {memberName: 'Harish'}]}
   ];
 
   transactionList = [

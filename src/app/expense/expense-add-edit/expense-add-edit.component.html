@@ -20,7 +20,7 @@
         </div>
 
 
-        <!-- Amount of expense -->
+        <!-- Currency and amount of expense -->
         <div class="form-group mt-2">
             <label for="amount">Amount:</label>
             <div class="input-group">
@@ -57,7 +57,13 @@
         <!-- participants included -->
         <div class="form-group mt-2">
             <label for="participants">Participants:</label>
-            <input type="text" class="form-control" id="participants" name="participants" placeholder="Enter participant" required>
+            <!-- Participant name -->
+            <div>
+                <div *ngFor="let friend of friends">
+                    <input class="form-check-input" type="checkbox" value="{{friend.friendName}}" id="flexCheckChecked">
+                    <label class="form-check-label" for="flexCheckChecked">{{friend.friendName}}</label>
+                </div>
+            </div>
         </div>
 
         <!-- Save and cancel button -->
@@ -66,7 +72,7 @@
             <button type="submit" class="btn btn-success w-20 h-25" routerLink="/expense/expense-list">Save</button>
     
             <!-- Cancel button -->
-            <button routerLink="/expense/expense-list" type="button" class="btn btn-primary w-20 h-25">Cancel</button>
+            <button routerLink="/expense/expense-list" type="button" class="btn btn-danger w-20 h-25">Cancel</button>
         </div>
     </form>
 </div>

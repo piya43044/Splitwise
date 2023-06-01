@@ -35,6 +35,7 @@ export class DashboardComponent implements OnInit{
       }
     });
 
+    // Calculate total balance
     this.totalBalance = this.totalOwed-this.totalOwe
 
     // Check total balance sign

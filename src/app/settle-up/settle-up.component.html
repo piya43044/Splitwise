@@ -75,7 +75,13 @@
             </select>
         </div>
 
-        <!-- Save button -->
-        <button type="submit" class="btn btn-success" routerLink="/dashboard">Save</button>
+        <!-- Save and cancel button -->
+        <div class="d-flex justify-content-end">
+            <!-- Save button -->
+            <button type="submit" routerLink="/transaction" class="btn btn-success w-20 h-25">Save</button>
+    
+            <!-- Cancel button -->
+            <button routerLink="/dashboard" type="button" class="btn btn-danger w-20 h-25">Cancel</button>
+        </div>
     </form>
 </div>

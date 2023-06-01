@@ -15,14 +15,30 @@
             margin-right: 5px;
         }
 
+        /* Action button */
+        .btn-action {
+            padding: 5px;
+            border: none;
+        }
+
+        /* Edit / delete icon */
+        i {
+            font-size: 20px;
+        }
+
         /* Friend name */
         a {
             text-decoration: none;
             color: $black;
+
+            /* Back icon */
+            i {
+                font-size: 24px;
+            }
     
             /* Friend name hover */
             &:hover {
-                color: $blue;
+                color: $green;
                 text-decoration: underline;
             }
         }
@@ -38,18 +54,34 @@
 
 @media screen and (max-width: 700px) {
     .friend-container {
+        width: 400px;
+
+        /* Friend header with group name, add expense button and settle up button */
+        .friend-header {
+            flex-direction: column;
+        }
+    }
+}
+
+@media screen and (max-width: 430px) {
+    .friend-container {
         width: 300px;
 
         /* Add expense and settle up button */
         .expense-settleup {
             display: flex;
             flex-direction: column;
+            justify-content: center;
+            
+            .btn {
+                margin: 3px 0;
+            }
         }
     }
 }
 
 @media screen and (max-width: 300px) {
     .friend-container {
-        width: 200px;
+        width: 250px;
     }
 }

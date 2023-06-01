@@ -1,21 +1,36 @@
 <div class="container">
-    <table class="table table-hover">
-        <!-- Transaction List header -->
-        <thead class="table-info">
-          <tr>
-            <td colspan="3">
-                <h4>Transaction List</h4>
-            </td>
-          </tr>
-        </thead>
     
-        <!-- Transaction list details -->
-        <tbody>
-            <tr *ngFor="let transaction of transactionList">
-                <td>{{transaction.payer}} paid <strong>{{transaction.currency}}{{transaction.amount}}</strong> to {{transaction.receiver}}</td>
-                <td><em>{{transaction.payer}} paid</em></td>
-                <td><strong>{{transaction.currency}}{{transaction.amount}}</strong></td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered">
+            <!-- Transaction List header -->
+            <thead class="table-secondary">
+                <tr>
+                    <th colspan="4">
+                        <div class="d-flex justify-content-center">
+                            <h4>Transaction List</h4>
+                        </div>
+                    </th>
+                </tr>
+    
+                <!-- Transaction list header -->
+                <tr>
+                    <th>Payer</th>
+                    <th>Receiver</th>
+                    <th>Amount</th>
+                    <th>Payment Type</th>
+                </tr>
+            </thead>
+        
+            <!-- Transaction list details -->
+            <tbody>
+                <tr *ngFor="let transaction of transactionList">
+                    <td>{{transaction.payer}}</td>
+                    <td>{{transaction.receiver}}</td>
+                    <td>{{transaction.currency}}{{transaction.amount}}</td>
+                    <td>{{transaction.paymentType}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
 </div>
