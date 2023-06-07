@@ -13,8 +13,8 @@
         
                         <!-- Add expense button and settle up button -->
                         <div class="expense-settleup">
-                            <button class="btn btn-danger" routerLink="/expense/expense-add">Add Expense</button>
-                            <button class="btn btn-success" routerLink="/settleUp">Settle Up</button>
+                            <button class="btn btn-danger" type="button" routerLink="/expense/expense-add">Add Expense</button>
+                            <button class="btn btn-success" type="button" routerLink="/settleUp">Settle Up</button>
                         </div>
                         
                     </div>
@@ -52,11 +52,11 @@
                 <!-- Owe/Owed Details -->
                 <tr *ngFor="let detail of balanceDetail">
                     <td colspan="3">
-                        <div *ngIf="detail.owe =='owe'" class="d-flex flex-column justify-content-center align-items-center">
+                        <div *ngIf="detail.owe ==='owe'" class="d-flex flex-column justify-content-center align-items-center">
                             <a routerLink="/friends/friends-list/{{detail.person}}">{{detail.person}}</a>
                             <p>You owe {{detail.currency}}{{detail.amount}}</p>
                         </div>
-                        <div *ngIf="detail.owe == 'owed'" class="d-flex flex-column justify-content-center align-items-center">
+                        <div *ngIf="detail.owe === 'owed'" class="d-flex flex-column justify-content-center align-items-center">
                             <a routerLink="/friends/friends-list/{{detail.person}}">{{detail.person}}</a>
                             <p>owes you {{detail.currency}}{{detail.amount}}</p>
                         </div>

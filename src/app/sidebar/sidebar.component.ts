@@ -13,6 +13,7 @@ export class SidebarComponent {
 
   // Constructor
   constructor( private router: Router){};
+  
   // ngOnInit method
   ngOnInit(): void {
 
