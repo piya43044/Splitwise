@@ -20,7 +20,7 @@ export class FriendsAddEditComponent implements OnInit {
     this.addFriendForm = new FormGroup({
       friendName: new FormControl('', [Validators.required]),
       friendEmail: new FormControl('', [Validators.required]),
-      friendMessage: new FormControl(''),
+      // friendMessage: new FormControl(''),
     })
 
     // get activatedRoute parameter using observable
