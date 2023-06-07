@@ -25,7 +25,10 @@ export class ExpenseAddEditComponent implements OnInit {
   // Constructor
   constructor( private router: Router, private activatedRoute: ActivatedRoute){};
 
-  // ngOnInit method
+  /**
+   * ngOnInit method
+   * @returns void
+   */
   ngOnInit(): void {
 
     // get activatedRoute parameter using observable

@@ -19,12 +19,18 @@ export class DashboardComponent implements OnInit{
   ]
 
 
-  // ngOnInit method
+  /** 
+   * ngOnInit method
+   * @returns void
+   * */ 
   ngOnInit(): void{
     this.totalBalanceCalculate();
   }
 
-  // Calculate total balance, owe amount and owed amount
+  /** 
+   * Calculate the total balance, owe amount and owed amount of user
+   * @returns void
+   * */ 
   totalBalanceCalculate(): void{
     this.balanceDetail.forEach(element => {
       if(element.owe === 'owe'){

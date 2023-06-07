@@ -15,7 +15,11 @@ export class FriendsAddEditComponent implements OnInit {
 
   // Constructor
   constructor( private router: Router, private activatedRoute: ActivatedRoute){};
-  // ngOnInit method
+
+  /** 
+   * ngOnInit method
+   * @returns void
+   * */ 
   ngOnInit(): void {
     this.addFriendForm = new FormGroup({
       friendName: new FormControl('', [Validators.required]),
@@ -36,7 +40,10 @@ export class FriendsAddEditComponent implements OnInit {
     })
   }
 
-  // Getter methods
+  /** 
+   * Getter methods
+   * @returns FormControl
+   * */ 
   get friendEmail(){
     return this.addFriendForm.get('friendEmail');
   }
@@ -45,7 +52,10 @@ export class FriendsAddEditComponent implements OnInit {
     return this.addFriendForm.get('friendName');
   }
 
-  // Submit method
+  /**
+   * Submit method
+   * @returns void
+   */
   onSubmit(): void{
     this.addFriendForm.reset();
     this.router.navigate(['friends/friends-list']);

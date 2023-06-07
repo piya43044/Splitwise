@@ -50,18 +50,30 @@ export class GroupListComponent implements OnInit {
     })
   }
 
-  // Group detail show
+  /** 
+   * Show group detail
+   * @params name- string, index - number
+   * @returns void
+   * */ 
   groupDetailShow(name: string, index: number): void{
     this.getActivatedRouteParam = name;
     this.router.navigate(['group','group-list',name]);
   }
 
-  // Navigate to edit form
+  /** 
+   * Navigate to edit form
+   * @params index - number
+   * @returns void
+   * */ 
   navigateToEditForm(index: number): void{
     this.router.navigate(['group','group-edit',index]);
   }
 
-  // Delete group
+  /** 
+   * Delete group
+   * @params index - number
+   * @returns void
+   * */
   deleteGroup(index: number): void {
     this.groups.splice(index,1);
   }

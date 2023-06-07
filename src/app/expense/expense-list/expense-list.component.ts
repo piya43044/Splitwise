@@ -18,12 +18,18 @@ export class ExpenseListComponent {
   // Constructor
   constructor( private router: Router){};
 
-  // Navigate to edit form
+  /** 
+   * Navigate to edit form
+   * @params index - number  
+   * */ 
   navigateToEditForm(index: number): void{
     this.router.navigate(['expense','expense-edit',index]);
   }
 
-  // Delete expense
+  /**
+   * Delete expense 
+   * @params index - number
+   * */ 
   deleteExpense(index: number): void {
     this.expenseList.splice(index,1);
   }
