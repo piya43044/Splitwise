@@ -1,13 +1,12 @@
 /* Import common style */
 @import "../../layout/variables";
 
-/* Frien container */
+/* Friend container */
 .friend-container {
     border-radius: 15px;
     box-shadow: 0 5px 15px $off-black;
-    background-color: $light-blue;
     padding: 20px;
-    width: 600px;
+    width: 500px;
 
     /* Buttons */
     .btn {
@@ -23,7 +22,7 @@
     }
 }
 
-/* Mediaquery for mobile size */
+
 @media screen and (max-width: 475px) {
     .friend-container {
         .friend-member {

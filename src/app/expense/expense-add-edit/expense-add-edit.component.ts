@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -7,7 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './expense-add-edit.component.html',
   styleUrls: ['./expense-add-edit.component.scss']
 })
-export class ExpenseAddEditComponent {
+export class ExpenseAddEditComponent implements OnInit {
 
   addExpenseForm !: FormGroup;
   isExpenseAddActive: Boolean = false;
@@ -15,10 +15,20 @@ export class ExpenseAddEditComponent {
   currency: String[] = ['MYR', 'SGD', 'USD'];
   groups: String[] = ['Mathura', 'Vanaras', 'Goa'];
 
+  friends = [
+    { friendName: 'Harish'},
+    { friendName: 'Nikita'},
+    { friendName: 'Priya'},
+    { friendName: 'Mayank'}
+  ];
+
   // Constructor
   constructor( private router: Router, private activatedRoute: ActivatedRoute){};
 
-  // ngOnInit method
+  /**
+   * ngOnInit method
+   * @returns void
+   */
   ngOnInit(): void {
 
     // get activatedRoute parameter using observable

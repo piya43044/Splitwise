@@ -16,7 +16,10 @@ export class AppComponent implements OnInit {
   // Constructor
   constructor( private router: Router){};
 
-  // ngOnInit method
+  /** 
+   * ngOnInit method
+   * @returns void
+   * */
   ngOnInit(): void {
 
     // Get url for checking the login and signup status
@@ -27,6 +30,7 @@ export class AppComponent implements OnInit {
             
             if(this.currentUrl === '/login' || this.currentUrl === '/register' || this.currentUrl === '/'){
               this.isLoginSignupActive = true;
+              this.sideNavStatus = false;
             }
             else{
               this.isLoginSignupActive = false;
@@ -35,7 +39,10 @@ export class AppComponent implements OnInit {
     });
   }
 
-  // SideNavBar Toogle click
+  /** 
+   * SideNavBar Toogle click
+   * @returns void
+   * */
   sideNavToogle(): void{
     this.sideNavStatus =!this.sideNavStatus;
   }

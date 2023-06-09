@@ -2,38 +2,38 @@
     <ul class="nav-list p-0 m-0" [ngClass]="{'nav-list-open': sideNavStatus}">
 
         <!-- Dashboard -->
-        <li class="nav-list-item" routerLink="/dashboard">
+        <li class="nav-list-item" [ngClass]="{'active': currentUrl==='/dashboard'}" routerLink="/dashboard">
             <i class="fa fa-home"></i>
             <a>Dashboard</a>
         </li>
 
         <!-- Group -->
-        <li class="nav-list-item" routerLink="/group/group-list">
-            <i class="fas fa-user-friends"></i>
+        <li class="nav-list-item" [ngClass]="{'active': currentUrl==='/group/group-list'}" routerLink="/group/group-list">
+            <i class="fa fa-group"></i>
             <a > Groups</a>
         </li>
 
         <!-- Friends -->
-        <li class="nav-list-item" routerLink="/friends/friends-list">
-            <i class='far fa-handshake'></i>
+        <li class="nav-list-item" [ngClass]="{'active': currentUrl==='/friends/friends-list'}" routerLink="/friends/friends-list">
+            <i class='fa fa-handshake-o'></i>
             <a>Friends</a>
         </li>
 
         <!-- Transaction List-->
-        <li class="nav-list-item" routerLink="/transaction">
-            <i class='fas fa-tag'></i>
+        <li class="nav-list-item" [ngClass]="{'active': currentUrl==='/transaction'}" routerLink="/transaction">
+            <i class='fa fa-tag'></i>
             <a>Transaction List</a>
         </li>
 
         <!-- Expenses -->
-        <li class="nav-list-item"  routerLink="/expense/expense-list">
+        <li class="nav-list-item" [ngClass]="{'active': currentUrl==='/expense/expense-list'}"  routerLink="/expense/expense-list">
             <i class="	fa fa-credit-card"></i>
             <a>Expenses</a>
         </li>
 
         <!-- SettleUp -->
-        <li class="nav-list-item"  routerLink="/settleUp">
-            <i class="fab fa-stripe-s"></i>
+        <li class="nav-list-item" [ngClass]="{'active': currentUrl==='/settleUp'}"  routerLink="/settleUp">
+            <i class="fa fa-dollar"></i>
             <a>Settle Up</a>
         </li>
     </ul>

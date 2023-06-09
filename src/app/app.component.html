@@ -1,11 +1,20 @@
 <!-- Navbar Section -->
-<nav class="navbar navbar-expand-sm bg-body-tertiary">
+<nav class="navbar navbar-expand-sm bg-body-tertiary sticky-top">
   <div class="container-fluid">
 
       <!-- Sidebar button -->
       <div class="side-nav-button p-2 me-3 d-flex justify-content-center align-items-center btn btn-outline-success"
         *ngIf="!isLoginSignupActive" (click)="sideNavToogle()">
-        <i class="fa fa-bars"></i>
+        
+        <!-- Check the sidebar whether it is open or close -->
+        <div *ngIf="!sideNavStatus; then sidebarOpen else sidebarClose">
+        </div>
+        <ng-template #sidebarOpen>
+          <i class="	fa fa-navicon"></i>
+        </ng-template>
+        <ng-template #sidebarClose>
+          <i class="fa fa-window-close-o"></i>
+        </ng-template>
       </div>  
         
       <!-- Splitwise logo -->
@@ -19,7 +28,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <!-- navbar buttons shows according to the url status -->
+      <!-- Navbar buttons shows according to the url status -->
       <div *ngIf="isLoginSignupActive; then loginSignUp else logout">   
       </div>
 

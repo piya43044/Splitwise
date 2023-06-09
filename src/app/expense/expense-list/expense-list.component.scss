@@ -10,14 +10,31 @@
         margin-right: 5px;
     }
 
+    /* Action button of edit / delete button */
+    .btn-action {
+        padding: 5px;
+        border: none;
+        
+        /* Edit / delete icon */
+        i {
+            font-size: $font-size-20;
+        }
+    }
+
+    
     /* Expense name */
     a {
         text-decoration: none;
         color: $black;
 
+        /* Back icon */
+        i {
+            font-size: $font-size-24;
+        }
+
         /* Expense name hover */
         &:hover {
-            color: $blue;
+            color: $green;
             text-decoration: underline;
         }
     }
@@ -34,10 +51,10 @@
     .expense-container {
         width: 300px;
 
-        /* Add expense and settle up button */
-        .expense-settleup {
-            display: flex;
+        /* Expense header with expense name, add expense button and settle up button */
+        .expense-header {
             flex-direction: column;
+            justify-content: center;
         }
     }
 }
@@ -45,5 +62,17 @@
 @media screen and (max-width: 300px) {
     .expense-container {
         width: 200px;
+
+        /* Add expense and settle up button */
+        .expense-settleup {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            
+            /* Button */
+            .btn {
+                margin: 3px 0;
+            }
+        }
     }
 }

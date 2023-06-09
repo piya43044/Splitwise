@@ -41,8 +41,11 @@ export class GroupAddEditComponent implements OnInit {
       }
     })
   }
-
-  // Add member name and member email formgroup in add group form
+ 
+  /** 
+   * Add member name and member email formgroup in add group form
+   * @returns FormGroup  
+   * */ 
   memberNameAndEmailForm(): FormGroup{
     return new FormGroup({
       memberName : new FormControl(''),
@@ -50,27 +53,43 @@ export class GroupAddEditComponent implements OnInit {
     })
   }
 
-  // Getter methods
+  /** 
+   * Getter method for group name
+   * @returns FormControl  
+   * */ 
   get groupName(){
     return this.addGroupForm.get('groupName');
   }
 
-  // getter of dyanamic create group member
+  /** 
+   * Getter of dyanamic create group member
+   * @returns FormArray  
+   * */ 
   get memberNameEmail(){
     return this.addGroupForm.get('groupMember') as FormArray;
   }
 
-  // Add member dynamically
+  /** 
+   * Add member dynamically
+   * @returns void
+   * */ 
   addMemberNameAndEmail(): void{
     this.memberNameEmail.push(this.memberNameAndEmailForm());
   }
 
-  // Delete member name and email
+  /** 
+   * Delete member name and email
+   * @params i - number
+   * @returns void
+   * */ 
   deleteMemberNameAndEmail(i : number): void{
     this.memberNameEmail.removeAt(i);
   }
 
-  // Submit method
+  /** 
+   * Submit method
+   * @returns void
+   * */ 
   onSubmit(): void{
     this.addGroupForm.reset();
     this.router.navigate(['group/group-list']);

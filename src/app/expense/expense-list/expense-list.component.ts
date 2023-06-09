@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-expense-list',
@@ -13,4 +14,23 @@ export class ExpenseListComponent {
     { expenseName:'Notes', groupName:'Vanaras' , paidBy:'Nikita', lentOrBorrow:'borrow'},
     { expenseName:'Taxi', groupName:'Goa' , paidBy:'Harish', lentOrBorrow:'lent'},
   ]
+
+  // Constructor
+  constructor( private router: Router){};
+
+  /** 
+   * Navigate to edit form
+   * @params index - number  
+   * */ 
+  navigateToEditForm(index: number): void{
+    this.router.navigate(['expense','expense-edit',index]);
+  }
+
+  /**
+   * Delete expense 
+   * @params index - number
+   * */ 
+  deleteExpense(index: number): void {
+    this.expenseList.splice(index,1);
+  }
 }

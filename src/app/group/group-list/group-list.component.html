@@ -2,55 +2,95 @@
  
     <!-- If Group detail is not active then it shows group list -->
     <ng-container *ngIf="!isGroupDetailActive">
-        
+      <div class="table-responsive">
+
         <table class="table table-bordered table-hover">
             <!-- Group header with add group button -->
-            <thead class="table-info">
+            <thead class="table-secondary">
               <tr>
-                <div class="d-flex justify-content-between align-items-center">
-                  <h4>Groups</h4>
-                  <button class="btn btn-primary" routerLink="/group/group-add">+ Add Group</button>
-                </div>
+                <td colspan="5">
+                  <div class="d-flex justify-content-between align-items-center">
+
+                    <!-- Back icon -->
+                    <a routerLink="/dashboard"><i class="fa fa-arrow-circle-left"></i></a>
+
+                    <!-- Group heading -->
+                    <h4>Groups</h4>
+                    <button class="btn btn-success" routerLink="/group/group-add">+ Add Group</button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Group list header -->
+              <tr>
+                <th>Group Name</th>
+                <th>Group share link</th>
+                <th>Group Members</th>
+                <th>Group type</th>
+                <th>Action</th>
               </tr>
             </thead>
       
             <!-- Group list -->
             <tbody>
               <tr *ngFor="let group of groups; let i=index">
-                <div class="d-flex justify-content-between align-items-center">
-                  <!-- Group name -->
+                <!-- Group name -->
+                <td>
                   <a class="p-2" (click)="groupDetailShow(group.groupName, i)">{{group.groupName}}</a>
-      
-                  <!-- Edit and delete button -->
-                  <div>
-                    <!-- Edit button -->
-                    <button type="button" class="btn btn-outline-dark" (click)="navigateToEditForm(i)"><i class='fas fa-pen'></i></button>
-                    <!-- Delete button -->
-                    <button type="button" class="btn btn-outline-dark" (click)="deleteGroup(i)"><i class='fas fa-trash'></i></button>
+                </td>
+
+                <!-- Group share link -->
+                <td>{{group.shareLink}}</td>
+
+                <!-- Group Members -->
+                <td>
+                  <div *ngFor="let member of group.groupMember; let j=index">
+                  {{j+1}}. {{member.memberName}}
                   </div>
-                </div>
+                </td>
+
+                <!-- Group Type -->
+                <td>{{group.groupType}}</td>
+
+                <!-- Group Action -->
+                <td>
+                  <!-- Edit and delete button -->
+                  <div class="d-flex justify-content-around">
+                    <!-- Edit button -->
+                    <button type="button" class="btn btn-outline-secondary btn-action" (click)="navigateToEditForm(i)"><i class='fa fa-edit'></i></button>
+                    <!-- Delete button -->
+                    <button type="button" class="btn btn-outline-danger btn-action" (click)="deleteGroup(i)"><i class="fa fa-trash"></i></button>
+                  </div>
+                </td>
               </tr>
             </tbody>
         </table>
+      </div>
         
     </ng-container>
 
     <!-- If group detail is active then it shows group detail with transaction and expense list -->
     <ng-container *ngIf="isGroupDetailActive">
-        <table class="table table-hover">
+
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+
             <!-- Group header with add group button -->
-            <thead class="table-info">
+            <thead class="table-secondary">
               <tr>
                 <td colspan="3">
-                  <div class="d-flex justify-content-between align-items-center">
+                  <div class="group-header d-flex justify-content-between align-items-center">
   
+                    <!-- Back icon -->
+                    <a routerLink="/group/group-list"><i class="fa fa-arrow-circle-left"></i></a>
+
                     <!-- Group Name -->
                     <h4>{{groupNameDetail}}</h4>
   
                     <!-- Add Expense and settle up button -->
                     <div class="expense-settleup">
-                      <button class="btn btn-primary" routerLink="/expense/expense-add" type="button">Add Expense</button>
-                      <button class="btn btn-success" routerLink="/settleUp/transaction-pattern" type="button">Settle Up</button>
+                      <button class="btn btn-danger" routerLink="/expense/expense-add" type="button">Add Expense</button>
+                      <button class="btn btn-success" routerLink="/settleUp" type="button">Settle Up</button>
                     </div>
                   </div>
                 </td>
@@ -59,11 +99,15 @@
       
             <!-- Group transaction list and expense list -->
             <tbody>
+
+                <!-- Transaction list details -->
                 <tr *ngFor="let transaction of transactionList">
                     <td>{{transaction.payer}} paid <strong>{{transaction.currency}}{{transaction.amount}}</strong> to {{transaction.receiver}}</td>
                     <td><em>{{transaction.payer}} paid</em></td>
                     <td><strong>{{transaction.currency}}{{transaction.amount}}</strong></td>
                 </tr>
+
+                <!-- Expense list details -->
                 <tr *ngFor="let expense of expenseList">
                   <td><a routerLink="/expense/expense-edit/{{expense.expenseName}}">{{expense.expenseName}}</a></td>
                   <td>
@@ -81,6 +125,7 @@
                 </tr>
             </tbody>
         </table>
+      </div>
     </ng-container>
  
 </div>

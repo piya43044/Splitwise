@@ -5,7 +5,6 @@
 .group-container {
     border-radius: 15px;
     box-shadow: 0 5px 15px $off-black;
-    background-color: $light-blue;
     padding: 20px;
     width: 600px;
 
@@ -26,8 +25,16 @@
 /* Mediaquery for mobile size */
 @media screen and (max-width: 475px) {
     .group-container {
+
+        /* Add group member */
+        .group-member-container {
+            flex-direction: column;
+        }
+
+        /* Group member detail */
         .group-member {
             flex-direction: column;
         }
+        
     }
 }

@@ -13,7 +13,10 @@ export class LoginComponent implements OnInit {
   // constructor
   constructor(private router:Router){};
 
-  // ngOnInit method
+  /** 
+   * ngOnInit method
+   * @returns void
+   * */
   ngOnInit(): void{
     this.loginForm = new FormGroup({
         email : new FormControl('', [Validators.required , Validators.email]),
@@ -21,15 +24,26 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  // getter methods
+  /** 
+   * Getter methods for email
+   * @returns FormControl
+   * */
   get email(){
     return this.loginForm.get('email');
   }
+
+  /** 
+   * Getter methods for password
+   * @returns FormControl
+   * */
   get password(){
     return this.loginForm.get('password');
   }
 
-  // Form submit method
+  /** 
+   * Form submit method
+   * @returns void
+   * */
   onSubmit(): void{
     this.loginForm.reset();
     this.router.navigate(['dashboard']);

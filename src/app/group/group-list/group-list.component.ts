@@ -12,10 +12,10 @@ export class GroupListComponent implements OnInit {
   getActivatedRouteParam : String = '';
   groupNameDetail!: String;
   groups = [
-    { groupName: 'Mathura'},
-    { groupName: 'Vanaras'},
-    { groupName: 'Goa'},
-    { groupName: 'Mumbai'}
+    { groupName: 'Mathura', shareLink: 'dff-dfs-sdf', groupType: 'trip', groupMember: [{memberName: 'Priya'}, {memberName: 'Nikita'}]},
+    { groupName: 'Vanaras', shareLink: 'wff-dfs-sdf', groupType: 'home', groupMember: [{memberName: 'Mayank'}, {memberName: 'Harish'}]},
+    { groupName: 'Goa', shareLink: 'dff-qfs-sdf', groupType: 'trip', groupMember: [{memberName: 'Priya'}, {memberName: 'Mayank'}, {memberName: 'Harish'}, {memberName: 'Nikita'}]},
+    { groupName: 'Mumbai', shareLink: 'tff-dfs-sdf', groupType: 'home', groupMember: [{memberName: 'Priya'}, {memberName: 'Mayank'}, {memberName: 'Harish'}]}
   ];
 
   transactionList = [
@@ -50,18 +50,30 @@ export class GroupListComponent implements OnInit {
     })
   }
 
-  // Group detail show
+  /** 
+   * Show group detail
+   * @params name- string, index - number
+   * @returns void
+   * */ 
   groupDetailShow(name: string, index: number): void{
     this.getActivatedRouteParam = name;
     this.router.navigate(['group','group-list',name]);
   }
 
-  // Navigate to edit form
+  /** 
+   * Navigate to edit form
+   * @params index - number
+   * @returns void
+   * */ 
   navigateToEditForm(index: number): void{
     this.router.navigate(['group','group-edit',index]);
   }
 
-  // Delete group
+  /** 
+   * Delete group
+   * @params index - number
+   * @returns void
+   * */
   deleteGroup(index: number): void {
     this.groups.splice(index,1);
   }

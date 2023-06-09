@@ -13,7 +13,10 @@ export class RegisterComponent implements OnInit {
   // Constructor
   constructor(private router: Router){};
 
-  // ngOnInit method
+  /** 
+   * ngOnInit method
+   * @returns void
+   * */
   ngOnInit(): void{
     this.registerForm = new FormGroup({
         name: new FormControl('', [Validators.required]),
@@ -26,7 +29,10 @@ export class RegisterComponent implements OnInit {
     })
   }
 
-  // getter methods
+  /** 
+   * Getter methods
+   * @returns FormControl
+   * */
   get name(){
     return this.registerForm.get('name');
   }
@@ -37,7 +43,10 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.get('password');
   }
 
-  // Form submit method
+  /** 
+   * Form submit method
+   * @returns void
+   * */
   onSubmit(): void{
     this.registerForm.reset();
     this.router.navigate(['login']);
