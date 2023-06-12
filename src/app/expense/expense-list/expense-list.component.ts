@@ -16,7 +16,7 @@ export class ExpenseListComponent implements OnInit {
   expenseItem!: ExpenseItem[];
   deleteExpenseName!: string;
   deleteExpenseId!: string;
-  
+
   // Constructor
   constructor( private router: Router,
     private groupService: GroupService,
@@ -57,9 +57,16 @@ export class ExpenseListComponent implements OnInit {
    */
   getExpenseList(): void{
 
-    this.expenseService.getExpenseList().subscribe(data => {
+    this.expenseService.getExpenseList().subscribe(async data => {
       this.expense=data;
       this.expenseItem = this.expense.items;
+      for(let i=0;i<this.expenseItem.length;i++){
+        this.groupService.getGroupDetailByGroupId(this.expenseItem[i].groupId).subscribe( data => {
+          this.expenseItem[i].groupName= data.name
+          
+         })
+       console.log(this.expenseItem[i].groupName)
+      }
     })
   }
 
@@ -73,4 +80,5 @@ export class ExpenseListComponent implements OnInit {
     this.deleteExpenseId = expenseId;
   }
 
+  
 }

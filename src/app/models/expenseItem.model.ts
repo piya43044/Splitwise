@@ -9,5 +9,6 @@ export class ExpenseItem {
     currency!: string;
     isSettled!: boolean;
     id!: string;
+    groupName!:string
     
 }

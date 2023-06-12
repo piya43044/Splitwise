@@ -8,18 +8,18 @@ import { Observable } from 'rxjs';
 })
 export class GroupService {
 
-  private baseUrl="https://localhost:44329/api/app/group/groups-belonging-to-user";
-  userId = "3a0ba7a5-d258-8665-b647-039303686697";
+  private baseUrl="https://localhost:44329/api/app/group";
+  userId = "3a0bb1b5-7bff-6c67-b7f2-117875103553";
 
   // constructor
   constructor(private http: HttpClient) { }
 
   /**
-   * Get the data of group by their userId on the api
+   * Get the data of group by groupId on the api
    * @returns Observable<Group>
    */
-  getGroupListByUser(): Observable<Group>{
-    return this.http.get<Group>(`${this.baseUrl}/${this.userId}`);
+  getGroupDetailByGroupId(groupId: string): Observable<Group>{
+    return this.http.get<Group>(`${this.baseUrl}/${groupId}`);
   }
 
 }
