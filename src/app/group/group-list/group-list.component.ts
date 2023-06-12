@@ -69,9 +69,10 @@ export class GroupListComponent implements OnInit {
     this.router.navigate(['group', 'group-edit', index]);
   }
 
-  // Delete group
+  /**  Delete group function
+   * to delete group from list*/
   deleteGroup(index: number): void {
-    //this.groupList.splice(index, 1);
+    //this.groupList.splice(index, 1); // delete row from table
     const id =this.groupList[index].id;
     console.log(id)
     this.groupsService.deleteGroupFromlist(id).subscribe(res => {
@@ -80,8 +81,9 @@ export class GroupListComponent implements OnInit {
     });
   }
 
-
-
+  /** Group list function to call get api
+   * and get group details from server
+   **/
   getGroupList() {
     this.groupsService.getGroupList().subscribe((res) => {
       this.groupList = res.items
@@ -89,6 +91,9 @@ export class GroupListComponent implements OnInit {
     })
   }
 
+  /** Group list function to call get api
+   * and get group details from server
+   **/
   getGroupMembers() {
     this.groupsService.getGroupMembers().subscribe((res) => {
       console.log(res);
@@ -96,6 +101,9 @@ export class GroupListComponent implements OnInit {
     })
   }
 
+  /** CurrentUser function to call get api
+   * and get name of current user from server
+   **/
   getCurrentUserDetails(){
     this.groupsService.getCurrentUserDetails().subscribe(data => {
       console.log(data.userName)
