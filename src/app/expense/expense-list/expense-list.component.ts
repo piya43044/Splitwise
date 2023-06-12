@@ -35,8 +35,8 @@ export class ExpenseListComponent implements OnInit {
    * @param index - number
    * @return void
    * */
-  navigateToEditForm(index: number): void{
-    this.router.navigate(['expense','expense-edit',index]);
+  navigateToEditForm(id: string): void{
+    this.router.navigate(['expense','expense-edit',id]);
   }
 
   /** 
@@ -65,7 +65,6 @@ export class ExpenseListComponent implements OnInit {
           this.expenseItem[i].groupName= data.name
           
          })
-       console.log(this.expenseItem[i].groupName)
       }
     })
   }
@@ -80,5 +79,4 @@ export class ExpenseListComponent implements OnInit {
     this.deleteExpenseId = expenseId;
   }
 
-  
 }

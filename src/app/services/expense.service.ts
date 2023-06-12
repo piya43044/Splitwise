@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Expense } from '../models/expense.model';
+import { ExpenseItem } from '../models/expenseItem.model';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,33 @@ export class ExpenseService {
    */
   deleteExpense(id: string): Observable<string>{
     return this.http.delete<string>(`${this.baseUrl}/${id}`);
+  }
+
+  /**
+   * Post the expense to the api
+   * @param expense - ExpenseItem
+   * @returns Observable<ExpenseItem>
+   */
+  postExpense(expense: ExpenseItem): Observable<ExpenseItem> {
+    return this.http.post<ExpenseItem>(this.baseUrl, expense);
+  }
+
+  /**
+   * Get expense detail by id from the api
+   * @param id - string
+   * @returns Observable<ExpenseItem>
+   */
+  getExpenseDetailById(id: string): Observable<ExpenseItem>{
+    return this.http.get<ExpenseItem>(`${this.baseUrl}/${id}`);
+  }
+
+  /**
+   * Update expense detail by id and expense object
+   * @param id - string, expense - ExpenseItem
+   * @returns Observable<ExpenseItem>
+   */
+  updateExpenseByID(id: string, expense: ExpenseItem): Observable<ExpenseItem>{
+    return this.http.put<ExpenseItem>(`${this.baseUrl}/${id}`,expense);
   }
 
 }
