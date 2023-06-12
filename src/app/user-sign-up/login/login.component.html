@@ -12,10 +12,10 @@
             <input type="email" class="form-control" id="email" placeholder="Enter email" formControlName="email">
             <!-- Custom Validation for Email -->
                 <div class="validation" *ngIf="email?.invalid && email?.touched">
-                    <small *ngIf="email?.hasError('required')">
+                    <small *ngIf="email?.hasError('pattern')">
                         Email required
                     </small>
-                    <small *ngIf="email?.hasError('email')">
+                    <small *ngIf="email?.hasError('pattern')">
                         Please fill correct email
                     </small>
                 </div>
@@ -27,17 +27,13 @@
             <input type="password" class="form-control" id="password" placeholder="Enter password" formControlName="password">
             <!-- Custom Validation for Password -->
             <div class="validation" *ngIf="password?.invalid && password?.touched">
-                <small *ngIf="password?.hasError('required')">
+                <small *ngIf="password?.hasError('pattern')">
                     Password required
                 </small>
             </div>
         </div>
 
-
         <!-- Login button -->
         <input type="submit" value="Login" id="btn" [disabled]="!loginForm.valid">
-
-        <!-- Forget password link -->
-        <a href="#"> Forget your password?</a>
     </form>
 </div>

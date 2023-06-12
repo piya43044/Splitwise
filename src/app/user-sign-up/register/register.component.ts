@@ -85,7 +85,6 @@ export class RegisterComponent implements OnInit {
       }
     );
   }
-  // Submit method
   /**
    * Submit method
    * @returns void
@@ -96,7 +95,7 @@ export class RegisterComponent implements OnInit {
      userName : formData.name,
      emailAddress : formData.email,
      password : formData.password,
-     appName:'Splitwise',
+     appName:'EMS',
    }
    /**
    * call add user method
