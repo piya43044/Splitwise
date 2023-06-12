@@ -1,5 +1,5 @@
 <div class="groups-container">
- 
+
     <!-- If Group detail is not active then it shows group list -->
     <ng-container *ngIf="!isGroupDetailActive">
       <div class="table-responsive">
@@ -24,33 +24,70 @@
               <!-- Group list header -->
               <tr>
                 <th>Group Name</th>
-                <th>Group share link</th>
+                <th>Group Description</th>
                 <th>Group Members</th>
-                <th>Group type</th>
+                <!-- <th>Group type</th> -->
                 <th>Action</th>
               </tr>
             </thead>
-      
+
             <!-- Group list -->
             <tbody>
-              <tr *ngFor="let group of groups; let i=index">
+
+              <!-- /////////////////////////static data row///////////////////// -->
+
+              <!-- <tr *ngFor="let group of groups; let i=index"> -->
+                <!-- Group name -->
+                <!-- <td> -->
+                  <!-- <a class="p-2" (click)="groupDetailShow(group.groupName, i)">{{group.groupName}}</a> -->
+                <!-- </td> -->
+
+                <!-- Group share link -->
+                <!-- <td>{{group.shareLink}}</td> -->
+
+                <!-- Group Members -->
+                <!-- <td> -->
+                  <!-- <div *ngFor="let member of group.groupMember; let j=index">
+                  {{j+1}}. {{member.memberName}}
+                  </div>
+                </td> -->
+
+                <!-- Group Type -->
+                <!-- <td>{{group.groupType}}</td> -->
+
+                <!-- Group Action -->
+                <!-- <td> -->
+                  <!-- Edit and delete button -->
+                  <!-- <div class="d-flex justify-content-around"> -->
+                    <!-- Edit button -->
+                    <!-- <button type="button" class="btn btn-outline-secondary btn-action" (click)="navigateToEditForm(i)"><i class='fa fa-edit'></i></button> -->
+                    <!-- Delete button -->
+                    <!-- <button type="button" class="btn btn-outline-danger btn-action" (click)="deleteGroup(i)"><i class="fa fa-trash"></i></button> -->
+                  <!-- </div>
+                </td>
+              </tr> -->
+
+              <!-- ////////////////////////////////new row/////////////////////////////// -->
+
+              <tr *ngFor="let group of groupList; let i=index">
                 <!-- Group name -->
                 <td>
-                  <a class="p-2" (click)="groupDetailShow(group.groupName, i)">{{group.groupName}}</a>
+                  <a class="p-2" (click)="groupDetailShow(group.name, i)">{{group.name}}</a>
                 </td>
 
                 <!-- Group share link -->
-                <td>{{group.shareLink}}</td>
+                <td>{{group.about}} </td>
 
                 <!-- Group Members -->
-                <td>
-                  <div *ngFor="let member of group.groupMember; let j=index">
-                  {{j+1}}. {{member.memberName}}
+                <td><div>{{(group.createdBy)}}</div>
+
+                  <div *ngFor="let member of group.groupMembers; let j=index">
+                  {{j+1}}. {{member}}
                   </div>
                 </td>
 
                 <!-- Group Type -->
-                <td>{{group.groupType}}</td>
+                <!-- <td>{{group.groupType}}</td> -->
 
                 <!-- Group Action -->
                 <td>
@@ -63,10 +100,11 @@
                   </div>
                 </td>
               </tr>
+
             </tbody>
         </table>
       </div>
-        
+
     </ng-container>
 
     <!-- If group detail is active then it shows group detail with transaction and expense list -->
@@ -80,13 +118,13 @@
               <tr>
                 <td colspan="3">
                   <div class="group-header d-flex justify-content-between align-items-center">
-  
+
                     <!-- Back icon -->
                     <a routerLink="/group/group-list"><i class="fa fa-arrow-circle-left"></i></a>
 
                     <!-- Group Name -->
                     <h4>{{groupNameDetail}}</h4>
-  
+
                     <!-- Add Expense and settle up button -->
                     <div class="expense-settleup">
                       <button class="btn btn-danger" routerLink="/expense/expense-add" type="button">Add Expense</button>
@@ -96,7 +134,7 @@
                 </td>
               </tr>
             </thead>
-      
+
             <!-- Group transaction list and expense list -->
             <tbody>
 
@@ -127,5 +165,5 @@
         </table>
       </div>
     </ng-container>
- 
+
 </div>

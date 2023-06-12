@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PageErrorComponent } from './page-error/page-error.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 
 @NgModule({
@@ -18,7 +20,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     BrowserModule,
     AppRoutingModule,
     FontAwesomeModule,
-    
+    HttpClientModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
