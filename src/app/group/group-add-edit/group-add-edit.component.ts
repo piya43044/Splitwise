@@ -2,7 +2,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie';
 import { catchError, filter, throwError } from 'rxjs';
 import { GroupMembersToAdd, Groups } from 'src/app/models/groups';
 import { GroupsService } from 'src/app/services/groups.service';
