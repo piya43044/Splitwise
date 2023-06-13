@@ -9,7 +9,6 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { HttpClientModule } from '@angular/common/http';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,8 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     FontAwesomeModule,
-    HttpClientModule
-
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
