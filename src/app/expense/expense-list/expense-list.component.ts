@@ -63,6 +63,7 @@ export class ExpenseListComponent implements OnInit {
       for(let i=0;i<this.expenseItem.length;i++){
         this.groupService.getGroupDetailByGroupId(this.expenseItem[i].groupId).subscribe( data => {
           this.expenseItem[i].groupName= data.name
+          console.log(data.name)
           
          })
       }
