@@ -46,18 +46,30 @@ export class FriendsListComponent implements OnInit {
     })
   }
 
-  // friend detail show
+  /** 
+   * Friend detail show
+   * @param name - string, index - number
+   * @returns void
+   * */
   friendDetailShow(name: string, index: number): void{
     this.getActivatedRouteParam = name;
     this.router.navigate(['friends','friends-list',name]);
   }
 
-  // Navigate to edit form
+  /** 
+   *  Navigate to edit form
+   * @param index - number
+   * @returns void
+   * */
   navigateToEditForm(index: number): void{
     this.router.navigate(['friends','friends-edit',index]);
   }
 
-  // Delete friend
+  /**
+   *  Delete friend
+   * @param index - number
+   * @returns void
+   * */
   deleteFriend(index: number): void {
     this.friends.splice(index,1);
   }
