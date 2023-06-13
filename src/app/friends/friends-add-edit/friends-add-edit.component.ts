@@ -1,6 +1,8 @@
+import { formatCurrency } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FriendService } from 'src/app/services/friend.service';
 
 @Component({
   selector: 'app-friends-add-edit',
@@ -14,19 +16,23 @@ export class FriendsAddEditComponent implements OnInit {
   getActivatedRouteParam : String = '';
 
   // Constructor
-  constructor( private router: Router, private activatedRoute: ActivatedRoute){};
+  constructor( private router: Router, 
+    private activatedRoute: ActivatedRoute,
+    private friendService: FriendService){};
+
   // ngOnInit method
   ngOnInit(): void {
+
+    // Add friend form
     this.addFriendForm = new FormGroup({
       friendName: new FormControl('', [Validators.required]),
       friendEmail: new FormControl('', [Validators.required]),
-      // friendMessage: new FormControl(''),
     })
 
     // get activatedRoute parameter using observable
     this.activatedRoute.params.subscribe((param) =>{
       this.getActivatedRouteParam = param['routerParam'];
-      console.log(this.getActivatedRouteParam)
+
       if(this.getActivatedRouteParam === undefined ){
         this.isFriendAddActive = false;
       }
@@ -36,7 +42,10 @@ export class FriendsAddEditComponent implements OnInit {
     })
   }
 
-  // Getter methods
+  /**
+   * Getter methods
+   * @returns FormControl
+   *  */ 
   get friendEmail(){
     return this.addFriendForm.get('friendEmail');
   }
@@ -47,7 +56,11 @@ export class FriendsAddEditComponent implements OnInit {
 
   // Submit method
   onSubmit(): void{
-    this.addFriendForm.reset();
-    this.router.navigate(['friends/friends-list']);
+
+    this.friendService.postFriend(this.addFriendForm.value).subscribe( response => {
+      alert(response.result);
+      this.addFriendForm.reset();
+      this.router.navigate(['friends/friends-list']);
+    })
   }
 }
