@@ -2,31 +2,14 @@ import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { Groups, GroupMembers, GroupMembersToAdd } from '../models/groups';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { CookieModule } from 'ngx-cookie/public-api';
+
 @Injectable({
   providedIn: 'root'
 })
 export class GroupsService {
   group !: Groups;
 
-
-
-
-  loginURL = 'https://localhost:44329/api/account/Login';
-
-  csrf !: any;
-
   constructor(private http: HttpClient) { }
-
-  // httpOptions = {
-  //   headers: new HttpHeaders({
-  //     'Content-Type': 'application/json',
-  //     'accept': 'text/plain',
-  //     'X-Requested-With': 'XMLHttpRequest',
-
-  //   }),
-  // };
-
 
   /**create group function to call post api
    * and send group details to server
@@ -92,6 +75,10 @@ export class GroupsService {
 
 
   // ///////////////////////////////////////code for testing purpose ////////////////////////////
+
+
+  loginURL = 'https://localhost:44329/api/account/Login';
+
   getAdminLogin(): Observable<any> {
     const data = {
       userNameOrEmailAddress: "admin",
@@ -104,8 +91,8 @@ export class GroupsService {
 
   getLogin(): Observable<any> {
     const data = {
-      userNameOrEmailAddress: "harish@example.com",
-      password: "Harish@123",
+      userNameOrEmailAddress: "mayank",
+      password: "Mayank@123",
       rememberMe: true
     }
     console.log(JSON.stringify(data));
