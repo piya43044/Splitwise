@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpResponse, HttpErrorResponse} from '@angular/common/http';
-import { User_register } from '../models/register.model';
+import {HttpClient, HttpResponse} from '@angular/common/http';
+import { UserRegister } from '../models/register.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -13,11 +13,12 @@ export class UserService {
   private baseUrl = 'https://localhost:44329';
 
   constructor(private http : HttpClient) { }
+
    /**
    * addUsers are used to post data in the Api
    * @retun http response
    *  */
-  addUsers (addUserRequest : User_register): Observable<HttpResponse<User_register>>{
-    return this.http.post<User_register>(this.baseUrl + '/api/account/register', addUserRequest, { observe: 'response' });
+  addUsers (addUserRequest : UserRegister): Observable<HttpResponse<UserRegister>>{
+    return this.http.post<UserRegister>(this.baseUrl + '/api/account/register', addUserRequest, { observe: 'response' });
   }
 }

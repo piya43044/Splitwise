@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { User_register } from 'src/app/models/register.model';
+import { UserRegister } from 'src/app/models/register.model';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -15,20 +15,20 @@ export class RegisterComponent implements OnInit {
   /**
    * Constructor
    */
-  constructor(private add_users : UserService,private router: Router ){};
+  constructor(private addUsers: UserService, private router: Router) { };
+
   /**
    * ngOnInit method
-   * @returns void
    */
-  ngOnInit(): void{
+  ngOnInit(): void {
     this.registerForm = new FormGroup({
-        name: new FormControl('', [Validators.required]),
-        email : new FormControl('', [Validators.required ,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
-        password : new FormControl('',
-                          [Validators.required, 
-                            Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/),
-                            Validators.minLength(8)
-                          ])
+      name: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
+      password: new FormControl('',
+        [Validators.required,
+        Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/),
+        Validators.minLength(8)
+        ])
     })
   }
 
@@ -36,33 +36,38 @@ export class RegisterComponent implements OnInit {
    * name method are used to get name
    * @retun name
    *  */
-  get name(){
+  get name() {
     return this.registerForm.get('name');
   }
+
   /**
    * email method are used to get email
    * @retun email
    *  */
-  get email(){
+  get email() {
     return this.registerForm.get('email');
   }
+
   /**
    * password method are used to get password
    * @retun password
    *  */
-  get password(){
+  get password() {
     return this.registerForm.get('password');
   }
+
   /**
    * addUser method are used to subscribe data
-   * @param new_user : User_register
-   *  */ 
-  addUser(new_user: User_register) {
-    this.add_users.addUsers(new_user).subscribe(
-      (x) => {
+   * @param new_user : UserRegister
+   *  */
+  addUser(newUser: UserRegister) {
+    this.addUsers.addUsers(newUser).subscribe(
+      () => {
         alert("Registration Succesful");
         this.router.navigate(['/login']);
       },
+      // HttpErrorResponse
+      // @param error : HttpErrorResponse
       (error: HttpErrorResponse) => {
         if (error.status === 403) {
           alert("User already exists");
@@ -85,24 +90,21 @@ export class RegisterComponent implements OnInit {
       }
     );
   }
-  // Submit method
+
   /**
    * Submit method
-   * @returns void
-   */
-  onSubmit(): void{
+   * */
+  onSubmit(): void {
     const formData = this.registerForm.value;
-    const new_user : User_register ={
-     userName : formData.name,
-     emailAddress : formData.email,
-     password : formData.password,
-     appName:'Splitwise',
-   }
-   /**
-   * call add user method
-   * @param new_user : User_register
-   *  */
-    this.addUser(new_user);
+    const newUser: UserRegister = {
+      userName: formData.name,
+      emailAddress: formData.email,
+      password: formData.password,
+      appName: 'Splitwise',
+    }
+    //call add user method
+    //@param newUser : UserRegister
+    this.addUser(newUser);
     this.registerForm.reset();
   }
 }
