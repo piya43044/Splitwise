@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GroupList } from 'src/app/models/groups';
+import { GroupList, GroupMembers, GroupMembersResult } from 'src/app/models/groups';
 import { GroupsService } from 'src/app/services/groups.service';
 
 @Component({
@@ -10,7 +10,9 @@ import { GroupsService } from 'src/app/services/groups.service';
 })
 export class GroupListComponent implements OnInit {
 
-  groupList : GroupList[] =[];
+  groupList: GroupList[] = [];
+  groupMembers: GroupMembersResult[] = [];
+  currentUserName: string = '';
 
   isGroupDetailActive: Boolean = false;
   getActivatedRouteParam: String = '';
@@ -35,12 +37,14 @@ export class GroupListComponent implements OnInit {
   ]
 
 
+
   // Constructor
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
-    private groupsService: GroupsService) {
-      this.getGroupList();
-     };
+    private groupsService: GroupsService
+  ) {
+    this.getGroupList();
+  };
 
   // ngOnInit method
   ngOnInit(): void {
@@ -73,30 +77,28 @@ export class GroupListComponent implements OnInit {
    * to delete group from list*/
   deleteGroup(index: number): void {
     //this.groupList.splice(index, 1); // delete row from table
-    const id =this.groupList[index].id;
-    console.log(id)
+    const id = this.groupList[index].id;
     this.groupsService.deleteGroupFromlist(id).subscribe(res => {
-      console.warn(res)
-      console.log('group deleted...')
+      alert('group deleted...');
     });
   }
 
   /** Group list function to call get api
    * and get group details from server
    **/
-  getGroupList() {
+  getGroupList(): void {
     this.groupsService.getGroupList().subscribe((res) => {
-      this.groupList = res.items
-      this.getGroupMembers();
+      this.groupList = res.items;
     })
   }
 
   /** Group list function to call get api
    * and get group details from server
+   * @returns GroupMembers[]
    **/
-  getGroupMembers() {
+  getGroupMembers(): void {
     this.groupsService.getGroupMembers().subscribe((res) => {
-      console.log(res);
+      this.groupMembers = res;
 
     })
   }
@@ -104,9 +106,9 @@ export class GroupListComponent implements OnInit {
   /** CurrentUser function to call get api
    * and get name of current user from server
    **/
-  getCurrentUserDetails(){
+  getCurrentUserDetails(): void {
     this.groupsService.getCurrentUserDetails().subscribe(data => {
-      console.log(data.userName)
+      this.currentUserName = data.userName;
     })
   }
 }

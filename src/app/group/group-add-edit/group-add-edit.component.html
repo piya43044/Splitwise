@@ -11,7 +11,7 @@
   <hr>
 
   <!-- Add group form -->
-  <form [formGroup]="addGroupForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="addGroupForm">
     <!-- Group name -->
     <div class="form-group d-flex flex-column mt-3">
       <label for="group-name">Group name </label>
@@ -89,23 +89,4 @@
       {{addMembersForm.value | json}}
     </form>
   </ng-container>
-
-  <!-- Group type -->
-  <!-- <div class="form-group d-flex flex-column mt-3 mb-3">
-            <label for="group-type">Group type</label>
-            <select class="form-control" id="group-type" formControlName="groupType">
-                <option value="Home">Home</option>
-                <option *ngFor="let type of groupTypeArray" [value]="type">{{type}}</option>
-            </select>
-        </div> -->
-
-  <!-- Simplify deft -->
-  <!-- <div class="form-check form-switch mt-4 mb-3">
-            <label class="form-check-label" for="simplify-debt">Simplify Group Debts?</label>
-            <input class="form-check-input border border-secondary" type="checkbox" role="switch" id="simplify-debt">
-        </div> -->
-
-  <!-- Save and cancel button -->
-
-
 </div>

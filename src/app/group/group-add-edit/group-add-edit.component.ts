@@ -15,39 +15,21 @@ export class GroupAddEditComponent implements OnInit {
 
   addGroupForm !: FormGroup;
   addMembersForm !: FormGroup;
-  currentUser : string='';
-  groupTypeArray: string[] = ['Trip', 'Couple', 'Other'];
+
   isGroupAddActive: Boolean = false;
   getActivatedRouteParam: String = '';
   isGroupCreated: boolean = false;
 
   // Constructor
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private activatedRoute: ActivatedRoute,
-    private groupsService: GroupsService) {
-
-    /*******************************testing code*************************************/
-
-    // this.groupsService.logoutUser().subscribe((res)=> console.log(res))
-    // setTimeout(() => {
-    //   this.getLogin();
-    // }, 1000);
-
-    // setTimeout(() => {
-    //   this.getCurrentUser()
-    // }, 2000);
-
-  };
-
-
-
-
-
+    private groupsService: GroupsService
+    ) {}
 
   // ngOnInit method
   ngOnInit(): void {
-    /** Form group for add group page
-     */
+    //Form group for add group page
     this.addGroupForm = new FormGroup({
       groupName: new FormControl('', [Validators.required]),
       about: new FormControl(''),
@@ -58,18 +40,15 @@ export class GroupAddEditComponent implements OnInit {
       ]),
     })
 
-
     // form group add members to group
     this.addMembersForm = new FormGroup({
-    groupMembers: new FormArray([
-      this.addMembersToGroupForm()
+      groupMembers: new FormArray([
+        this.addMembersToGroupForm()
     ]),})
-
 
     // get activatedRoute parameter using observable
     this.activatedRoute.params.subscribe((param) => {
       this.getActivatedRouteParam = param['routerParam'];
-      // console.log(this.getActivatedRouteParam)
       if (this.getActivatedRouteParam === undefined) {
         this.isGroupAddActive = true;
       }
@@ -79,7 +58,7 @@ export class GroupAddEditComponent implements OnInit {
     })
 
 
-  }
+  }// OnInit method end
 
   // Add member name and member email formgroup in add group form
   addMembersToGroupForm(): FormGroup {
@@ -90,88 +69,94 @@ export class GroupAddEditComponent implements OnInit {
   }
 
   // Getter methods
-  get groupName() {
+  /** Get groupName FormControl
+   *  @returns FormControl
+   **/
+  get groupName() : FormControl {
     return this.addGroupForm.get('groupName') as FormControl;
   }
 
-  get about() {
+  /** Get groupDescription FormControl
+   *  @returns FormControl
+   **/
+  get about() : FormControl {
     return this.addGroupForm.get('about') as FormControl;
   }
 
-  // getter of dyanamic create group member
-  get groupMembers() {
+  /** Get groupMember FromArray
+   *  @returns FormArray
+   **/
+  get groupMembers() : FormArray {
     return this.addMembersForm.get('groupMembers') as FormArray;
   }
 
-  // Add member dynamically
+  /** Add member field in form
+   *  on click of add menber button
+   **/
   addMemberNameAndEmailField(): void {
     this.groupMembers.push(this.addMembersToGroupForm());
   }
 
-  // Delete member name and email
+  /** Delete member field in form
+   *  on click of Delete button
+   *  @param index
+   **/
   deleteMemberNameAndEmailField(i: number): void {
     this.groupMembers.removeAt(i);
   }
 
-  // Submit method
-  onSubmit(): void {
-    // this.addGroupForm.reset();
-    // this.router.navigate(['group/group-list']);
-  }
-
   /** create group method to get data from add group form
    * and send to post api call function
-   */
+   **/
   createGroup() {
-   // this.currentUser = this.getCurrentUser();
-   //const currentUserDetails = this.getCurrentUserByName(this.currentUser);
-  //  const currentUserId = currentUserDetails.id
-     const data : Groups = {
+    const data : Groups = {
       name: this.groupName?.value as string,
       about: this.about?.value as string,
-      groupMembers: [
-        {
+      groupMembers: [{
           userId: "3a0ba79a-0f40-0dd1-4e91-9ed501777180"
-        }
-      ]
+        }]
     }
 
+    // Create group Api call from group service
     this.groupsService.createGroup(data).subscribe(() => {
-      console.log('Group created successfully!');
+      alert('Group created successfully!');
     });
     this.isGroupCreated = true;
   }
 
-  /** add Members method to get data from add add members form
+  /** add Members method
+   * to get data from add add members form
    * and send to post api call function
-   */
+   **/
   addMembersToGroup() {
     const data : GroupMembersToAdd = this.groupMembers.value;
-    console.log(data)
+
+    // AddMembers api call from group service
     this.groupsService.addMembersToGroup(data).subscribe(() => {
-      console.log('members added successfully!');
+      alert('members added successfully!');
     });
   }
 
 
-  /** current user method to get name of current user from server through api */
-  getCurrentUser() {
-    return this.groupsService.getCurrentUser().subscribe((val) => console.log(val))
+  /** current user method
+   * to get name of current user
+   * from server through api
+   * @returns string
+   * */
+  getCurrentUser() : string {
+    let currentUSerName : string = '' ;
+
+    // Current user api call to get current user's name
+    this.groupsService.getCurrentUser().subscribe((val) => {currentUSerName = val})
+    return currentUSerName;
   }
 
-  /** current user by name method to get user details of current user from server through api */
-  getCurrentUserByName(name : string) {
-    return this.groupsService.getCurrentUserDetails().subscribe((val) => console.log(val))
+  /** current user by name method
+   * to get user details of current user
+   * from server through api
+   * @return object
+   * */
+  getCurrentUserByName(name : string) : object {
+    return this.groupsService.getCurrentUserDetails().subscribe((val) => {return (val)})
   }
-
-  // ////////////////////////////////code for testing purpose ////////////////////////////////
-
-  getLogin() {
-    return this.groupsService.getLogin().subscribe((val) => console.log(val))
-  }
-
-  registerUser() {
-    return this.groupsService.resgisterUser().subscribe((val) => console.log(val))
-  }
-
 }
