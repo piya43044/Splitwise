@@ -50,13 +50,11 @@ export class ExpenseListComponent implements OnInit {
       alert("Delete expense successfully")
     });
   }
-
   /**
    * Get expense list from the api
    * @return void
    */
   getExpenseList(): void{
-
     this.expenseService.getExpenseList().subscribe(async data => {
       this.expense=data;
       this.expenseItem = this.expense.items;
