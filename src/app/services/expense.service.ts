@@ -10,6 +10,7 @@ import { ExpenseItem } from '../models/expenseItem.model';
 export class ExpenseService {
   
   private baseUrl = "https://localhost:44329/api/app/expense";
+  private expenseUnsettleUrl = "https://localhost:44329/api/app/exp-list/un-setteled-list";
 
   // constructor
   constructor(private http: HttpClient) { }
@@ -56,6 +57,14 @@ export class ExpenseService {
    */
   updateExpenseByID(id: string, expense: ExpenseItem): Observable<ExpenseItem>{
     return this.http.put<ExpenseItem>(`${this.baseUrl}/${id}`,expense);
+  }
+
+  /**
+   * Get expense unsettle data from the api
+   * @returns Observable<ExpenseItem>
+   */
+  getExpenseUnsettleList(): Observable<ExpenseItem[]>{
+    return this.http.get<ExpenseItem[]>(this.expenseUnsettleUrl);
   }
 
 }

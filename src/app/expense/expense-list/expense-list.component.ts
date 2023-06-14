@@ -16,6 +16,7 @@ export class ExpenseListComponent implements OnInit {
   expenseItem!: ExpenseItem[];
   deleteExpenseName!: string;
   deleteExpenseId!: string;
+  unsettledDetail!: ExpenseItem[];
 
   // Constructor
   constructor( private router: Router,
@@ -24,16 +25,15 @@ export class ExpenseListComponent implements OnInit {
 
   /** 
    * ngOnInt method
-   * @return void
    * */ 
   ngOnInit(): void{
+    this.getUnsettleList();
     this.getExpenseList();
   }
 
   /**
    * Navigate to edit form
    * @param index - number
-   * @return void
    * */
   navigateToEditForm(id: string): void{
     this.router.navigate(['expense','expense-edit',id]);
@@ -42,7 +42,6 @@ export class ExpenseListComponent implements OnInit {
   /** 
    * Delete expense
    * @param index -number
-   * @return void
    * */ 
   deleteExpense(id: string){
     this.expenseService.deleteExpense(id).subscribe( data =>{
@@ -53,7 +52,6 @@ export class ExpenseListComponent implements OnInit {
 
   /**
    * Get expense list from the api
-   * @return void
    */
   getExpenseList(): void{
 
@@ -61,10 +59,20 @@ export class ExpenseListComponent implements OnInit {
       this.expense=data;
       this.expenseItem = this.expense.items;
       for(let i=0;i<this.expenseItem.length;i++){
+        // Get the group name by their id
         this.groupService.getGroupDetailByGroupId(this.expenseItem[i].groupId).subscribe( data => {
-          this.expenseItem[i].groupName= data.name
-          
+          this.expenseItem[i].groupName= data.name         
          })
+
+        //  Compare the expense id and store the unsettled data
+         for(let j=0;j<this.unsettledDetail.length;j++){
+          if(this.unsettledDetail[j].expenseId === this.expenseItem[i].id){
+            this.expenseItem[i].amount = this.unsettledDetail[j].amount;
+            this.expenseItem[i].paymentId = this.unsettledDetail[j].paymentId;
+            this.expenseItem[i].ownedBy = this.unsettledDetail[j].ownedBy;
+            this.expenseItem[i].expenseId = this.unsettledDetail[j].expenseId;
+          }
+         }
       }
     })
   }
@@ -72,11 +80,19 @@ export class ExpenseListComponent implements OnInit {
   /**
    * Set the value of delete expense name and id
    * @param expenseName - string, expenseId -string
-   * @returns void
    */
   setDeleteExpense(expenseName: string, expenseId: string): void{
     this.deleteExpenseName = expenseName;
     this.deleteExpenseId = expenseId;
   }
 
+  /** 
+   * Get unsettle data from the expense unsettle list api
+   * */ 
+  getUnsettleList(){
+    
+    this.expenseService.getExpenseUnsettleList().subscribe( data => {
+      this.unsettledDetail = data;    
+    })
+  }
 }

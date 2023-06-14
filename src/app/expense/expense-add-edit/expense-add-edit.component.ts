@@ -55,7 +55,7 @@ export class ExpenseAddEditComponent implements OnInit {
       expense_amount: new FormControl('',[Validators.required]),
       split_as: new FormControl('equal',[Validators.required]),
       currency: new FormControl('INR',[Validators.required]),
-      isSettled: new FormControl('false',[Validators.required]),
+      // isSettled: new FormControl('false',[Validators.required]),
     })
 
   }
@@ -118,7 +118,7 @@ export class ExpenseAddEditComponent implements OnInit {
         expense_amount: expenseDetail.expense_amount,
         split_as: expenseDetail.split_as,
         currency: expenseDetail.currency,
-        isSettled: expenseDetail.isSettled,
+        // isSettled: expenseDetail.isSettled,
       })
     })
   }
