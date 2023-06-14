@@ -14,8 +14,8 @@ export class FriendService {
 
   /**
    * Post the data of friend in the server
-   * @param friend - Friend
-   * @returns Observable<Friend>
+   * @param friend data (name and email)
+   * @returns friend invite data
    */
   postFriend(friend: Friend): Observable<Friend> {
    

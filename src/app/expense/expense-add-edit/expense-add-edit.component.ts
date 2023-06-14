@@ -19,7 +19,9 @@ export class ExpenseAddEditComponent implements OnInit {
   group!: Group;
   groupItem!: GroupItem[];
 
-  // Constructor
+  /**
+   * Constructor
+   *  */ 
   constructor( private router: Router, 
     private activatedRoute: ActivatedRoute,
     private expenseService: ExpenseService,
@@ -27,7 +29,6 @@ export class ExpenseAddEditComponent implements OnInit {
 
   /**
    * ngOnInit method
-   * @return void
    *  */ 
   ngOnInit(): void {
 
@@ -44,6 +45,7 @@ export class ExpenseAddEditComponent implements OnInit {
       }
     })
 
+    // Call the getGroupList() method for getting the list of group
     this.getGroupList();
 
     // Add expense form
@@ -55,30 +57,28 @@ export class ExpenseAddEditComponent implements OnInit {
       expense_amount: new FormControl('',[Validators.required]),
       split_as: new FormControl('equal',[Validators.required]),
       currency: new FormControl('INR',[Validators.required]),
-      // isSettled: new FormControl('false',[Validators.required]),
     })
 
   }
 
   /**
    * Getter method for expense title
-   * @returns FormControl
+   * @returns FormControl of expense_title
    */
-  get expenseTitle(){
-    return this.addExpenseForm.get('expense_title');
+  get expenseTitle(): FormControl{
+    return this.addExpenseForm.get('expense_title') as FormControl;
   }
 
   /**
    * Getter method for expense amount
-   * @returns FormControl
+   * @returns FormControl of the expense_amount
    */
-  get expenseAmount(){
-    return this.addExpenseForm.get('expense_amount');
+  get expenseAmount(): FormControl{
+    return this.addExpenseForm.get('expense_amount') as FormControl;
   }
 
   /**
    * onSubmit method
-   * @return void
    */
   onSubmit(): void{
     
@@ -92,7 +92,6 @@ export class ExpenseAddEditComponent implements OnInit {
 
   /**
    * Get group list from the group api
-   * @returns void
    */
   getGroupList(): void {
     this.groupService.getGroupList().subscribe( data => {
@@ -103,7 +102,6 @@ export class ExpenseAddEditComponent implements OnInit {
 
   /**
    * Get expense detail by their id and set the values in the form
-   * @returns void
    */
   getExpenseById(): void{
     this.expenseService.getExpenseDetailById(this.getActivatedRouteParam).subscribe(data =>{
@@ -118,14 +116,12 @@ export class ExpenseAddEditComponent implements OnInit {
         expense_amount: expenseDetail.expense_amount,
         split_as: expenseDetail.split_as,
         currency: expenseDetail.currency,
-        // isSettled: expenseDetail.isSettled,
       })
     })
   }
 
   /**
    * Update the expense detail by their expense id
-   * @returns void
    */
   updateExpense(): void{
     

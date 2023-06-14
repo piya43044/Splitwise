@@ -18,7 +18,9 @@ export class ExpenseListComponent implements OnInit {
   deleteExpenseId!: string;
   unsettledDetail!: ExpenseItem[];
 
-  // Constructor
+  /**
+   * Constructor
+   *  */ 
   constructor( private router: Router,
     private groupService: GroupService,
     private expenseService: ExpenseService){};
@@ -33,7 +35,7 @@ export class ExpenseListComponent implements OnInit {
 
   /**
    * Navigate to edit form
-   * @param index - number
+   * @param id of expense as string
    * */
   navigateToEditForm(id: string): void{
     this.router.navigate(['expense','expense-edit',id]);
@@ -41,7 +43,7 @@ export class ExpenseListComponent implements OnInit {
 
   /** 
    * Delete expense
-   * @param index -number
+   * @param id of expense as string
    * */ 
   deleteExpense(id: string){
     this.expenseService.deleteExpense(id).subscribe( data =>{
