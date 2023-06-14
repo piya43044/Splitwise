@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
-import { Groups, GroupMembers, GroupMembersToAdd, GroupList, GroupListResult, UserProfile, GroupMembersResult } from '../models/groups';
+import { Groups, GroupMembers, GroupMembersToAdd, GroupList, GroupListResult, UserProfile, GroupMembersResult, GroupResult } from '../models/groups';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 
 
@@ -10,14 +10,16 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 export class GroupsService {
   group !: Groups;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient
+    ) {}
 
   /**create group function to call post api
    * and send group details to server
    **/
-  createGroup(data: Groups): Observable<Groups> {
+  createGroup(data: Groups): Observable<GroupResult> {
     const createGroupURL: string = 'https://localhost:44329/api/app/group';
-    return this.http.post<Groups>(createGroupURL, data);
+    return this.http.post<GroupResult>(createGroupURL, data);
   }
 
   /** add members to group function to call post api

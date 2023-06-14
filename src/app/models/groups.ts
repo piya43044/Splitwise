@@ -1,16 +1,46 @@
-// Group interface with attributes of group
+/** Group interface with attributes of group */
 export interface Groups {
   name: string;
   about: string;
   groupMembers: GroupMembers[];
 }
 
-// GroupGroupMembers interface with attributes of GroupMembers
+/**  GroupGroupMembers interface with attributes of GroupMembers */
 export interface GroupMembers {
   userId: string;
 }
 
-// GroupMembersResult interface with attributes of group members result through api
+/** GroupResult interface with attributes of group result through api*/
+export interface GroupResult {
+  name: string;
+  about: string;
+  createdBy: string;
+  isDeleted: false;
+  groupMembers: [
+    {
+      userId: string;
+      groupId: string;
+      isRemoved: false;
+      dateOfJoin: string;
+      lastModificationTime: null;
+      lastModifierId: null;
+      creationTime: string;
+      creatorId: string;
+      extraProperties: {};
+      concurrencyStamp: string;
+      id: string;
+    }
+  ];
+  id: string;
+
+}
+
+/** GroupGroupMembers interface with attributes of GroupMembers */
+export interface GroupMembers {
+  userId: string;
+}
+
+/** GroupMembersResult interface with attributes of group members result through api */
 export interface GroupMembersResult {
   userId: string;
   groupId: string;
@@ -25,13 +55,13 @@ export interface GroupMembersResult {
   id: string;
 }
 
-// GroupMembersToAdd interface with attributes of Group Members of group
+/** GroupMembersToAdd interface with attributes of Group Members of group */
 export interface GroupMembersToAdd {
   userId: string;
   groupId: string;
 }
 
-// GroupList interface with attributes of Members details of group
+/** GroupList interface with attributes of Members details of group */
 export interface GroupList {
   name: string;
   about: string;
@@ -41,13 +71,13 @@ export interface GroupList {
   isDeleted: string;
 }
 
-// GroupListResult interface with attributes of group list result through api
+/** GroupListResult interface with attributes of group list result through api */
 export interface GroupListResult {
   totalCount: number;
   items: GroupList[];
 }
 
-// UserProfile interface with the properties of user profile details
+/** UserProfile interface with the properties of user profile details */
 export interface UserProfile {
   userName: string;
   email: string;

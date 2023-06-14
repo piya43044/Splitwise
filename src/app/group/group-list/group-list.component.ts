@@ -62,34 +62,40 @@ export class GroupListComponent implements OnInit {
     })
   }
 
-  // Group detail show
+  /** Group details show function use index and group name from group list
+   * and redirect to group details page.
+   * @param name
+   * @param index
+   **/
   groupDetailShow(name: string, index: number): void {
     this.getActivatedRouteParam = name;
-    this.router.navigate(['group', 'group-list', name]);
+    this.router.navigate(['group', 'group-list', { groupName: name, index: index }]);
   }
 
-  // Navigate to edit form
+  /** navgate to edit form function use index from group list
+   *  and redirect to edit form with index of group to edit details
+   * @param index
+   **/
   navigateToEditForm(index: number): void {
     this.router.navigate(['group', 'group-edit', index]);
   }
 
   /**  Delete group function
-   * to delete group from list*/
+   * to delete group from list
+   * @param index
+   **/
   deleteGroup(index: number): void {
-    //this.groupList.splice(index, 1); // delete row from table
+    this.groupList.splice(index, 1); // delete row from table
     const id = this.groupList[index].id;
-    this.groupsService.deleteGroupFromlist(id).subscribe(res => {
-      alert('group deleted...');
-    });
+    this.groupsService.deleteGroupFromlist(id).subscribe(res => { alert('group deleted...') });
+    this.router.navigate(['group', 'group-list']);
   }
 
   /** Group list function to call get api
    * and get group details from server
    **/
   getGroupList(): void {
-    this.groupsService.getGroupList().subscribe((res) => {
-      this.groupList = res.items;
-    })
+    this.groupsService.getGroupList().subscribe((res) => { this.groupList = res.items })
   }
 
   /** Group list function to call get api
@@ -97,19 +103,14 @@ export class GroupListComponent implements OnInit {
    * @returns GroupMembers[]
    **/
   getGroupMembers(): void {
-    this.groupsService.getGroupMembers().subscribe((res) => {
-      this.groupMembers = res;
-
-    })
+    this.groupsService.getGroupMembers().subscribe((res) => { this.groupMembers = res });
   }
 
   /** CurrentUser function to call get api
    * and get name of current user from server
    **/
   getCurrentUserDetails(): void {
-    this.groupsService.getCurrentUserDetails().subscribe(data => {
-      this.currentUserName = data.userName;
-    })
+    this.groupsService.getCurrentUserDetails().subscribe(data => { this.currentUserName = data.userName });
   }
 }
 
