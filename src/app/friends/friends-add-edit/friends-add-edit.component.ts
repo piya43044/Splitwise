@@ -16,12 +16,16 @@ export class FriendsAddEditComponent implements OnInit {
   getActivatedRouteParam : String = '';
   loading: boolean = false;
 
-  // Constructor
+  /**
+   * Constructor
+   *  */ 
   constructor( private router: Router, 
     private activatedRoute: ActivatedRoute,
     private friendService: FriendService){};
 
-  // ngOnInit method
+  /**
+   * ngOnInit method
+   *  */ 
   ngOnInit(): void {
 
     // Add friend form
@@ -47,22 +51,28 @@ export class FriendsAddEditComponent implements OnInit {
    * Getter methods
    * @returns FormControl
    *  */ 
-  get friendEmail(){
-    return this.addFriendForm.get('friendEmail');
+  get friendEmail(): FormControl{
+    return this.addFriendForm.get('friendEmail') as FormControl;
   }
 
-  get friendName(){
-    return this.addFriendForm.get('friendName');
+  get friendName(): FormControl{
+    return this.addFriendForm.get('friendName') as FormControl;
   }
 
-  // Submit method for invite friend
+  /**
+   * Submit method for invite friend
+   *  */ 
   onSubmit(): void{
     this.loading = true;
-    this.friendService.postFriend(this.addFriendForm.value).subscribe( response => {
-      this.loading = false;
+    this.friendService.postFriend(this.addFriendForm.value).subscribe( (response) => {
+      // this.loading = false;
       alert(response.result);
       this.addFriendForm.reset();
       this.router.navigate(['friends/friends-list']);
+    },
+    (error) => {
+      this.loading = false;
+      alert("Error caught, please try again!");
     })
   }
 }
