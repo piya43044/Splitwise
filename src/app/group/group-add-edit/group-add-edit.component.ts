@@ -61,11 +61,12 @@ export class GroupAddEditComponent implements OnInit {
 
     /** On click of group edit button it will set current details of group to textbox */
     if (this.getActivatedRouteParam != undefined) {
+      const data = this.groupsService.groupList[Number(this.getActivatedRouteParam)];
       this.addGroupForm.patchValue({
-        groupName: 'trip',
-        about: 'this is group for testing',
+        groupName: data.name,
+        about: data.about,
         groupMember: [{
-          userId: 'admin'
+          userId: data.createdBy
         }]
       })
     }

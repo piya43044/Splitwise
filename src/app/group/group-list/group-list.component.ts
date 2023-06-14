@@ -100,7 +100,8 @@ export class GroupListComponent implements OnInit {
    **/
   getGroupList(): void {
     this.groupsService.getGroupList().subscribe((res) => {
-      this.groupList = res.items;
+      this.groupsService.groupList = res.items;
+      this.groupList = this.groupsService.groupList;
     })
   }
 
@@ -109,7 +110,8 @@ export class GroupListComponent implements OnInit {
    **/
   getGroupMembers(): void {
     this.groupsService.getGroupMembers().subscribe((res) => {
-      this.groupMembers = res;
+      this.groupsService.groupMembers = res;
+      this.groupMembers = this.groupsService.groupMembers;
     })
   }
 

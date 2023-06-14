@@ -9,6 +9,8 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 })
 export class GroupsService {
   group !: Groups;
+  groupList: GroupList[] = [];
+  groupMembers: GroupMembersResult[] = [];
   getSelectedGroupIndex !: number;
 
   constructor(
