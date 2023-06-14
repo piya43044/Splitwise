@@ -83,7 +83,9 @@ export class GroupListComponent implements OnInit {
   }
 
   /**  Delete group function
-   * to delete group from list*/
+   * to delete group from list
+   * @param index
+   **/
   deleteGroup(index: number): void {
     this.groupList.splice(index, 1); // delete row from table
     const id = this.groupList[index].id;
@@ -104,12 +106,10 @@ export class GroupListComponent implements OnInit {
 
   /** Group list function to call get api
    * and get group details from server
-   * @returns GroupMembers[]
    **/
   getGroupMembers(): void {
     this.groupsService.getGroupMembers().subscribe((res) => {
       this.groupMembers = res;
-
     })
   }
 

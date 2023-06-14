@@ -59,6 +59,7 @@ export class GroupAddEditComponent implements OnInit {
       }
     })
 
+    /** On click of group edit button it will set current details of group to textbox */
     if (this.getActivatedRouteParam != undefined) {
       this.addGroupForm.patchValue({
         groupName: 'trip',
