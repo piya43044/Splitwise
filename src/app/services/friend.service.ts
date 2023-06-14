@@ -12,10 +12,11 @@ export class FriendService {
 
   constructor(private http: HttpClient) { }
 
+  
   /**
    * Post the data of friend in the server
-   * @param friend - Friend class
-   * @returns Observable<Friend> which is having the data of Friend class
+   * @param friend data (name and email)
+   * @returns friend invite data
    */
   postFriend(friend: Friend): Observable<Friend> {
    
