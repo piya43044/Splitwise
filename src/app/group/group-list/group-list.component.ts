@@ -12,10 +12,11 @@ export class GroupListComponent implements OnInit {
 
   groupList: GroupList[] = [];
   groupMembers: GroupMembersResult[] = [];
-  currentUserName: string = '';
+  currentUserName: string = 'Admin';
 
   isGroupDetailActive: Boolean = false;
   getActivatedRouteParam: String = '';
+  getSelectedGroupIndex !: number;
   groupNameDetail!: String;
   groups = [
     { groupName: 'Mathura', shareLink: 'dff-dfs-sdf', groupType: 'trip', groupMember: [{ memberName: 'Priya' }, { memberName: 'Nikita' }] },
@@ -44,14 +45,15 @@ export class GroupListComponent implements OnInit {
     private groupsService: GroupsService
   ) {
     this.getGroupList();
-  };
+  }
 
   // ngOnInit method
   ngOnInit(): void {
 
     // get activatedRoute parameter using observable
     this.activatedRoute.params.subscribe((param) => {
-      this.getActivatedRouteParam = param['routerParam'];
+      this.getActivatedRouteParam = param['groupName'];
+      this.getSelectedGroupIndex = param['index'];
       if (this.getActivatedRouteParam === undefined) {
         this.isGroupDetailActive = false;
       }
@@ -62,13 +64,20 @@ export class GroupListComponent implements OnInit {
     })
   }
 
-  // Group detail show
+  /** Group details show function use index and group name from group list
+   * and redirect to group details page.
+   * @param name
+   * @param index
+   */
   groupDetailShow(name: string, index: number): void {
     this.getActivatedRouteParam = name;
-    this.router.navigate(['group', 'group-list', name]);
+    this.router.navigate(['group', 'group-list', { groupName: name, index: index }]);
   }
 
-  // Navigate to edit form
+  /** navgate to edit form function use index from group list
+   *  and redirect to edit form with index of group to edit details
+   * @param index
+   */
   navigateToEditForm(index: number): void {
     this.router.navigate(['group', 'group-edit', index]);
   }
@@ -76,11 +85,12 @@ export class GroupListComponent implements OnInit {
   /**  Delete group function
    * to delete group from list*/
   deleteGroup(index: number): void {
-    //this.groupList.splice(index, 1); // delete row from table
+    this.groupList.splice(index, 1); // delete row from table
     const id = this.groupList[index].id;
     this.groupsService.deleteGroupFromlist(id).subscribe(res => {
       alert('group deleted...');
     });
+    this.router.navigate(['group', 'group-list']);
   }
 
   /** Group list function to call get api

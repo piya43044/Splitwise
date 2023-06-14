@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
-import { Groups, GroupMembers, GroupMembersToAdd, GroupList, GroupListResult, UserProfile, GroupMembersResult } from '../models/groups';
+import { Groups, GroupMembers, GroupMembersToAdd, GroupList, GroupListResult, UserProfile, GroupMembersResult, GroupResult } from '../models/groups';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 
 
@@ -9,15 +9,18 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 })
 export class GroupsService {
   group !: Groups;
+  getSelectedGroupIndex !: number;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient
+    ) {}
 
   /**create group function to call post api
    * and send group details to server
    **/
-  createGroup(data: Groups): Observable<Groups> {
+  createGroup(data: Groups): Observable<GroupResult> {
     const createGroupURL: string = 'https://localhost:44329/api/app/group';
-    return this.http.post<Groups>(createGroupURL, data);
+    return this.http.post<GroupResult>(createGroupURL, data,{withCredentials: true});
   }
 
   /** add members to group function to call post api
@@ -58,7 +61,7 @@ export class GroupsService {
    **/
   getCurrentUser(): Observable<string> {
     const currentUserURL = 'https://localhost:44329/api/app/current-user/current-user-name';
-    return this.http.get<string>(currentUserURL);
+    return this.http.get(currentUserURL,{withCredentials: true , responseType: 'text' });
   }
 
   /** CurrentUserDetails function to call get api
@@ -66,6 +69,16 @@ export class GroupsService {
    **/
   getCurrentUserDetails(): Observable<UserProfile> {
     const currentUserDetailsURL ='https://localhost:44329/api/account/my-profile';
-    return this.http.get<UserProfile>(currentUserDetailsURL);
+    return this.http.get<UserProfile>(currentUserDetailsURL,{withCredentials: true});
+  }
+
+  getLogin(): Observable<any> {
+    const LoginURL = 'https://localhost:44329/api/account/login';
+    const data = {
+      userNameOrEmailAddress : "mayank",
+      password : "Mayank@123",
+      rememberMe : true
+    }
+    return this.http.post<any>(LoginURL,(data));
   }
 }

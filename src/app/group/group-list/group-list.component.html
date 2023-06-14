@@ -25,7 +25,7 @@
           <tr>
             <th>Group Name</th>
             <th>Group Description</th>
-            <th>Group Members</th>
+            <th>Created By</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -38,7 +38,7 @@
               <a class="p-2" (click)="groupDetailShow(group.name, i)">{{group.name}}</a>
             </td>
 
-            <!-- Group share link -->
+            <!-- Group Description -->
             <td>{{group.about}} </td>
 
             <!-- Group Members -->
@@ -91,7 +91,7 @@
                 <!-- Add Expense and settle up button -->
                 <div class="expense-settleup">
                   <button class="btn btn-danger" routerLink="/expense/expense-add" type="button">Add Expense</button>
-                  <button class="btn btn-success" routerLink="/settleUp" type="button">Settle Up</button>
+                  <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#GroupMembers">Group Details</button>
                 </div>
               </div>
             </td>
@@ -130,4 +130,32 @@
     </div>
   </ng-container>
 
+</div>
+
+
+
+<!-- Group Members Modal -->
+<div class="modal fade" id="GroupMembers" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{groupNameDetail}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <ul class="list-group">
+          <li class="list-group-item">{{currentUserName}}</li>
+          <li class="list-group-item" *ngIf="groupMembers.length == 0">No other members added.</li>
+          <li class="list-group-item" *ngFor="let groupMember of groupMembers">
+            {{groupMember.id}}
+            <p *ngIf="groupMembers.length == 0">No other members added.</p>
+          </li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="deleteGroup(getSelectedGroupIndex)">Delete Group</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="navigateToEditForm(getSelectedGroupIndex)">Edit Group Details </button>
+      </div>
+    </div>
+  </div>
 </div>
