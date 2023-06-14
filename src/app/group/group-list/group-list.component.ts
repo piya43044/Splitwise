@@ -20,6 +20,7 @@ export class GroupListComponent implements OnInit {
 
   isGroupDetailActive: Boolean = false;
   getActivatedRouteParam: String = '';
+  getSelectedGroupIndex !: number;
   groupNameDetail!: String;
   totalExpenses: ExpenseItem[] = [];
   deleteGroupId !: number;
@@ -32,7 +33,7 @@ export class GroupListComponent implements OnInit {
     private expenseService: ExpenseService
   ) {
     this.getGroupList();
-  };
+  }
 
   // ngOnInit method
   ngOnInit(): void {
