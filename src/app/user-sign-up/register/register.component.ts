@@ -34,31 +34,31 @@ export class RegisterComponent implements OnInit {
 
   /**
    * name method are used to get name
-   * @retun name
-   *  */
+   * @retun formcontrol name
+   */
   get name() {
     return this.registerForm.get('name');
   }
 
   /**
    * email method are used to get email
-   * @retun email
-   *  */
+   * @retun formcontrol email
+   */
   get email() {
     return this.registerForm.get('email');
   }
 
   /**
    * password method are used to get password
-   * @retun password
-   *  */
+   * @retun formcontrol password
+   */
   get password() {
     return this.registerForm.get('password');
   }
 
   /**
    * addUser method are used to subscribe data
-   * @param new_user : UserRegister
+   * @param newUser store the user data
    *  */
   addUser(newUser: UserRegister) {
     this.addUsers.addUsers(newUser).subscribe(
@@ -67,7 +67,7 @@ export class RegisterComponent implements OnInit {
         this.router.navigate(['/login']);
       },
       // HttpErrorResponse
-      // @param error : HttpErrorResponse
+      // @param error store the error status
       (error: HttpErrorResponse) => {
         if (error.status === 403) {
           alert("User already exists");
@@ -93,7 +93,7 @@ export class RegisterComponent implements OnInit {
 
   /**
    * Submit method
-   * */
+   */
   onSubmit(): void {
     const formData = this.registerForm.value;
     const newUser: UserRegister = {
@@ -102,8 +102,8 @@ export class RegisterComponent implements OnInit {
       password: formData.password,
       appName: 'Splitwise',
     }
-    //call add user method
-    //@param newUser : UserRegister
+    //addUser method are used to subscribe data
+    //@param newUser store the user data
     this.addUser(newUser);
     this.registerForm.reset();
   }

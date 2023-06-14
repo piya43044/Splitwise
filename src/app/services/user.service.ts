@@ -15,9 +15,9 @@ export class UserService {
   constructor(private http : HttpClient) { }
 
    /**
-   * addUsers are used to post data in the Api
-   * @retun http response
-   *  */
+     * addUsers are used to post data in the Api
+     * @retun register user details
+     */
   addUsers (addUserRequest : UserRegister): Observable<HttpResponse<UserRegister>>{
     return this.http.post<UserRegister>(this.baseUrl + '/api/account/register', addUserRequest, { observe: 'response' });
   }
