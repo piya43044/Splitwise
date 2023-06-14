@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpResponse, HttpErrorResponse} from '@angular/common/http';
+import {HttpClient, HttpResponse} from '@angular/common/http';
 import { User_register } from '../models/register.model';
 import { Observable } from 'rxjs';
 import { User_login } from '../models/login.model';
-import { AuthService } from '@abp/ng.core';
+
 
 @Injectable({
   providedIn: 'root'
@@ -27,13 +27,13 @@ export class UserService {
    * @retun http response
    *  */
   logUser(logUserRequest : User_login) : Observable<HttpResponse<any>>{
-    return this.http.post<User_login>(this.baseUrl+ '/api/account/login',logUserRequest,{observe :'response'})
+    return this.http.post<User_login>(this.baseUrl+ '/api/account/login',logUserRequest,{observe :'response',withCredentials:true})
   }
   /**
    * currentUser are used to get data from the Api
    * @retun http response
    *  */
   currentUser(){
-    return this.http.get(this.baseUrl+'/api/app/current-user/current-user-name')
+    return this.http.get(this.baseUrl+'/api/app/current-user/current-user-name', { withCredentials:true, responseType: 'text' })
   }
 }

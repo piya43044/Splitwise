@@ -69,6 +69,7 @@ export class LoginComponent implements OnInit {
    *  */
   getCurrentUser(){
     this.loggedUSer.currentUser().subscribe((x)=>{
+      console.log(x);
     })
   }
  

@@ -34,21 +34,21 @@ export class RegisterComponent implements OnInit {
 
   /**
    * name method are used to get name
-   * @retun name
+   * @retun formcontrol - name
    *  */
   get name(){
     return this.registerForm.get('name');
   }
   /**
    * email method are used to get email
-   * @retun email
+   * @retun formcontrol - email
    *  */
   get email(){
     return this.registerForm.get('email');
   }
   /**
    * password method are used to get password
-   * @retun password
+   * @retun formcontrol - password
    *  */
   get password(){
     return this.registerForm.get('password');
@@ -99,7 +99,7 @@ export class RegisterComponent implements OnInit {
    }
    /**
    * call add user method
-   * @param new_user : User_register
+   * @param new_user : UserRegister
    *  */
     this.addUser(new_user);
     this.registerForm.reset();
