@@ -1,3 +1,9 @@
+<!-- Loading message while click on invite button -->
+<div *ngIf="loading">
+    <h3>Loading......</h3>
+</div>
+
+<!-- Friend container -->
 <div class="friend-container">
     <!-- Friend heading -->
     <div *ngIf="!isFriendAddActive; then friendAdd else friendEdit">

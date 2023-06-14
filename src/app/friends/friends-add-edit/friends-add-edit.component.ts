@@ -14,6 +14,7 @@ export class FriendsAddEditComponent implements OnInit {
   addFriendForm !: FormGroup;
   isFriendAddActive: Boolean = false;
   getActivatedRouteParam : String = '';
+  loading: boolean = false;
 
   // Constructor
   constructor( private router: Router, 
@@ -54,10 +55,11 @@ export class FriendsAddEditComponent implements OnInit {
     return this.addFriendForm.get('friendName');
   }
 
-  // Submit method
+  // Submit method for invite friend
   onSubmit(): void{
-
+    this.loading = true;
     this.friendService.postFriend(this.addFriendForm.value).subscribe( response => {
+      this.loading = false;
       alert(response.result);
       this.addFriendForm.reset();
       this.router.navigate(['friends/friends-list']);

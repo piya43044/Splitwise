@@ -18,10 +18,7 @@ export class FriendService {
    * @returns Observable<Friend>
    */
   postFriend(friend: Friend): Observable<Friend> {
-
-    //const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8').set('accept','text/plain');
-    //return this.http.post<any>(`${this.baseUrl}?name=${friend.friendName}&userMail=${encodeURIComponent(friend.friendEmail)}`, { headers: headers, responseType: 'text' as 'json' });
-
+   
     return this.http.post<Friend>(`${this.baseUrl}?name=${friend.friendName}&userMail=${encodeURIComponent(friend.friendEmail)}`, null);
   }
 }
