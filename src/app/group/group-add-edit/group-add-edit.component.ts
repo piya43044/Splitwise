@@ -103,7 +103,7 @@ export class GroupAddEditComponent implements OnInit {
 
   /** Delete member field in form
    *  on click of Delete button
-   *  @param index
+   *  @param index index of field which is selected to delete
    **/
   deleteMemberNameAndEmailField(i: number): void {
     this.groupMembers.removeAt(i);
@@ -122,7 +122,8 @@ export class GroupAddEditComponent implements OnInit {
     }
 
     // Create group Api call from group service
-    this.groupsService.createGroup(data).subscribe((data) => {
+    this.groupsService.createGroup(data).subscribe(
+      (data) => {
       this.GroupResult = data;
       alert('Group created successfully!');
     });
@@ -137,9 +138,10 @@ export class GroupAddEditComponent implements OnInit {
     const data: GroupMembersToAdd = this.groupMembers.value;
 
     // AddMembers api call from group service
-    this.groupsService.addMembersToGroup(data).subscribe(() => {
-      alert('members added successfully!');
-    });
+    this.groupsService.addMembersToGroup(data).subscribe(
+      (res) => { alert('members added successfully!') },
+      (error) => { alert (error) }
+    );
   }
 
 
@@ -152,7 +154,10 @@ export class GroupAddEditComponent implements OnInit {
     let currentUSerName: string = '';
 
     // Current user api call to get current user's name
-    this.groupsService.getCurrentUser().subscribe((val) => { currentUSerName = val });
+    this.groupsService.getCurrentUser().subscribe(
+      (val) => { currentUSerName = val },
+      (error) => { alert (error) }
+      );
   }
 
   /** current user by name method
@@ -160,6 +165,9 @@ export class GroupAddEditComponent implements OnInit {
    * from server through api
    **/
   getCurrentUserByName(name: string): void {
-    this.groupsService.getCurrentUserDetails().subscribe((val) => { this.userProfile = val });
+    this.groupsService.getCurrentUserDetails().subscribe(
+      (val) => { this.userProfile = val },
+      (error) => { alert (error) }
+      );
   }
 }
