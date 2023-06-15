@@ -139,8 +139,8 @@ export class GroupAddEditComponent implements OnInit {
 
     // AddMembers api call from group service
     this.groupsService.addMembersToGroup(data).subscribe(
-      (res) => { alert('members added successfully!') },
-      (error) => { alert (error) }
+      (res) => { alert('members added successfully!'); },
+      (error) => { alert(error); }
     );
   }
 
@@ -155,8 +155,8 @@ export class GroupAddEditComponent implements OnInit {
 
     // Current user api call to get current user's name
     this.groupsService.getCurrentUser().subscribe(
-      (val) => { currentUSerName = val },
-      (error) => { alert (error) }
+      (val) => { currentUSerName = val; },
+      (error) => { alert(error); }
       );
   }
 
@@ -166,8 +166,8 @@ export class GroupAddEditComponent implements OnInit {
    **/
   getCurrentUserByName(name: string): void {
     this.groupsService.getCurrentUserDetails().subscribe(
-      (val) => { this.userProfile = val },
-      (error) => { alert (error) }
+      (val) => { this.userProfile = val; },
+      (error) => { alert(error); }
       );
   }
 }

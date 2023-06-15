@@ -96,8 +96,8 @@ export class GroupListComponent implements OnInit {
    **/
   getGroupList(): void {
     this.groupsService.getGroupList().subscribe(
-      (res) => { this.groupList = res.items },
-      (error) => { alert(error) }
+      (res) => { this.groupList = res.items; },
+      (error) => { alert(error); }
     );
   }
 
@@ -107,8 +107,8 @@ export class GroupListComponent implements OnInit {
    **/
   getGroupMembers(): void {
     this.groupsService.getGroupMembers().subscribe(
-      (res) => { this.groupMembers = res },
-      (error) => { alert(error) }
+      (res) => { this.groupMembers = res; },
+      (error) => { alert(error); }
     );
   }
 
@@ -123,10 +123,10 @@ export class GroupListComponent implements OnInit {
         for (let i = 0; i < this.totalExpenses.length; i++) {
           this.groupsService.getGroupDetailByGroupId(this.totalExpenses[i].groupId).subscribe(data => {
             this.totalExpenses[i].groupName = data.name;
-          })
+          });
         }
       },
-      (error) => { alert(error) }
+      (error) => { alert(error); }
     );
   }
 
@@ -135,8 +135,8 @@ export class GroupListComponent implements OnInit {
    **/
   getCurrentUserDetails(): void {
     this.groupsService.getCurrentUserDetails().subscribe(
-      (res) => { this.currentUserName = res.userName },
-      (error) => { alert(error) }
+      (res) => { this.currentUserName = res.userName; },
+      (error) => { alert(error); }
     );
   }
 }
