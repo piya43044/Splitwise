@@ -43,4 +43,9 @@ export class DashboardService {
     const DebtAmountListURL = 'https://localhost:44329/api/app/user-outstanding-details/who-will-give-to-current-user';
     return this.http.get<DebtAmountDetails[]>(DebtAmountListURL, { withCredentials: true });
   }
+
+  getUserNameById(id: string): Observable<any>{
+    const getUserNameByIdURL = 'https://localhost:44329/api/identity/users/'+id;
+    return this.http.get<any>(getUserNameByIdURL , { withCredentials: true });
+  }
 }

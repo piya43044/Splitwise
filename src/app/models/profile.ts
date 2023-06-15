@@ -25,6 +25,7 @@ export interface BorrowedAmountDetails{
   whomeToGive: string;
   groupName: string;
   message: string;
+  friendName : string;
 }
 
 /** BorrowedAmountDetails interface with the properties of user's debt amount details*/

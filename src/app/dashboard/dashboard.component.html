@@ -82,10 +82,11 @@
             <tbody>
               <tr *ngFor="let item of borrowedAmountList; let i=index">
                 <td>{{item.message}}</td>
-                <td>{{item.whomeToGive}}</td>
+                <td>{{item.friendName}}</td>
                 <td>{{item.amount}}</td>
 
               </tr>
+              <tr *ngIf="borrowedAmountList.length == 0">No record found</tr>
             </tbody>
           </table>
           </div>

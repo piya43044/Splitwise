@@ -59,9 +59,29 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.getBorrowedAmountList().subscribe(data => {
       this.borrowedAmountList = data;
       for (let item of data) {
-        sum += item.amount
+
       }
-      this.totalOwe = sum;
+
+
+      for (let i = 0; i < this.borrowedAmountList.length; i++) {
+        this.dashboardService.getUserNameById(this.borrowedAmountList[i].whomeToGive).subscribe((res) => {
+          if (res.userName != '' || null || undefined) {
+            sum += res.amount;
+            this.borrowedAmountList[i].friendName = res.userName;
+          }
+          else {
+            this.borrowedAmountList[i].friendName = 'This user is deleted... '
+          }
+        },
+          error => {
+            console.log(error.error.error.code);
+            this.borrowedAmountList.splice(i);
+
+          })
+        this.totalOwe = sum;
+      }
+
+
     })
   }
 
