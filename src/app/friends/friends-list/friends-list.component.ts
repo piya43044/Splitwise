@@ -104,7 +104,7 @@ export class FriendsListComponent implements OnInit {
       for(let i=0;i<this.friends.length;i++){
 
         // Check the friend if they are deleted or not
-        if(this.friends[i].isDeleted === false){
+        if(!this.friends[i].isDeleted){
           
           this.friendList.push(this.friends[i]);
 
