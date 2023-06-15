@@ -14,7 +14,7 @@
 
               <!-- Add expense button and settle up button -->
               <div class="expense-settleup">
-                <h4>{{userName | uppercase}}</h4>
+                <h6>{{userName | uppercase}}</h6>
               </div>
 
             </div>
@@ -57,12 +57,12 @@
                     <a routerLink="/dashboard" class="p-2"><i class="fa fa-arrow-circle-left"></i></a>
 
                     <!-- expense Name -->
-                    <h4 class="p-2">Expenses</h4>
+                    <h4 class="p-2">Expenses Record</h4>
 
                     <!-- Add Expense and settle up button -->
                     <div class="expense-settleup">
                       <button class="btn btn-danger" routerLink="/expense/expense-add" type="button">Add Expense</button>
-                      <button class="btn btn-success" routerLink="/settleUp" type="button">Settle Up</button>
+
                     </div>
 
                   </div>
@@ -71,21 +71,20 @@
 
               <!-- Expense table header -->
               <tr>
-                <th>Borrowed From</th>
-                <th>Group Name</th>
-                <th>Amount</th>
                 <th>Message</th>
+                <th>Friend Name</th>
+                <th>Amount</th>
+
               </tr>
             </thead>
 
             <!-- expense list -->
             <tbody>
               <tr *ngFor="let item of borrowedAmountList; let i=index">
-                <td>{{item.whomeToGive}}
-                  {{item.whomeToGive}}</td>
-                <td>{{item.groupName}}</td>
-                <td>{{item.amount}}</td>
                 <td>{{item.message}}</td>
+                <td>{{item.whomeToGive}}</td>
+                <td>{{item.amount}}</td>
+
               </tr>
             </tbody>
           </table>
@@ -95,6 +94,7 @@
 
       </tbody>
     </table>
+
 
   </div>
 </div>
