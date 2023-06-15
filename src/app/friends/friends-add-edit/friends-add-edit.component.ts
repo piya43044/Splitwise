@@ -65,7 +65,6 @@ export class FriendsAddEditComponent implements OnInit {
   onSubmit(): void{
     this.loading = true;
     this.friendService.postFriend(this.addFriendForm.value).subscribe( (response) => {
-      // this.loading = false;
       alert(response.result);
       this.addFriendForm.reset();
       this.router.navigate(['friends/friends-list']);
