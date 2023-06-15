@@ -35,7 +35,7 @@ export class FriendsListComponent implements OnInit {
     // get activatedRoute parameter using observable
     this.activatedRoute.params.subscribe((param) =>{
       this.getActivatedRouteParam = param['routerParam'];
-      console.log(this.getActivatedRouteParam)
+      
       if(this.getActivatedRouteParam === undefined ){
         this.isFriendDetailActive = false;
       }
@@ -49,7 +49,6 @@ export class FriendsListComponent implements OnInit {
   /** 
    * Friend detail show
    * @param name - string, index - number
-   * @returns void
    * */
   friendDetailShow(name: string, index: number): void{
     this.getActivatedRouteParam = name;
@@ -59,7 +58,6 @@ export class FriendsListComponent implements OnInit {
   /** 
    *  Navigate to edit form
    * @param index - number
-   * @returns void
    * */
   navigateToEditForm(index: number): void{
     this.router.navigate(['friends','friends-edit',index]);
@@ -68,7 +66,6 @@ export class FriendsListComponent implements OnInit {
   /**
    *  Delete friend
    * @param index - number
-   * @returns void
    * */
   deleteFriend(index: number): void {
     this.friends.splice(index,1);
