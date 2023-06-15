@@ -16,6 +16,7 @@ export class FriendsListComponent implements OnInit {
   getActivatedRouteParam : string = '';
   friendNameDetail!: String;
   deleteFriendId!: string;
+  deleteFriendName!: string;
   friends!: Friend[];
   friendList:Friend[] =[];
 
@@ -75,10 +76,11 @@ export class FriendsListComponent implements OnInit {
 
   /**
    * Set the friend id in the deleteFriendId for delete the friend
-   * @param id of friend for delete
+   * @param name and id of friend for delete
    */
-  setDeleteFriendId(id: string): void{
+  setDeleteFriendId(name:string, id: string): void{
     this.deleteFriendId = id; 
+    this.deleteFriendName = name;
   }
 
   /**
@@ -87,7 +89,7 @@ export class FriendsListComponent implements OnInit {
    * */
   deleteFriend(id: string): void {
     this.friendService.deleteFriend(id).subscribe( response => {
-      // alert("Delete successfully");
+      alert("Delete successfully");
       this.getFriendList();
     })
   }
@@ -112,10 +114,16 @@ export class FriendsListComponent implements OnInit {
               this.friends[i].friendName = data.userName;
               this.friends[i].friendEmail = data.email;
             }
+          },
+          (error) =>{
+            alert("Error caught, please try again!");
           })
         }
       }
 
+    },
+    (error) => {
+      alert("Error caught, please try again!");
     })
   }
 }

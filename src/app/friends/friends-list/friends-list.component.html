@@ -47,7 +47,7 @@
                   <!-- Edit button -->
                   <button type="button" class="btn btn-outline-secondary btn-action" (click)="navigateToEditForm(i)"><i class='fa fa-edit'></i></button>
                   <!-- Delete button -->
-                  <button type="button" class="btn btn-outline-danger btn-action" data-bs-toggle="modal" data-bs-target="#delete" (click)="setDeleteFriendId(friend.id)" ><i class='fa fa-trash'></i></button>
+                  <button type="button" class="btn btn-outline-danger btn-action" data-bs-toggle="modal" data-bs-target="#delete" (click)="setDeleteFriendId(friend.friendName, friend.id)" ><i class='fa fa-trash'></i></button>
                 </div>
               </td>
             </tr>
@@ -123,7 +123,7 @@
       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="modal-body">
-      Are you want to delete the {{deleteFriendId}}?
+      Are you want to delete the {{deleteFriendName}}?
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
