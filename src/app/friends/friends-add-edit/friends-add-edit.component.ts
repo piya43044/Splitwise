@@ -13,8 +13,10 @@ export class FriendsAddEditComponent implements OnInit {
 
   addFriendForm !: FormGroup;
   isFriendAddActive: Boolean = false;
-  getActivatedRouteParam : String = '';
+  getActivatedRouteParam : string = '';
   loading: boolean = false;
+  toaster: boolean = false;
+  response: string ="";
 
   /**
    * Constructor
@@ -31,7 +33,8 @@ export class FriendsAddEditComponent implements OnInit {
     // Add friend form
     this.addFriendForm = new FormGroup({
       friendName: new FormControl('', [Validators.required]),
-      friendEmail: new FormControl('', [Validators.required]),
+      friendEmail: new FormControl('', [Validators.required,
+                                        Validators.pattern("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$")])
     })
 
     // get activatedRoute parameter using observable
@@ -65,13 +68,19 @@ export class FriendsAddEditComponent implements OnInit {
   onSubmit(): void{
     this.loading = true;
     this.friendService.postFriend(this.addFriendForm.value).subscribe( (response) => {
-      alert(response.result);
-      this.addFriendForm.reset();
-      this.router.navigate(['friends/friends-list']);
+      this.loading = false;
+      this.response = response.result;
+      this.toaster = true;
+  
+      setTimeout(()=>{
+        this.addFriendForm.reset();
+        this.router.navigate(['friends/friends-list']);
+      },1000)
     },
     (error) => {
       this.loading = false;
-      alert("Error caught, please try again!");
+      this.response = "Error caught, please try again!";
+      this.toaster = true;
     })
   }
 }
