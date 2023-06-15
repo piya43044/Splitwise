@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Friend } from 'src/app/models/friend.model';
+import { UserOutstandingDetail } from 'src/app/models/userOutstandingDetail.model';
 import { FriendService } from 'src/app/services/friend.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -15,17 +16,13 @@ export class FriendsListComponent implements OnInit {
   isFriendDetailActive: Boolean = false;
   getActivatedRouteParam : string = '';
   friendNameDetail!: String;
-  deleteFriendId!: string;
-  deleteFriendName!: string;
-  friends!: Friend[];
-  friendList:Friend[] =[];
-
-  FriendDetailList = [
-    { groupName:'Mathura', payer:'Priya', receiver:'Mayank',currency:'USD', amount:1000},
-    { groupName:'Vanaras', payer:'Harish', receiver:'Mayank',currency:'USD', amount:2000},
-    { groupName:'Goa', payer:'Nikita', receiver:'Priya',currency:'₹' , amount:3000}
-  ];
-
+  friendId!: string;
+  friendName!: string;
+  friends: Friend[] = [];
+  friendList:Friend[] = [];
+  friendOweToList: UserOutstandingDetail[] = [];
+  friendOweFromList: UserOutstandingDetail[] = [];
+  friendOweList: UserOutstandingDetail[] = this.userService.userOutstandingList;
 
   /**
    * Constructor
@@ -51,27 +48,38 @@ export class FriendsListComponent implements OnInit {
         this.isFriendDetailActive = true;
         this.friendNameDetail = this.getActivatedRouteParam;
       }
+    },
+    (error) =>{
+      alert("Error caught, please try again!");
     })
 
     this.getFriendList();
-
+    this.getUserOweDetail();
   }
 
   /** 
    * Friend detail show
-   * @param name - string, index - number
+   * @param friend name as string, friend id as string
    * */
-  friendDetailShow(name: string, index: number): void{
+  friendDetailShow(name: string, id: string): void{
     this.getActivatedRouteParam = name;
-    this.router.navigate(['friends','friends-list',name]);
-  }
 
-  /** 
-   *  Navigate to edit form
-   * @param index - number
-   * */
-  navigateToEditForm(index: number): void{
-    this.router.navigate(['friends','friends-edit',index]);
+    // Store the owe from detail for the particular friend
+    for(let i=0;i<this.friendOweFromList.length;i++){
+      if(this.friendOweFromList[i].owesFromYou === id){
+        this.friendOweList.push(this.friendOweFromList[i]);
+      }
+    }
+
+    // Store the owe to detail for the particular friend
+    for(let i=0;i<this.friendOweToList.length;i++){
+      if(this.friendOweToList[i].owesFromYou === id){
+        this.friendOweList.push(this.friendOweToList[i]);
+      }
+    }
+
+    this.userService.userOutstandingList = this.friendOweList;
+    this.router.navigate(['friends','friends-list',name]);
   }
 
   /**
@@ -79,8 +87,8 @@ export class FriendsListComponent implements OnInit {
    * @param name and id of friend for delete
    */
   setDeleteFriendId(name:string, id: string): void{
-    this.deleteFriendId = id; 
-    this.deleteFriendName = name;
+    this.friendId = id; 
+    this.friendName = name;
   }
 
   /**
@@ -90,7 +98,10 @@ export class FriendsListComponent implements OnInit {
   deleteFriend(id: string): void {
     this.friendService.deleteFriend(id).subscribe( response => {
       alert("Delete successfully");
-      this.getFriendList();
+      window.location.reload();
+    },
+    (error) =>{
+      alert("Error caught, please try again!");
     })
   }
 
@@ -98,6 +109,7 @@ export class FriendsListComponent implements OnInit {
    * Get friend list from the api
    */
   getFriendList(): void{
+    this.userService.userOutstandingList=[];
     this.friendService.getFriendList().subscribe( data => {
       this.friends = data;
 
@@ -120,7 +132,28 @@ export class FriendsListComponent implements OnInit {
           })
         }
       }
+    },
+    (error) => {
+      alert("Error caught, please try again!");
+    })
+  }
 
+  /**
+   * Get user owe details from the api
+   */
+  getUserOweDetail(): void{
+
+    // Get owe to details
+    this.userService.getUserOweToDetail().subscribe( (data) => {
+      this.friendOweToList = data;
+    },
+    (error) => {
+      alert("Error caught, please try again!");
+    })
+
+    // Get owe from details
+    this.userService.getUserOweFromDetail().subscribe( data => {
+      this.friendOweFromList = data;
     },
     (error) => {
       alert("Error caught, please try again!");

@@ -42,6 +42,9 @@ export class ExpenseAddEditComponent implements OnInit {
         this.isExpenseAddActive = false;
         this.getExpenseById();
       }
+    },
+    (error) => {
+      alert("Error caught, please try again!");
     })
 
     this.getGroupList();
@@ -55,14 +58,13 @@ export class ExpenseAddEditComponent implements OnInit {
       expense_amount: new FormControl('',[Validators.required]),
       split_as: new FormControl('equal',[Validators.required]),
       currency: new FormControl('INR',[Validators.required]),
-      isSettled: new FormControl('false',[Validators.required]),
     })
 
   }
 
   /**
    * Getter method for expense title
-   * @returns FormControl
+   * @returns FormControl of expense title
    */
   get expenseTitle(){
     return this.addExpenseForm.get('expense_title');
@@ -70,7 +72,7 @@ export class ExpenseAddEditComponent implements OnInit {
 
   /**
    * Getter method for expense amount
-   * @returns FormControl
+   * @returns FormControl of expense amount
    */
   get expenseAmount(){
     return this.addExpenseForm.get('expense_amount');
@@ -78,7 +80,6 @@ export class ExpenseAddEditComponent implements OnInit {
 
   /**
    * onSubmit method
-   * @return void
    */
   onSubmit(): void{
     
@@ -87,23 +88,27 @@ export class ExpenseAddEditComponent implements OnInit {
       this.addExpenseForm.reset();
       alert("Expense is added");
       this.router.navigate(['expense/expense-list']);
+    },
+    (error) => {
+      alert("Error caught, please try again!");
     })
   }
 
   /**
    * Get group list from the group api
-   * @returns void
    */
   getGroupList(): void {
     this.groupService.getGroupList().subscribe( data => {
       this.group = data;
       this.groupItem = this.group.items;
+    },
+    (error) => {
+      alert("Error caught, please try again!");
     })
   }
 
   /**
    * Get expense detail by their id and set the values in the form
-   * @returns void
    */
   getExpenseById(): void{
     this.expenseService.getExpenseDetailById(this.getActivatedRouteParam).subscribe(data =>{
@@ -118,19 +123,23 @@ export class ExpenseAddEditComponent implements OnInit {
         expense_amount: expenseDetail.expense_amount,
         split_as: expenseDetail.split_as,
         currency: expenseDetail.currency,
-        isSettled: expenseDetail.isSettled,
       })
+    },
+    (error) => {
+      alert("Error caught, please try again!");
     })
   }
 
   /**
    * Update the expense detail by their expense id
-   * @returns void
    */
   updateExpense(): void{
     
     this.expenseService.updateExpenseByID(this.getActivatedRouteParam, this.addExpenseForm.value).subscribe( data => {
       this.router.navigate(['expense/expense-list'])
+    },
+    (error) => {
+      alert("Error caught, please try again!");
     })
   }
 }
