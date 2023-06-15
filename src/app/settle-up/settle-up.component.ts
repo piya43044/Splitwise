@@ -1,27 +1,54 @@
 import { Component } from '@angular/core';
 import { SettleUpService } from '../services/settle-up.service';
-import { UserData } from '../models/settleUp.model';
-
+import { SettleUserData } from '../models/settleUp.model';
+import { OnInit } from '@angular/core'
 @Component({
   selector: 'app-settle-up',
   templateUrl: './settle-up.component.html',
   styleUrls: ['./settle-up.component.scss']
 })
-export class SettleUpComponent {
-  constructor(private userAmount: SettleUpService) {}
-  currency: string[] = ['MYR', 'SGD', 'USD'];
-  groups: string[] = ['Mathura', 'Vanaras', 'Goa'];
+export class SettleUpComponent implements OnInit {
+  paymentID !: string;
+  ownedDetails: SettleUserData[] = [];
+  /**
+   * constructor
+   */
+  constructor(private userAmount: SettleUpService) {
+  }
 
-  ownedDetails: UserData[] = [];
-  datas: UserData | undefined;
+  /**
+   * ngOnInit method
+   */
+  ngOnInit(): void {
+    this.unSettle();
+  }
 
+  /**
+   * Unsettle are used to get unsettle list
+   */
   unSettle() {
-    this.userAmount.getUnsettledList().subscribe((data) => {     
-      this.ownedDetails = data;   
-      console.log(this.ownedDetails)
-      for(let ownedDetail of this.ownedDetails){
-      console.log(ownedDetail.ownedBy);
-    }
+    this.userAmount.getUnsettledList().subscribe((data) => {
+      this.ownedDetails = data;
     });
+  }
+
+  /**
+   * paymentMethod are used to subscribe settle payment
+   * @param payID are used to store payment Id
+   */
+  paymentMethod(payID: string) {
+    this.userAmount.settlePayment(payID).subscribe((x) => {
+      alert("Payment successful");
+      this.unSettle();
+    },
+    )
+  }
+
+  /**
+   * getPaymentID are used to take payment Id from the user
+   */
+  getPaymentID(event: string) {
+    this.paymentID = event
+    this.paymentMethod(this.paymentID)
   }
 }
