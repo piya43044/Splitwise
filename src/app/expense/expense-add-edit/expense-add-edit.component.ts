@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Group } from 'src/app/models/group.model';
 import { GroupItem } from 'src/app/models/groupItem.model';
 import { ExpenseService } from 'src/app/services/expense.service';
@@ -23,7 +24,8 @@ export class ExpenseAddEditComponent implements OnInit {
   constructor( private router: Router, 
     private activatedRoute: ActivatedRoute,
     private expenseService: ExpenseService,
-    private groupService: GroupService){};
+    private groupService: GroupService,
+    private toastrService: ToastrService){};
 
   /**
    * ngOnInit method
@@ -44,7 +46,9 @@ export class ExpenseAddEditComponent implements OnInit {
       }
     },
     (error) => {
-      alert("Error caught, please try again!");
+      this.toastrService.error('Error caught, please try again!', '', {
+        timeOut: 2000,
+      });
     })
 
     this.getGroupList();
@@ -86,11 +90,15 @@ export class ExpenseAddEditComponent implements OnInit {
     // Post the expense to the api
     this.expenseService.postExpense(this.addExpenseForm.value).subscribe((response) => {
       this.addExpenseForm.reset();
-      alert("Expense is added");
+      this.toastrService.success('Expense added successfully', '', {
+        timeOut: 2000,
+      });
       this.router.navigate(['expense/expense-list']);
     },
     (error) => {
-      alert("Error caught, please try again!");
+      this.toastrService.error('Error caught, please try again!', '', {
+        timeOut: 2000,
+      });
     })
   }
 
@@ -103,7 +111,9 @@ export class ExpenseAddEditComponent implements OnInit {
       this.groupItem = this.group.items;
     },
     (error) => {
-      alert("Error caught, please try again!");
+      this.toastrService.error('Error caught, please try again!', '', {
+        timeOut: 2000,
+      });
     })
   }
 
@@ -126,7 +136,9 @@ export class ExpenseAddEditComponent implements OnInit {
       })
     },
     (error) => {
-      alert("Error caught, please try again!");
+      this.toastrService.error('Error caught, please try again!', '', {
+        timeOut: 2000,
+      });
     })
   }
 
@@ -136,10 +148,15 @@ export class ExpenseAddEditComponent implements OnInit {
   updateExpense(): void{
     
     this.expenseService.updateExpenseByID(this.getActivatedRouteParam, this.addExpenseForm.value).subscribe( data => {
+      this.toastrService.success('Update successfully', '', {
+        timeOut: 2000,
+      });
       this.router.navigate(['expense/expense-list'])
     },
     (error) => {
-      alert("Error caught, please try again!");
+      this.toastrService.error('Error caught, please try again!', '', {
+        timeOut: 2000,
+      });
     })
   }
 }

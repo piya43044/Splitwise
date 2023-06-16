@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Friend } from 'src/app/models/friend.model';
 import { UserOutstandingDetail } from 'src/app/models/userOutstandingDetail.model';
 import { FriendService } from 'src/app/services/friend.service';
@@ -30,7 +31,8 @@ export class FriendsListComponent implements OnInit {
   constructor( private router: Router, 
     private activatedRoute: ActivatedRoute,
     private friendService: FriendService,
-    private userService: UserService){};
+    private userService: UserService,
+    private toastrService: ToastrService){};
 
   /**
    * ngOnInit method
@@ -50,12 +52,13 @@ export class FriendsListComponent implements OnInit {
       }
     },
     (error) =>{
-      alert("Error caught, please try again!");
+      this.toastrService.error('Error caught, please try again!', '', {
+        timeOut: 2000,
+      });
     })
 
     this.getFriendList();
     this.getUserOweDetail();
-    // console.log(this.friendOweList);
   }
 
   /** 
@@ -97,12 +100,16 @@ export class FriendsListComponent implements OnInit {
    * @param id of friend as string
    * */
   deleteFriend(id: string): void {
-    this.friendService.deleteFriend(id).subscribe( response => {
-      alert("Delete successfully");
+    this.friendService.deleteFriend('').subscribe( response => {
+      this.toastrService.success('Delete Successfully', '', {
+        timeOut: 2000,
+      });
       window.location.reload();
     },
     (error) =>{
-      alert("Error caught, please try again!");
+      this.toastrService.error('Error caught, please try again!', '', {
+        timeOut: 2000,
+      });
     })
   }
 
@@ -129,13 +136,17 @@ export class FriendsListComponent implements OnInit {
             }
           },
           (error) =>{
-            alert("Error caught, please try again!");
+            this.toastrService.error('Error caught, please try again!', '', {
+              timeOut: 2000,
+            });
           })
         }
       }
     },
     (error) => {
-      alert("Error caught, please try again!");
+      this.toastrService.error('Error caught, please try again!', '', {
+        timeOut: 2000,
+      });
     })
   }
 
@@ -149,7 +160,9 @@ export class FriendsListComponent implements OnInit {
       this.friendOweToList = data;
     },
     (error) => {
-      alert("Error caught, please try again!");
+      this.toastrService.error('Error caught, please try again!', '', {
+        timeOut: 2000,
+      });
     })
 
     // Get owe from details
@@ -157,7 +170,9 @@ export class FriendsListComponent implements OnInit {
       this.friendOweFromList = data;
     },
     (error) => {
-      alert("Error caught, please try again!");
+      this.toastrService.error('Error caught, please try again!', '', {
+        timeOut: 2000,
+      });
     })
   }
 }

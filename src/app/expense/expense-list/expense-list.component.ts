@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Expense } from 'src/app/models/expense.model';
 import { ExpenseItem } from 'src/app/models/expenseItem.model';
 import { ExpenseService } from 'src/app/services/expense.service';
@@ -20,7 +21,8 @@ export class ExpenseListComponent implements OnInit {
   // Constructor
   constructor( private router: Router,
     private groupService: GroupService,
-    private expenseService: ExpenseService){};
+    private expenseService: ExpenseService,
+    private toastrService: ToastrService){};
 
   /** 
    * ngOnInt method
@@ -47,7 +49,14 @@ export class ExpenseListComponent implements OnInit {
   deleteExpense(id: string){
     this.expenseService.deleteExpense(id).subscribe( data =>{
       this.getExpenseList();
-      alert("Delete expense successfully")
+      this.toastrService.success('Delete Successfully', '', {
+        timeOut: 2000,
+      });
+    },
+    (error) => {
+      this.toastrService.error('Error caught, please try again!', '', {
+        timeOut: 2000,
+      });
     });
   }
 
@@ -62,10 +71,19 @@ export class ExpenseListComponent implements OnInit {
       this.expenseItem = this.expense.items;
       for(let i=0;i<this.expenseItem.length;i++){
         this.groupService.getGroupDetailByGroupId(this.expenseItem[i].groupId).subscribe( data => {
-          this.expenseItem[i].groupName= data.name
-          
+          this.expenseItem[i].groupName= data.name;
+         },
+         (error) =>{
+          this.toastrService.error('Error caught, please try again!', '', {
+            timeOut: 2000,
+          });
          })
       }
+    },
+    (error) => {
+      this.toastrService.error('Error caught, please try again!', '', {
+        timeOut: 2000,
+      });
     })
   }
 
