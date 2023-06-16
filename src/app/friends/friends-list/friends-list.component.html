@@ -36,19 +36,15 @@
             <tr *ngFor="let friend of friendList; let i=index">
               <!-- Friend name -->
               <td>
-                <a class="p-2" (click)="friendDetailShow(friend.friendName, i)">{{friend.friendName}}</a>
+                <a class="p-2" (click)="friendDetailShow(friend.friendName, friend.friendId)">{{friend.friendName}}</a>
               </td>
               
               <td>{{friend.friendEmail}}</td>
 
               <!-- Edit and delete button -->
               <td>
-                <div class="d-flex justify-content-around">
-                  <!-- Edit button -->
-                  <button type="button" class="btn btn-outline-secondary btn-action" (click)="navigateToEditForm(i)"><i class='fa fa-edit'></i></button>
-                  <!-- Delete button -->
-                  <button type="button" class="btn btn-outline-danger btn-action" data-bs-toggle="modal" data-bs-target="#delete" (click)="setDeleteFriendId(friend.friendName, friend.id)" ><i class='fa fa-trash'></i></button>
-                </div>
+                <!-- Delete button -->
+                <button type="button" class="btn btn-outline-danger btn-action" data-bs-toggle="modal" data-bs-target="#delete" (click)="setDeleteFriendId(friend.friendName, friend.id)" ><i class='fa fa-trash'></i></button>
               </td>
             </tr>
           </tbody>
@@ -84,27 +80,18 @@
 
             <!-- Friends table header -->
             <tr>
-              <th>
-                <div class="d-flex justify-content-between">
-                  <p>Group Name</p>
-                  <p>Transaction Detail</p>
-                </div>
-              </th>
+              <th>Owe To / Owe From</th>
+              <th>Amount</th>
+              <th>Group</th>
             </tr>
           </thead>
     
-          <!-- friend transaction list -->
+          <!-- friend owe detail -->
           <tbody>
-              <tr *ngFor="let detail of FriendDetailList">
-                  <div *ngIf="friendNameDetail === detail.payer || friendNameDetail === detail.receiver">
-                    <div class="d-flex justify-content-between">
-                      <a routerLink="/group/group-list/{{detail.groupName}}">{{detail.groupName}}</a>
-                      <div class="d-flex flex-column">
-                        <em>{{detail.payer}} owes {{detail.receiver}}</em>
-                        <strong>{{detail.currency}}{{detail.amount}}</strong>
-                      </div>
-                    </div>
-                  </div>
+              <tr *ngFor="let detail of friendOweList">
+                  <td>{{detail.message}}</td>
+                  <td>{{detail.amount}}</td>
+                  <td>{{detail.groupName}}</td>
               </tr>
           </tbody>
       </table>
@@ -123,11 +110,11 @@
       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="modal-body">
-      Are you want to delete the {{deleteFriendName}}?
+      Do you want to delete the {{friendName}}?
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-      <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="deleteFriend(deleteFriendId)">Delete</button>
+      <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="deleteFriend(friendId)">Delete</button>
     </div>
   </div>
 </div>
