@@ -59,7 +59,6 @@ export class ExpenseAddEditComponent implements OnInit {
       split_as: new FormControl('equal',[Validators.required]),
       currency: new FormControl('INR',[Validators.required]),
     })
-
   }
 
   /**
