@@ -119,7 +119,7 @@ export class GroupListComponent implements OnInit {
   getExpensesOfGroup(): void {
     this.expenseService.getExpenseList().subscribe(
       (res) => {
-        this.totalExpenses = res.items
+        this.totalExpenses = res.items;
         for (let i = 0; i < this.totalExpenses.length; i++) {
           this.groupsService.getGroupDetailByGroupId(this.totalExpenses[i].groupId).subscribe(data => {
             this.totalExpenses[i].groupName = data.name;
