@@ -1,87 +1,40 @@
-<div class="container">
-
-    <!-- Header of settle up page -->
-    <h2>Settle Up</h2>
-    <hr>
-
-    <!-- Settle up form -->
-    <form>
-        <!-- Paid by and paid to -->
-        <div class="form-group mt-4 mb-2">
-            <div class="d-flex">
-
-                <!-- Paid By  -->
-                <div class="w-50">
-                    <select class="form-control" id="paidBy">
-                        <option value="you">You</option>
-                        <option value="Mayank">Mayank</option>
-                        <option value="Harish">Harish</option>
-                        <option value="Nikita">Nikita</option>
-                    </select>
+<div class="settle-up-container">
+    <div class="table-responsive">
+      <table class="table table-hover table-bordered">
+          <!-- expense header with add expense button -->
+          <thead class="table-secondary">
+            <tr>
+              <td colspan="7">
+                <div class="expense-header d-flex justify-content-between align-items-center">
+                  <!-- Back icon -->
+                  <a routerLink="/dashboard"><i class="fa fa-arrow-circle-left"></i></a>
+                  <!-- settle up Name -->
+                  <h4>Settle Up</h4>
                 </div>
-                
-                <!-- Paid text -->
-                <div class="w-25 text-center">
-                    <p> paid </p>
-                </div>
-    
-                <!-- Paid to -->
-                <div class="w-50">
-                    <select class="form-control" id="paidTo">
-                        <option value="Priya">Priya</option>
-                        <option value="Mayank">Mayank</option>
-                        <option value="Harish">Harish</option>
-                        <option value="Nikita">Nikita</option>
-                    </select>
-                </div>
-            </div>
-        </div>
+              </td>
+            </tr>
+            <!-- settle up table header -->
+            <tr>
+              <th>Name</th>
+              <th>Amount</th>
+              <th>Settle up</th>
+            </tr>
+          </thead>
+          <!-- settle up list -->
+          <tbody>
+              <tr *ngFor="let item of ownedDetails; let i=index">
+                <td>{{item.ownedBy}}</td>
+                <td>{{item.amount}}</td>
+                <td>
+                  <div class="d-flex justify-content-around">
+                    <button type="button"  class="btn btn-success" (click)="getPaymentID(item.paymentId)">Settle Up</button>
+                  </div>
+                </td>
+              </tr>
+          </tbody>
+      </table>
+    </div>
+  </div>
+  
 
-        <!-- Amount of expense -->
-        <div class="form-group mt-2 mb-2">
-            <label for="amount">Amount:</label>
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <select class="form-control" id="currency-type">
-                        <option value="₹">₹</option>
-                        <option *ngFor="let type of currency" [value]="type">{{type}}</option>
-                    </select>
-                </div>
-                <input type="number" class="form-control" id="amount" name="amount" min="0" placeholder="Enter amount" required>
-            </div>
-        </div>
-
-        <!-- Date -->
-        <div class="form-group mt-2 mb-2">
-            <label for="date">Date</label>
-            <input type="date" class="form-control" id="date" name="date">
-        </div>
-
-        <!-- Group selection -->
-        <div class="form-group mt-2 mb-2">
-            <label for="group-type">Groups</label>
-            <select class="form-control" id="group-type">
-                <option value="no-group">No Group</option>
-                <option *ngFor="let group of groups" [value]="group">{{group}}</option>
-            </select>
-        </div>
-
-        <!-- Payment type -->
-        <div class="form-group mt-2 mb-3">
-            <label for="payment-type">Payment type</label>
-            <select class="form-control" id="payment-type">
-                <option value="cash">Cash</option>
-                <option value="paypal">PayPal</option>
-            </select>
-        </div>
-
-        <!-- Save and cancel button -->
-        <div class="d-flex justify-content-end">
-            <!-- Save button -->
-            <button type="submit" routerLink="/transaction" class="btn btn-success w-20 h-25">Save</button>
-    
-            <!-- Cancel button -->
-            <button routerLink="/dashboard" type="button" class="btn btn-danger w-20 h-25">Cancel</button>
-        </div>
-    </form>
-</div>
+  
