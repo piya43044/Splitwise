@@ -52,7 +52,7 @@ export class ExpenseAddEditComponent implements OnInit {
     // Add expense form
     this.addExpenseForm = new FormGroup({
       groupId: new FormControl('', [Validators.required]),
-      paidBy: new FormControl('3a0bc559-4a98-1dfa-317d-c94539d43a69',[Validators.required]),
+      paidBy: new FormControl('3a0bc563-5c01-4e7b-6d9d-ee5830a71997',[Validators.required]),
       expense_title: new FormControl('',[Validators.required]),
       expense_description: new FormControl(''),
       expense_amount: new FormControl('',[Validators.required]),

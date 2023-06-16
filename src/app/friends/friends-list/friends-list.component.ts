@@ -55,6 +55,7 @@ export class FriendsListComponent implements OnInit {
 
     this.getFriendList();
     this.getUserOweDetail();
+    // console.log(this.friendOweList);
   }
 
   /** 
@@ -73,7 +74,7 @@ export class FriendsListComponent implements OnInit {
 
     // Store the owe to detail for the particular friend
     for(let i=0;i<this.friendOweToList.length;i++){
-      if(this.friendOweToList[i].owesFromYou === id){
+      if(this.friendOweToList[i].whomeToGive === id){
         this.friendOweList.push(this.friendOweToList[i]);
       }
     }
