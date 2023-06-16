@@ -2,6 +2,7 @@ import { formatCurrency } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { FriendService } from 'src/app/services/friend.service';
 
 @Component({
@@ -23,7 +24,8 @@ export class FriendsAddEditComponent implements OnInit {
    *  */ 
   constructor( private router: Router, 
     private activatedRoute: ActivatedRoute,
-    private friendService: FriendService){};
+    private friendService: FriendService,
+    private toastrService: ToastrService){};
 
   /**
    * ngOnInit method
@@ -69,18 +71,17 @@ export class FriendsAddEditComponent implements OnInit {
     this.loading = true;
     this.friendService.postFriend(this.addFriendForm.value).subscribe( (response) => {
       this.loading = false;
-      this.response = response.result;
-      this.toaster = true;
-  
-      setTimeout(()=>{
-        this.addFriendForm.reset();
-        this.router.navigate(['friends/friends-list']);
-      },1000)
+      this.toastrService.success(response.result, '', {
+        timeOut: 2000,
+      });
+      this.addFriendForm.reset();
+      this.router.navigate(['friends/friends-list']);
     },
     (error) => {
       this.loading = false;
-      this.response = "Error caught, please try again!";
-      this.toaster = true;
+      this.toastrService.error('Error caught, please try again!', '', {
+        timeOut: 2000,
+      });
     })
   }
 }
