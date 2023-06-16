@@ -43,6 +43,7 @@ export class UserService {
   getUserOweFromDetail(): Observable<UserOutstandingDetail[]>{
     return this.http.get<UserOutstandingDetail[]>(this.userOweFromUrl);
   }
+  
    /**
      * addUsers are used to post data in the Api
      * @retun register user details
