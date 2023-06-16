@@ -63,6 +63,7 @@ export class ExpenseListComponent implements OnInit {
    * Get expense list from the api
    * @return void
    */
+
   getExpenseList(): void {
     this.expenseService.getExpenseList().subscribe(async data => {
       this.expense = data;

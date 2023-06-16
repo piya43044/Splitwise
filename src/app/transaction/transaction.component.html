@@ -1,36 +1,40 @@
 <div class="container">
-    
     <div class="table-responsive">
         <table class="table table-hover table-bordered">
             <!-- Transaction List header -->
             <thead class="table-secondary">
                 <tr>
-                    <th colspan="4">
+                    <th colspan="8">
                         <div class="d-flex justify-content-center">
                             <h4>Transaction List</h4>
                         </div>
                     </th>
                 </tr>
-    
                 <!-- Transaction list header -->
                 <tr>
-                    <th>Payer</th>
-                    <th>Receiver</th>
+                    <th>Id</th>
+                    <th>OwnedBy</th>
+                    <th>ExpenseId</th>
+                    <th>CreationTime</th>
+                    <th>Last Modification Time</th>
+                    <th>Last Modified Id</th>
                     <th>Amount</th>
-                    <th>Payment Type</th>
+                    <th>Settled</th>
                 </tr>
             </thead>
-        
             <!-- Transaction list details -->
             <tbody>
                 <tr *ngFor="let transaction of transactionList">
-                    <td>{{transaction.payer}}</td>
-                    <td>{{transaction.receiver}}</td>
-                    <td>{{transaction.currency}}{{transaction.amount}}</td>
-                    <td>{{transaction.paymentType}}</td>
+                    <td>{{transaction.id}}</td>
+                    <td>{{transaction.ownedBy}}</td>
+                    <td>{{transaction.expenseId}}</td>
+                    <td>{{transaction.creationTime}}</td>
+                    <td>{{transaction.lastModificationTime}}</td>
+                    <td>{{transaction.lastModifierId}}</td>
+                    <td>{{transaction.amount}}</td>
+                    <td>{{transaction.isSettled}}</td>
                 </tr>
             </tbody>
         </table>
-
     </div>
 </div>
