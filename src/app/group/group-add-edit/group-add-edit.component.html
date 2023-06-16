@@ -42,7 +42,6 @@
       <button routerLink="/group/group-list" type="button" class="btn btn-danger w-20 h-25"
         [hidden]="isGroupCreated">Cancel</button>
     </div>
-    {{addGroupForm.value | json}}
   </form>
 
   <ng-container *ngIf="isGroupCreated">
@@ -86,7 +85,6 @@
         <!-- Cancel button -->
         <button routerLink="/group/group-list" type="button" class="btn btn-danger w-20 h-25">Cancel</button>
       </div>
-      {{addMembersForm.value | json}}
     </form>
   </ng-container>
 </div>

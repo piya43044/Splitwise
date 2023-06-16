@@ -71,10 +71,25 @@ export class GroupAddEditComponent implements OnInit {
     }
 
 
+    /** On click of group edit button it will set current details of group to textbox */
+    if (this.getActivatedRouteParam != undefined) {
+      const data = this.groupsService.groupList[Number(this.getActivatedRouteParam)];
+      this.addGroupForm.patchValue({
+        groupName: data.name,
+        about: data.about,
+        groupMember: [{
+          userId: data.createdBy
+        }]
+      })
+    }
+
+
 
   }// OnInit method end
 
-  // Add member name and member email formgroup in add group form
+  /** Add member name and member email formgroup in add group form
+   * @returns FormGroup
+   **/
   addMembersToGroupForm(): FormGroup {
     return new FormGroup({
       memberName: new FormControl(''),
@@ -122,7 +137,7 @@ export class GroupAddEditComponent implements OnInit {
    * and send to post api call function
    **/
   createGroup() {
-    const data : Groups = {
+    const data: Groups = {
       name: this.groupName?.value as string,
       about: this.about?.value as string,
       groupMembers: [{
@@ -130,7 +145,7 @@ export class GroupAddEditComponent implements OnInit {
       }]
     }
 
-    // Create group Api call from group service
+    /**  Create group Api call from group service */
     this.groupsService.createGroup(data).subscribe(() => {
       alert('Group created successfully!');
     });
@@ -142,9 +157,9 @@ export class GroupAddEditComponent implements OnInit {
    * and send to post api call function
    **/
   addMembersToGroup() {
-    const data : GroupMembersToAdd = this.groupMembers.value;
+    const data: GroupMembersToAdd = this.groupMembers.value;
 
-    // AddMembers api call from group service
+    /** AddMembers api call from group service */
     this.groupsService.addMembersToGroup(data).subscribe(() => {
       alert('members added successfully!');
     });
@@ -156,20 +171,21 @@ export class GroupAddEditComponent implements OnInit {
    * from server through api
    * @returns string returns current user's name
    * */
-  getCurrentUser() : string {
-    let currentUSerName : string = '' ;
+  getCurrentUser(): string {
+    let currentUSerName: string = '';
 
     // Current user api call to get current user's name
-    this.groupsService.getCurrentUser().subscribe((val) => {currentUSerName = val})
+    this.groupsService.getCurrentUser().subscribe((val) => { currentUSerName = val })
     return currentUSerName;
   }
 
   /** current user by name method
    * to get user details of current user
    * from server through api
+   * @param name
    * @return object
    * */
-  getCurrentUserByName(name : string) : object {
-    return this.groupsService.getCurrentUserDetails().subscribe((val) => {return (val)})
+  getCurrentUserByName(name: string): object {
+    return this.groupsService.getCurrentUserDetails().subscribe((val) => { return (val) })
   }
 }
