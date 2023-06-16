@@ -30,6 +30,7 @@ export interface BorrowedAmountDetails{
 
 /** BorrowedAmountDetails interface with the properties of user's debt amount details*/
 export interface DebtAmountDetails{
+  friendName: string;
   owesFromYou: string;
   amount: number;
   groupName: string;

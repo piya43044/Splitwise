@@ -33,9 +33,12 @@ export class DashboardComponent implements OnInit {
     this.getCurrentUserDetails();
     this.getBorrowedAmountList();
     this.getDebtAmountList();
+
     setTimeout(() => {
+      this.totalOwe = this.calculateAmount(this.borrowedAmountList);
+      this.totalOwed = this.calculateAmount(this.debtAmountList);
       this.totalBalance = this.totalOwed - this.totalOwe;
-    }, 100);
+    }, 1000);
 
 
   }
@@ -48,7 +51,9 @@ export class DashboardComponent implements OnInit {
       this.dashboardService.userProfile = data;
       this.userProfile = this.dashboardService.userProfile;
       this.userName = this.dashboardService.userProfile.userName;
-    })
+    },
+      (error) => { alert('Error in getting Profile details of user : ' + error.error.error.message); })
+
   }
 
   /** getBorrowedAmountList function to get the total borrowed amount list
@@ -57,47 +62,57 @@ export class DashboardComponent implements OnInit {
   getBorrowedAmountList(): void {
     let sum: number = 0
     this.dashboardService.getBorrowedAmountList().subscribe(data => {
-      this.borrowedAmountList = data;
+
+      //  To get user name by user id and calculate amount
       for (let item of data) {
-
-      }
-
-
-      for (let i = 0; i < this.borrowedAmountList.length; i++) {
-        this.dashboardService.getUserNameById(this.borrowedAmountList[i].whomeToGive).subscribe((res) => {
+        this.dashboardService.getUserNameById(item.whomeToGive).subscribe((res) => {
           if (res.userName != '' || null || undefined) {
-            sum += res.amount;
-            this.borrowedAmountList[i].friendName = res.userName;
-          }
-          else {
-            this.borrowedAmountList[i].friendName = 'This user is deleted... '
+            item.friendName = res.userName;
+            this.borrowedAmountList.push(item);
+
           }
         },
-          error => {
-            console.log(error.error.error.code);
-            this.borrowedAmountList.splice(i);
-
-          })
-        this.totalOwe = sum;
+          (error) => { console.log('No Borrowed amount of ' + this.userName); })
       }
-
 
     })
   }
 
-  /** getBorrowedAmount function to calculate the total borrowed amount
+  /** getDebtAmountList function to calculate the total borrowed amount
    * of the user.
    **/
   getDebtAmountList(): void {
-    let sum: number = 0
+
     this.dashboardService.getDebtAmountList().subscribe(data => {
-      this.debtAmountList = data;
+      //this.debtAmountList = data;
+      let sum: number = 0
+
+      //  To get user name by user id and
       for (let item of data) {
-        sum += item.amount
+        this.dashboardService.getUserNameById(item.owesFromYou).subscribe((res) => {
+          if (res.userName != '' || null || undefined) {
+            item.friendName = res.userName;
+            this.debtAmountList.push(item);
+          }
+        },
+          (error) => {
+            console.log('No debt amount of ' + this.userName);
+          })
       }
-      this.totalOwed = sum;
     })
 
+  }
+
+  /**  calculateAmount function to calculate owe/owed amount
+   * @param arr : array of type BorrowedAmountDetails or DebtAmountDetails
+   * @returns sum : sum of the value of amount of the list
+   **/
+  calculateAmount(arr: BorrowedAmountDetails[] | DebtAmountDetails[]): number {
+    let sum: number = 0;
+    for (let item of arr) {
+      sum += item.amount
+    }
+    return sum;
   }
 
 }

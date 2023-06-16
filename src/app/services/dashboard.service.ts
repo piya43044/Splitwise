@@ -44,8 +44,12 @@ export class DashboardService {
     return this.http.get<DebtAmountDetails[]>(DebtAmountListURL, { withCredentials: true });
   }
 
-  getUserNameById(id: string): Observable<any>{
+  /** getDebtAmountList function to call get api
+   * and get Current User details By user-id from server
+   * @returns current user's debt Amount list
+   **/
+  getUserNameById(id: string): Observable<CurrentUserNameByIdResult>{
     const getUserNameByIdURL = 'https://localhost:44329/api/identity/users/'+id;
-    return this.http.get<any>(getUserNameByIdURL , { withCredentials: true });
+    return this.http.get<CurrentUserNameByIdResult>(getUserNameByIdURL , { withCredentials: true });
   }
 }

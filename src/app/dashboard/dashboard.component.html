@@ -46,7 +46,7 @@
       <tbody>
         <td colspan="3">
           <div class="d-flex justify-content-between align-items-center">
-          <table class="table table-hover table-bordered">
+          <table class="table table-hover">
             <!-- expense header with add expense button -->
             <thead class="table-secondary">
               <tr>
@@ -70,23 +70,32 @@
               </tr>
 
               <!-- Expense table header -->
-              <tr>
+              <!-- <tr>
                 <th>Message</th>
                 <th>Friend Name</th>
                 <th>Amount</th>
 
-              </tr>
+              </tr> -->
             </thead>
 
             <!-- expense list -->
             <tbody>
+              <!-- Borrowed Amount List -->
               <tr *ngFor="let item of borrowedAmountList; let i=index">
                 <td>{{item.message}}</td>
                 <td>{{item.friendName}}</td>
-                <td>{{item.amount}}</td>
+                <td> Rs. {{item.amount}}</td>
 
               </tr>
-              <tr *ngIf="borrowedAmountList.length == 0">No record found</tr>
+
+              <!-- Debt Amount List -->
+              <tr *ngFor="let item of debtAmountList; let i=index">
+                <td>{{item.friendName}}</td>
+                <td>{{item.message}}</td>
+                <td> RS. {{item.amount}}</td>
+
+              </tr>
+              <tr *ngIf="borrowedAmountList.length == 0 && debtAmountList.length ==0">No record found</tr>
             </tbody>
           </table>
           </div>
