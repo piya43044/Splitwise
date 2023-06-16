@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
-import { AuthService } from '@abp/ng.core';
+// import { AuthService } from '@abp/ng.core';
 import { User_login } from 'src/app/models/login.model';
-import { environment } from 'src/environments/environment';
-import { OAuthService, AuthConfig } from 'angular-oauth2-oidc';
+// import { environment } from 'src/environments/environment';
+// import { OAuthService, AuthConfig } from 'angular-oauth2-oidc';
 
 
 @Component({
@@ -19,8 +19,7 @@ export class LoginComponent implements OnInit {
   /**
    * Constructor
    */
-  constructor(private router: Router, private loggedUSer: UserService, private authService : AuthService, private oauthService: OAuthService) { };
-
+  constructor(private router: Router, private loggedUSer: UserService){}
   /**
    * ngOnInit method
    * @returns void
