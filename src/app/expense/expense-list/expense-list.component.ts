@@ -18,15 +18,15 @@ export class ExpenseListComponent implements OnInit {
   deleteExpenseId!: string;
 
   // Constructor
-  constructor( private router: Router,
+  constructor(private router: Router,
     private groupService: GroupService,
-    private expenseService: ExpenseService){};
+    private expenseService: ExpenseService) { };
 
   /** 
    * ngOnInt method
    * @return void
-   * */ 
-  ngOnInit(): void{
+   * */
+  ngOnInit(): void {
     this.getExpenseList();
   }
 
@@ -35,17 +35,17 @@ export class ExpenseListComponent implements OnInit {
    * @param index - number
    * @return void
    * */
-  navigateToEditForm(id: string): void{
-    this.router.navigate(['expense','expense-edit',id]);
+  navigateToEditForm(id: string): void {
+    this.router.navigate(['expense', 'expense-edit', id]);
   }
 
   /** 
    * Delete expense
    * @param index -number
    * @return void
-   * */ 
-  deleteExpense(id: string){
-    this.expenseService.deleteExpense(id).subscribe( data =>{
+   * */
+  deleteExpense(id: string) {
+    this.expenseService.deleteExpense(id).subscribe(data => {
       this.getExpenseList();
       alert("Delete expense successfully")
     });
@@ -54,16 +54,15 @@ export class ExpenseListComponent implements OnInit {
    * Get expense list from the api
    * @return void
    */
-  getExpenseList(): void{
+
+  getExpenseList(): void {
     this.expenseService.getExpenseList().subscribe(async data => {
-      this.expense=data;
+      this.expense = data;
       this.expenseItem = this.expense.items;
-      for(let i=0;i<this.expenseItem.length;i++){
-        this.groupService.getGroupDetailByGroupId(this.expenseItem[i].groupId).subscribe( data => {
-          this.expenseItem[i].groupName= data.name
-          console.log(data.name)
-          
-         })
+      for (let i = 0; i < this.expenseItem.length; i++) {
+        this.groupService.getGroupDetailByGroupId(this.expenseItem[i].groupId).subscribe(data => {
+          this.expenseItem[i].groupName = data.name
+        })
       }
     })
   }
@@ -73,7 +72,7 @@ export class ExpenseListComponent implements OnInit {
    * @param expenseName - string, expenseId -string
    * @returns void
    */
-  setDeleteExpense(expenseName: string, expenseId: string): void{
+  setDeleteExpense(expenseName: string, expenseId: string): void {
     this.deleteExpenseName = expenseName;
     this.deleteExpenseId = expenseId;
   }

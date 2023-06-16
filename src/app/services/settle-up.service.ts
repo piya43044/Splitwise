@@ -6,12 +6,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SettleUpService {
+  private baseUrl = 'https://localhost:44329';
   /**
    * constructor
    */
   constructor(private http:HttpClient) {}
-  private baseUrl = 'https://localhost:44329';
-  
+
   /**
    * getUnsettledList are used to get data from the Api
    * @returns unsettled list

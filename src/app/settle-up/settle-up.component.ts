@@ -46,8 +46,9 @@ export class SettleUpComponent implements OnInit {
 
   /**
    * getPaymentID are used to take payment Id from the user
+   * @param event are used to store payment Id
    */
-  getPaymentID(event: string) {
+  getPaymentID(event: string):void {
     this.paymentID = event
     this.paymentMethod(this.paymentID)
   }

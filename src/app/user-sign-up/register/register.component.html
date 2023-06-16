@@ -27,7 +27,7 @@
                     <small *ngIf="email?.hasError('required')">
                         Email required
                     </small>
-                    <small *ngIf="email?.hasError('email')">
+                    <small *ngIf="email?.hasError('pattern')">
                         Please fill correct email
                     </small>
                 </div>
