@@ -25,7 +25,7 @@
           <tr>
             <th>Group Name</th>
             <th>Group Description</th>
-            <th>Group Members</th>
+            <th>Created By</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -38,7 +38,7 @@
               <a class="p-2" (click)="groupDetailShow(group.name, i)">{{group.name}}</a>
             </td>
 
-            <!-- Group share link -->
+            <!-- Group Description -->
             <td>{{group.about}} </td>
 
             <!-- Group Members -->
@@ -91,7 +91,7 @@
                 <!-- Add Expense and settle up button -->
                 <div class="expense-settleup">
                   <button class="btn btn-danger" routerLink="/expense/expense-add" type="button">Add Expense</button>
-                  <button class="btn btn-success" routerLink="/settleUp" type="button">Settle Up</button>
+                  <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#GroupMembers">Group Details</button>
                 </div>
               </div>
             </td>
