@@ -175,7 +175,7 @@ export class GroupAddEditComponent implements OnInit {
     let currentUSerName: string = '';
 
     // Current user api call to get current user's name
-    this.groupsService.getCurrentUser().subscribe((val) => { currentUSerName = val })
+    this.groupsService.getCurrentUser().subscribe((val) => { currentUSerName = val; })
     return currentUSerName;
   }
 
@@ -186,6 +186,6 @@ export class GroupAddEditComponent implements OnInit {
    * @return object
    * */
   getCurrentUserByName(name: string): object {
-    return this.groupsService.getCurrentUserDetails().subscribe((val) => { return (val) })
+    return this.groupsService.getCurrentUserDetails().subscribe((val) => { return (val); })
   }
 }
