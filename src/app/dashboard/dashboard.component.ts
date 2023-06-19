@@ -72,7 +72,7 @@ export class DashboardComponent implements OnInit {
 
           }
         },
-          (error) => { console.log('No Borrowed amount of ' + this.userName); })
+          (error) => { alert('No Borrowed amount of ' + this.userName); })
       }
 
     })
@@ -85,18 +85,18 @@ export class DashboardComponent implements OnInit {
 
     this.dashboardService.getDebtAmountList().subscribe(data => {
       //this.debtAmountList = data;
-      let sum: number = 0
+      let sum: number = 0;
 
       //  To get user name by user id and
       for (let item of data) {
         this.dashboardService.getUserNameById(item.owesFromYou).subscribe((res) => {
-          if (res.userName != '' || null || undefined) {
+          if (res.userName !== '' || null || undefined) {
             item.friendName = res.userName;
             this.debtAmountList.push(item);
           }
         },
           (error) => {
-            console.log('No debt amount of ' + this.userName);
+            alert('No debt amount of ' + this.userName);
           })
       }
     })
@@ -107,10 +107,10 @@ export class DashboardComponent implements OnInit {
    * @param arr : array of type BorrowedAmountDetails or DebtAmountDetails
    * @returns sum : sum of the value of amount of the list
    **/
-  calculateAmount(arr: BorrowedAmountDetails[] | DebtAmountDetails[]): number {
+  calculateAmount(listItems: BorrowedAmountDetails[] | DebtAmountDetails[]): number {
     let sum: number = 0;
-    for (let item of arr) {
-      sum += item.amount
+    for (let item of listItems) {
+      sum += item.amount;
     }
     return sum;
   }

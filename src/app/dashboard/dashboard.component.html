@@ -46,50 +46,50 @@
       <tbody>
         <td colspan="3">
           <div class="d-flex justify-content-between align-items-center">
-          <table class="table table-hover">
-            <!-- expense header with add expense button -->
-            <thead class="table-secondary">
-              <tr>
-                <td colspan="7">
-                  <div class="expense-header d-flex justify-content-between align-items-center">
+            <table class="table table-hover">
+              <!-- expense header with add expense button -->
+              <thead class="table-secondary">
+                <tr>
+                  <td colspan="7">
+                    <div class="expense-header d-flex justify-content-between align-items-center">
 
-                    <!-- Back icon -->
-                    <a routerLink="/dashboard" class="p-2"><i class="fa fa-arrow-circle-left"></i></a>
+                      <!-- Back icon -->
+                      <a routerLink="/dashboard" class="p-2"><i class="fa fa-arrow-circle-left"></i></a>
 
-                    <!-- expense Name -->
-                    <h4 class="p-2">Expenses Record</h4>
+                      <!-- expense Name -->
+                      <h4 class="p-2">Expenses Record</h4>
 
-                    <!-- Add Expense and settle up button -->
-                    <div class="expense-settleup">
-                      <button class="btn btn-danger" routerLink="/expense/expense-add" type="button">Add Expense</button>
+                      <!-- Add Expense and settle up button -->
+                      <div class="expense-settleup">
+                        <button class="btn btn-danger" routerLink="/expense/expense-add" type="button">Add
+                          Expense</button>
+
+                      </div>
 
                     </div>
+                  </td>
+                </tr>
+              </thead>
 
-                  </div>
-                </td>
-              </tr>
-            </thead>
+              <!-- expense list -->
+              <tbody>
+                <!-- Borrowed Amount List -->
+                <tr *ngFor="let item of borrowedAmountList; let i=index">
+                  <td>{{item.message}}</td>
+                  <td>{{item.friendName}}</td>
+                  <td> Rs. {{item.amount}}</td>
 
-            <!-- expense list -->
-            <tbody>
-              <!-- Borrowed Amount List -->
-              <tr *ngFor="let item of borrowedAmountList; let i=index">
-                <td>{{item.message}}</td>
-                <td>{{item.friendName}}</td>
-                <td> Rs. {{item.amount}}</td>
+                </tr>
 
-              </tr>
+                <!-- Debt Amount List -->
+                <tr *ngFor="let item of debtAmountList; let i=index">
+                  <td>{{item.friendName}}</td>
+                  <td>{{item.message}}</td>
+                  <td> RS. {{item.amount}}</td>
 
-              <!-- Debt Amount List -->
-              <tr *ngFor="let item of debtAmountList; let i=index">
-                <td>{{item.friendName}}</td>
-                <td>{{item.message}}</td>
-                <td> RS. {{item.amount}}</td>
-
-              </tr>
-              <tr *ngIf="borrowedAmountList.length == 0 && debtAmountList.length ==0">No record found</tr>
-            </tbody>
-          </table>
+                </tr>
+              </tbody>
+            </table>
           </div>
 
         </td>
