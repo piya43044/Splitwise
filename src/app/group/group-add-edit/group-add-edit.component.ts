@@ -186,6 +186,6 @@ export class GroupAddEditComponent implements OnInit {
    * @return object
    * */
   getCurrentUserByName(name: string): object {
-    return this.groupsService.getCurrentUserDetails().subscribe((val) => { return (val) })
+    return this.groupsService.getCurrentUserDetails().subscribe((val) => { return (val); })
   }
 }
