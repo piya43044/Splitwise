@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,10 +18,14 @@ export class DashboardComponent implements OnInit{
     { owe:'owed', person:'Harish', currency:'₹', amount:666 },
     { owe:'owed', person:'Nikita', currency:'₹', amount: 800 }
   ]
-
+  constructor(
+    private cookieService: CookieService) {
+     
+   }
 
   // ngOnInit method
   ngOnInit(): void{
+    
     this.totalBalanceCalculate();
   }
 

@@ -53,6 +53,7 @@ export class LoginComponent implements OnInit {
     this.loggedUSer.logUser(existing_user).subscribe(
       (x) => {
         if (x.body.description==="Success") {
+        
           this.getCurrentUser()
           this.router.navigate(['dashboard']);
         } 
@@ -71,6 +72,7 @@ export class LoginComponent implements OnInit {
       console.log(x);
     })
   }
+ 
  
    /**
    * Submit methos
