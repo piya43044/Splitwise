@@ -11,6 +11,7 @@ import { GroupItem } from '../models/groupItem.model';
 })
 export class GroupsService {
   group !: Groups;
+  groupList !: GroupList[];
   getSelectedGroupIndex !: number;
 
   constructor(
