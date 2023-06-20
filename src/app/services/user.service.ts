@@ -25,10 +25,10 @@ export class UserService {
     * @param addUserRequest store the data of the user credential
     * @retun http response
     */
-  addUsers(addUserRequest: User_register): Observable<HttpResponse<User_register>> {
+  addUsers(addUserRequest: UserRegister): Observable<HttpResponse<UserRegister>> {
     const url = `${this.baseUrl}/api/account/register`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<User_register>(url, addUserRequest, { headers, observe: 'response', withCredentials: true });
+    return this.http.post<UserRegister>(url, addUserRequest, { headers, observe: 'response', withCredentials: true });
   }
 
   /**
@@ -41,7 +41,7 @@ export class UserService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post<UserLoginResult>(url, logUserRequest, { headers, observe: 'response', withCredentials: true });
     }
-  
+
   /**
    * Get the user detail from the api
    * @param id of user for their detail
@@ -67,5 +67,4 @@ export class UserService {
   getUserOweFromDetail(): Observable<UserOutstandingDetail[]>{
     return this.http.get<UserOutstandingDetail[]>(this.userOweFromUrl);
   }
-
 }
