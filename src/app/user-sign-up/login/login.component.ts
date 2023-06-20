@@ -6,7 +6,7 @@ import { UserService } from 'src/app/services/user.service';
 import { User_login } from 'src/app/models/login.model';
 // import { environment } from 'src/environments/environment';
 // import { OAuthService, AuthConfig } from 'angular-oauth2-oidc';
-
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   /**
    * Constructor
    */
-  constructor(private router: Router, private loggedUSer: UserService){}
+  constructor(private router: Router, private loggedUSer: UserService, private cookieService: CookieService){}
   /**
    * ngOnInit method
    * @returns void
@@ -51,19 +51,31 @@ export class LoginComponent implements OnInit {
    *  */ 
   login(existing_user: User_login) {
     this.loggedUSer.logUser(existing_user).subscribe(
-      (x) => {
-        if (x.body.description==="Success") {
+      (response:any) => {
+        console.log(response);
+        if (response.body.description === "Success") {
+          // Get the cookie from the response headers
+          const RequestVerificationToken = response.headers.get('Set-Cookie');
+          console.log(RequestVerificationToken)
+          console.log('Header : ',response.cookie);
+          // Store the cookie in a local variable or cookie service
         
-          this.getCurrentUser()
+          if(RequestVerificationToken){
+            this.cookieService.set('authToken', RequestVerificationToken);
+          }
+  
+          this.getCurrentUser();
           this.router.navigate(['dashboard']);
-        } 
-        else
-        {
-          alert('Invalid user name and passwprd');
+        } else {
+          alert('Invalid username and password');
         }
       },
-    )
-    }
+      (error) => {
+        console.error(error);
+        alert('An error occurred during login');
+      }
+    );
+  }
   /**
    * getCurrentUser method are used to subscribe data
    *  */

@@ -6,7 +6,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PageErrorComponent } from './page-error/page-error.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { OAuthModule } from 'angular-oauth2-oidc';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpClientXsrfModule } from '@angular/common/http';
 import { AuthInterceptor } from './auth-interceptor';
 
 
@@ -22,6 +22,10 @@ import { AuthInterceptor } from './auth-interceptor';
     FontAwesomeModule,
     HttpClientModule,
     OAuthModule.forRoot(),
+    HttpClientXsrfModule.withOptions({
+      cookieName: 'XSRF-TOKEN',
+      headerName: 'RequestVerificationToken'
+    })
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]

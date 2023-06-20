@@ -4,13 +4,15 @@ import { Observable } from 'rxjs';
 import { User_register } from '../models/register.model';
 import { User_login } from '../models/login.model';
 
+import { CookieService } from 'ngx-cookie-service';
+
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   private baseUrl = 'https://localhost:44329';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private cookieService: CookieService) { }
 
   addUsers(addUserRequest: User_register): Observable<HttpResponse<User_register>> {
     const url = `${this.baseUrl}/api/account/register`;
@@ -21,12 +23,14 @@ export class UserService {
   logUser(logUserRequest: User_login): Observable<HttpResponse<any>> {
     const url = `${this.baseUrl}/api/account/login`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<User_login>(url, logUserRequest, { headers, observe: 'response'});
+    return this.http.post(url, logUserRequest, { headers, observe: 'response',withCredentials:true});
+    
   }
 
   currentUser(): Observable<string> {
     const url = `${this.baseUrl}/api/app/current-user/current-user-name`;
-    const headers = new HttpHeaders();
+    const token =this.cookieService.get('authToken')
+    const headers = new HttpHeaders({'RequestVerificationToken': token});
     return this.http.get<string>(url, { headers, withCredentials: true });
   }
 }
