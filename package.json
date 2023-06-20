@@ -24,6 +24,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.2.1",
     "angular-oauth2-oidc": "^15.0.1",
     "ngx-cookie-service": "^16.0.0",
+    "ngx-toastr": "^17.0.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"

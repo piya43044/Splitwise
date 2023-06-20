@@ -12,7 +12,7 @@
             <input type="email" class="form-control" id="email" placeholder="Enter email" formControlName="email">
             <!-- Custom Validation for Email -->
                 <div class="validation" *ngIf="email?.invalid && email?.touched">
-                    <small *ngIf="email?.hasError('pattern')">
+                    <small *ngIf="email?.hasError('required')">
                         Email required
                     </small>
                     <small *ngIf="email?.hasError('pattern')">
@@ -27,8 +27,11 @@
             <input type="password" class="form-control" id="password" placeholder="Enter password" formControlName="password">
             <!-- Custom Validation for Password -->
             <div class="validation" *ngIf="password?.invalid && password?.touched">
-                <small *ngIf="password?.hasError('pattern')">
+                <small *ngIf="password?.hasError('required')">
                     Password required
+                </small>
+                <small *ngIf="password?.hasError('pattern')">
+                    Password must contain more than 8 characters with 1 upper case letter and 1 special character
                 </small>
             </div>
         </div>

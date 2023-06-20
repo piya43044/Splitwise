@@ -8,8 +8,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { HttpClientModule, HTTP_INTERCEPTORS, HttpClientXsrfModule } from '@angular/common/http';
 import { AuthInterceptor } from './auth-interceptor';
-
-
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +25,9 @@ import { AuthInterceptor } from './auth-interceptor';
     HttpClientXsrfModule.withOptions({
       cookieName: 'XSRF-TOKEN',
       headerName: 'RequestVerificationToken'
-    })
+    }),
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]

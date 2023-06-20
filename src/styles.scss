@@ -2,7 +2,7 @@
 @import "./app/layout/navbar";
 @import "./app/layout/variables";
 @import "./app/layout/button";
-
+@import 'ngx-toastr/toastr';
 /* Universal styling */
 * {
     box-sizing: border-box;
