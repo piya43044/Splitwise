@@ -100,7 +100,7 @@ export class FriendsListComponent implements OnInit {
    * @param id of friend as string
    * */
   deleteFriend(id: string): void {
-    this.friendService.deleteFriend('').subscribe( response => {
+    this.friendService.deleteFriend(id).subscribe( response => {
       this.toastrService.success('Delete Successfully', '', {
         timeOut: 2000,
       });

@@ -1,27 +1,35 @@
-import { Component, Input } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs';
+import { Component, Input, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnChanges {
   @Input() sideNavStatus: Boolean = false;
-  currentUrl: string = '/dashboard';
+  @Input() currentUrl: string = '';
 
-  // Constructor
-  constructor( private router: Router){};
-  // ngOnInit method
-  ngOnInit(): void {
+  /**
+   * Constructor
+   *  */ 
+  constructor(){};
 
-    // Get current url
-    this.router.events
-      .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
-      .subscribe((event: NavigationEnd) => {
-            this.currentUrl = event.url;
-    });
+  /**
+   * ngOnChanges method
+   *  */ 
+  ngOnChanges(){
+
+    // Check friend list url
+    let checkFriendUrl = this.currentUrl.includes('/friends/friends-list');
+    if(checkFriendUrl){
+      this.currentUrl = '/friends/friends-list';
+    }
+
+    // Check group list url
+    let checkGroupUrl = this.currentUrl.includes('/group/group-list');
+    if(checkGroupUrl){
+      this.currentUrl = '/group/group-list';
+    }
   }
 
 }

@@ -20,6 +20,7 @@ img {
 /* Sidebar */
 .sidebar {
     position: absolute;
+    top: 72px;
     left: 0;
     width: 55px;
     height: calc(100% - 72px);
@@ -44,6 +45,7 @@ img {
     padding: 30px;
     width: calc(100% - 55px);
     position: absolute;
+    top: 72px;
     left: 55px;
     transition: left 250ms ease-in,width 250ms ease-in;
 }

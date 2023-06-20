@@ -12,4 +12,7 @@ export interface TransactionList {
     creationTime: string,
     creatorId: string,
     id: string,
+    expenseName: string,
+    ownedByName: string,
+    creatorName: string;
 }

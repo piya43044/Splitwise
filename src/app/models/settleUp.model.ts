@@ -6,4 +6,5 @@ export interface SettleUserData{
     message:string,
     ownedBy:string,
     paymentId:string,
+    ownedByName: string,
 }

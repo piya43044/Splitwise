@@ -12,27 +12,23 @@
                 </tr>
                 <!-- Transaction list header -->
                 <tr>
-                    <th>Id</th>
+                    <th>Payment Id</th>
                     <th>OwnedBy</th>
-                    <th>ExpenseId</th>
+                    <th>Expense</th>
                     <th>CreationTime</th>
-                    <th>Last Modification Time</th>
-                    <th>Last Modified Id</th>
+                    <th>Last Modified Name</th>
                     <th>Amount</th>
-                    <th>Settled</th>
                 </tr>
             </thead>
             <!-- Transaction list details -->
             <tbody>
                 <tr *ngFor="let transaction of transactionList">
                     <td>{{transaction.id}}</td>
-                    <td>{{transaction.ownedBy}}</td>
-                    <td>{{transaction.expenseId}}</td>
+                    <td>{{transaction.ownedByName}}</td>
+                    <td>{{transaction.expenseName}}</td>
                     <td>{{transaction.creationTime}}</td>
-                    <td>{{transaction.lastModificationTime}}</td>
-                    <td>{{transaction.lastModifierId}}</td>
+                    <td>{{transaction.creatorName}}</td>
                     <td>{{transaction.amount}}</td>
-                    <td>{{transaction.isSettled}}</td>
                 </tr>
             </tbody>
         </table>

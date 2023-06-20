@@ -3,7 +3,6 @@ import {HttpClient, HttpResponse} from '@angular/common/http';
 import { UserRegister } from '../models/register.model';
 import { Observable } from 'rxjs';
 import { UserDetail } from '../models/userDetail.model';
-import { HttpClient } from '@angular/common/http';
 import { UserOutstandingDetail } from '../models/userOutstandingDetail.model';
 
 @Injectable({

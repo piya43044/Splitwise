@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { SettleUpService } from '../services/settle-up.service';
 import { SettleUserData } from '../models/settleUp.model';
 import { OnInit } from '@angular/core'
+import { UserService } from '../services/user.service';
 @Component({
   selector: 'app-settle-up',
   templateUrl: './settle-up.component.html',
@@ -13,7 +14,8 @@ export class SettleUpComponent implements OnInit {
   /**
    * constructor
    */
-  constructor(private userAmount: SettleUpService) {
+  constructor(private userAmount: SettleUpService,
+    private userService: UserService) {
   }
 
   /**
@@ -29,6 +31,13 @@ export class SettleUpComponent implements OnInit {
   unSettle() {
     this.userAmount.getUnsettledList().subscribe((data) => {
       this.ownedDetails = data;
+
+      for(let i=0;i<this.ownedDetails.length; i++){
+        // Get the user detail by their user id
+        this.userService.getUserDetail(this.ownedDetails[i].ownedBy).subscribe( data => {
+          this.ownedDetails[i].ownedByName = data.userName;
+        })
+      }
     });
   }
 
