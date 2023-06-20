@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { GroupMembersToAdd, GroupResult, Groups, UserProfile } from 'src/app/models/groups';
 import { GroupsService } from 'src/app/services/groups.service';
 
@@ -15,7 +16,7 @@ export class GroupAddEditComponent implements OnInit {
   addMembersForm !: FormGroup;
 
   isGroupAddActive: Boolean = false;
-  getActivatedRouteParam: String = '';
+  getActivatedRouteParam !: number;
   isGroupCreated: boolean = false;
 
   GroupResult !: GroupResult;
@@ -25,7 +26,8 @@ export class GroupAddEditComponent implements OnInit {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private groupsService: GroupsService
+    private groupsService: GroupsService,
+    private toastrService: ToastrService
   ) { }
 
   // ngOnInit method
@@ -50,7 +52,7 @@ export class GroupAddEditComponent implements OnInit {
 
     /** get activatedRoute parameter using observable */
     this.activatedRoute.params.subscribe((param) => {
-      this.getActivatedRouteParam = param['routerParam'];
+      this.getActivatedRouteParam = Number(param['routerParam']);
 
       if (this.getActivatedRouteParam === undefined) {
         this.isGroupAddActive = true;
@@ -60,20 +62,9 @@ export class GroupAddEditComponent implements OnInit {
       }
     })
 
-    if (this.getActivatedRouteParam != undefined) {
-      this.addGroupForm.patchValue({
-        groupName: 'trip',
-        about: 'this is group for testing',
-        groupMember: [{
-          userId: 'admin'
-        }]
-      })
-    }
-
-
     /** On click of group edit button it will set current details of group to textbox */
     if (this.getActivatedRouteParam != undefined) {
-      const data = this.groupsService.groupList[Number(this.getActivatedRouteParam)];
+      const data = this.getEditDataToEdit(this.getActivatedRouteParam );
       this.addGroupForm.patchValue({
         groupName: data.name,
         about: data.about,
@@ -146,10 +137,19 @@ export class GroupAddEditComponent implements OnInit {
     }
 
     /**  Create group Api call from group service */
-    this.groupsService.createGroup(data).subscribe(() => {
-      alert('Group created successfully!');
-    });
-    this.isGroupCreated = true;
+    this.groupsService.createGroup(data).subscribe(
+      (res) => {
+      this.toastrService.success('Group created successfully!', 'Success', {
+        timeOut: 2000,
+      });
+      this.isGroupCreated = true;
+    },
+      (error) => {
+        this.toastrService.success(error.error.error.message, 'Error', {
+          timeOut: 2000,
+        });
+       }
+    );
   }
 
   /** add Members method
@@ -161,8 +161,15 @@ export class GroupAddEditComponent implements OnInit {
 
     /** AddMembers api call from group service */
     this.groupsService.addMembersToGroup(data).subscribe(() => {
-      alert('members added successfully!');
-    });
+      this.toastrService.success('Members added successfully!', 'Success', {
+        timeOut: 2000,
+      });
+    },
+      (error) => {
+        this.toastrService.error('Error in addng member to group' + error.error.error.message, 'Error', {
+          timeOut: 2000,
+        });
+      });
   }
 
 
@@ -175,7 +182,7 @@ export class GroupAddEditComponent implements OnInit {
     let currentUSerName: string = '';
 
     // Current user api call to get current user's name
-    this.groupsService.getCurrentUser().subscribe((val) => { currentUSerName = val; })
+    //this.groupsService.getCurrentUser().subscribe((val) => { currentUSerName = val; })
     return currentUSerName;
   }
 
@@ -188,4 +195,18 @@ export class GroupAddEditComponent implements OnInit {
   getCurrentUserByName(name: string): object {
     return this.groupsService.getCurrentUserDetails().subscribe((val) => { return (val); })
   }
+
+  /** getEditDataToEdit method
+   * to get group details to edit
+   * from group service file
+   * @param name
+   * @return object
+   * */
+  getEditDataToEdit(index: number) {
+    return this.groupsService.groupList[index]
+  }
 }
+
+
+
+

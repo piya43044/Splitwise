@@ -16,33 +16,15 @@ export interface GroupResult {
   about: string;
   createdBy: string;
   isDeleted: false;
-  groupMembers: [
-    {
-      userId: string;
-      groupId: string;
-      isRemoved: false;
-      dateOfJoin: string;
-      lastModificationTime: null;
-      lastModifierId: null;
-      creationTime: string;
-      creatorId: string;
-      extraProperties: {};
-      concurrencyStamp: string;
-      id: string;
-    }
-  ];
+  groupMembers: GroupMembersResult[];
   id: string;
 
-}
-
-/** GroupGroupMembers interface with attributes of GroupMembers */
-export interface GroupMembers {
-  userId: string;
 }
 
 /** GroupMembersResult interface with attributes of group members result through api */
 export interface GroupMembersResult {
   userId: string;
+  name: string;
   groupId: string;
   isRemoved: false;
   dateOfJoin: string;
@@ -66,7 +48,7 @@ export interface GroupList {
   name: string;
   about: string;
   createdBy: string;
-  groupMembers: string;
+  groupMembers: GroupMembersResult[];
   id: string;
   isDeleted: string;
 }
