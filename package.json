@@ -10,7 +10,9 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^15.2.9",
+    "@abp/ng.core": "^7.2.2",
+    "@angular/animations": "^15.2.0",
+
     "@angular/common": "^15.2.0",
     "@angular/compiler": "^15.2.0",
     "@angular/core": "^15.2.0",
@@ -21,6 +23,8 @@
     "@fortawesome/angular-fontawesome": "^0.12.1",
     "@fortawesome/fontawesome-svg-core": "^6.2.1",
     "@fortawesome/free-solid-svg-icons": "^6.2.1",
+    "angular-oauth2-oidc": "^15.0.1",
+
     "ngx-toastr": "^17.0.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

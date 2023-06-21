@@ -90,7 +90,6 @@ export class RegisterComponent implements OnInit {
       }
     );
   }
-
   /**
    * Submit method
    */

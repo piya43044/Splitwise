@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 import { DashboardService } from '../services/dashboard.service';
 import { Profile, BorrowedAmountDetails, DebtAmountDetails } from '../models/profile';
 import { throwError } from 'rxjs';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -20,7 +22,6 @@ export class DashboardComponent implements OnInit {
   totalOwe: number = 0;
   totalOwed: number = 0;
   totalBalance: number = 0;
-
   // constructor
   constructor(
     private dashboardService: DashboardService
@@ -39,8 +40,6 @@ export class DashboardComponent implements OnInit {
       this.totalOwed = this.calculateAmount(this.debtAmountList);
       this.totalBalance = this.totalOwed - this.totalOwe;
     }, 1000);
-
-
   }
 
   /** CurrentUser function to call get api

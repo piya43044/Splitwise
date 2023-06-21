@@ -15,7 +15,7 @@
                     <small *ngIf="email?.hasError('required')">
                         Email required
                     </small>
-                    <small *ngIf="email?.hasError('email')">
+                    <small *ngIf="email?.hasError('pattern')">
                         Please fill correct email
                     </small>
                 </div>
@@ -30,14 +30,13 @@
                 <small *ngIf="password?.hasError('required')">
                     Password required
                 </small>
+                <small *ngIf="password?.hasError('pattern')">
+                    Password must contain more than 8 characters with 1 upper case letter and 1 special character
+                </small>
             </div>
         </div>
 
-
         <!-- Login button -->
         <input type="submit" value="Login" id="btn" [disabled]="!loginForm.valid">
-
-        <!-- Forget password link -->
-        <a href="#"> Forget your password?</a>
     </form>
 </div>
