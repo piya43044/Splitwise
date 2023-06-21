@@ -17,7 +17,7 @@
         
         /* Edit / delete icon */
         i {
-            font-size: 20px;
+            font-size: $font-size-20;
         }
     }
 
@@ -29,7 +29,7 @@
 
         /* Back icon */
         i {
-            font-size: 24px;
+            font-size: $font-size-24;
         }
 
         /* Expense name hover */
@@ -47,9 +47,9 @@
     }
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 750px) {
     .expense-container {
-        width: 300px;
+        width: 350px;
 
         /* Expense header with expense name, add expense button and settle up button */
         .expense-header {
@@ -59,9 +59,15 @@
     }
 }
 
-@media screen and (max-width: 300px) {
+@media screen and (max-width: 600px) {
     .expense-container {
-        width: 200px;
+        width: 300px;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .expense-container {
+        width: 250px;
 
         /* Add expense and settle up button */
         .expense-settleup {

@@ -1,68 +1,102 @@
 <div class="dashboard-container">
- 
-    <div class="table-responsive">
-        <table class="table table-bordered table-hover">
-            <!-- Dashboard header -->
-            <thead class="table-secondary">
-              <tr>
-                <td colspan="3">
-                    <div class="dashboard-header d-flex justify-content-between align-items-center">
-                        <div>
-                            <h4>Dashboard</h4>
-                        </div>
-        
-                        <!-- Add expense button and settle up button -->
-                        <div class="expense-settleup">
-                            <button class="btn btn-danger" routerLink="/expense/expense-add">Add Expense</button>
-                            <button class="btn btn-success" routerLink="/settleUp">Settle Up</button>
-                        </div>
-                        
+
+  <div class="table-responsive">
+    <table class="table table-bordered">
+
+      <!-- Dashboard header -->
+      <thead class="table-secondary">
+        <tr>
+          <td colspan="3">
+            <div class="dashboard-header d-flex justify-content-between align-items-center">
+              <div>
+                <h4>Dashboard</h4>
+              </div>
+
+              <!-- Add expense button and settle up button -->
+              <div class="expense-settleup">
+                <h6>{{userName | uppercase}}</h6>
+              </div>
+
+            </div>
+          </td>
+        </tr>
+
+        <!-- Balance detail -->
+        <tr>
+          <th>
+            <div>
+              <p>Total balance:</p>
+              <p>{{totalBalance}}</p>
+            </div>
+          </th>
+          <th>
+            <div>
+              <p class="text-danger">You owe:</p>
+              <p class="text-danger">{{totalOwe}}</p>
+            </div>
+          </th>
+          <th>
+            <div>
+              <p class="text-success">You are owed:</p>
+              <p class="text-success">{{totalOwed}}</p>
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <td colspan="3">
+          <div class="d-flex justify-content-between align-items-center">
+            <table class="table table-hover">
+              <!-- expense header with add expense button -->
+              <thead class="table-secondary">
+                <tr>
+                  <td colspan="7">
+                    <div class="expense-header d-flex justify-content-between align-items-center">
+
+                      <!-- Back icon -->
+                      <a routerLink="/dashboard" class="p-2"><i class="fa fa-arrow-circle-left"></i></a>
+
+                      <!-- expense Name -->
+                      <h4 class="p-2">Expenses Record</h4>
+
+                      <!-- Add Expense and settle up button -->
+                      <div class="expense-settleup">
+                        <button class="btn btn-danger" routerLink="/expense/expense-add" type="button">Add
+                          Expense</button>
+
+                      </div>
+
                     </div>
-                </td>
-              </tr>
-    
-              <!-- Balance detail -->
-              <tr>
-                <th>
-                    <div>
-                        <p>Total balance:</p>
-                        <p>{{totalBalanceSign}}{{totalBalance}}</p>
-                    </div>
-                </th>
-                <th>
-                    <div>
-                        <p>You owe:</p>
-                        <p>{{totalOwe}}</p>
-                    </div>
-                </th>
-                <th>
-                    <div>
-                        <p>You are owed:</p>
-                        <p>{{totalOwed}}</p>
-                    </div>
-                </th>
-            </tr>
-    
-            </thead>
-      
-            <!-- Dashboard Detail -->
-            <tbody>
-    
-                
-                <!-- Owe/Owed Details -->
-                <tr *ngFor="let detail of balanceDetail">
-                    <td colspan="3">
-                        <div *ngIf="detail.owe =='owe'" class="d-flex flex-column justify-content-center align-items-center">
-                            <a routerLink="/friends/friends-list/{{detail.person}}">{{detail.person}}</a>
-                            <p>You owe {{detail.currency}}{{detail.amount}}</p>
-                        </div>
-                        <div *ngIf="detail.owe == 'owed'" class="d-flex flex-column justify-content-center align-items-center">
-                            <a routerLink="/friends/friends-list/{{detail.person}}">{{detail.person}}</a>
-                            <p>owes you {{detail.currency}}{{detail.amount}}</p>
-                        </div>
-                    </td>
+                  </td>
                 </tr>
-            </tbody>
-        </table>
-    </div>
+              </thead>
+
+              <!-- expense list -->
+              <tbody>
+                <!-- Borrowed Amount List -->
+                <tr *ngFor="let item of borrowedAmountList; let i=index">
+                  <td>{{item.message}}</td>
+                  <td>{{item.friendName}}</td>
+                  <td> Rs. {{item.amount}}</td>
+
+                </tr>
+
+                <!-- Debt Amount List -->
+                <tr *ngFor="let item of debtAmountList; let i=index">
+                  <td>{{item.friendName}}</td>
+                  <td>{{item.message}}</td>
+                  <td> RS. {{item.amount}}</td>
+
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </td>
+
+      </tbody>
+    </table>
+
+
+  </div>
 </div>

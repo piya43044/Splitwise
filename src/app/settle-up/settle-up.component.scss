@@ -1,23 +1,65 @@
-/* Import common style */
+/* Import common styling */
 @import "../layout/variables";
 
-/* SettleUp container */
-.container {
-    border-radius: 15px;
-    box-shadow: 0 5px 15px $off-black;
-    padding: 20px;
-    width: 500px;
+/* Settle up container */
+.settle-up-container {
+    width: 700px;
+    
+    /* Settle up table */
+    .table {
+        border-left: 1px solid $off-grey;
+        border-right: 1px solid $off-grey;
 
-    /* Buttons */
-    .btn {
-        margin-right: 10px;
+        /* Buttons */
+        .btn {
+            margin-right: 5px;
+        }
+
+        /* Action button */
+        .btn-action {
+            padding: 5px;
+            border: none;
+        }
+
+        /* Edit / delete icon */
+        i {
+            font-size: $font-size-20;
+        }
+
+        /* Settle up name */
+        a {
+            text-decoration: none;
+            color: $black;
+
+            /* Back icon */
+            i {
+                font-size: $font-size-24;
+            }
+    
+            /* Settle up name hover */
+            &:hover {
+                color: $green;
+                text-decoration: underline;
+            }
+        }
     }
 }
 
-/* Media query */
-@media screen and (max-width: 900px) {
-    
-    .container {
-        width: auto;
+/* Media querys */
+@media screen and (max-width: 1000px) {
+    .settle-up-container {
+        width: 500px;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .settle-up-container {
+        width: 400px;
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .settle-up-container {
+        width: 250px;
     }
 }

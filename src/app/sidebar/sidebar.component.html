@@ -8,13 +8,13 @@
         </li>
 
         <!-- Group -->
-        <li class="nav-list-item" [ngClass]="{'active': currentUrl==='/group/group-list'}" routerLink="/group/group-list">
+        <li class="nav-list-item" [ngClass]="{'active': currentUrl==='/group/group-list' || currentUrl === '/group/group-add'}" routerLink="/group/group-list">
             <i class="fa fa-group"></i>
             <a > Groups</a>
         </li>
 
         <!-- Friends -->
-        <li class="nav-list-item" [ngClass]="{'active': currentUrl==='/friends/friends-list'}" routerLink="/friends/friends-list">
+        <li class="nav-list-item" [ngClass]="{'active': currentUrl==='/friends/friends-list' || currentUrl === '/friends/friends-add'}" routerLink="/friends/friends-list">
             <i class='fa fa-handshake-o'></i>
             <a>Friends</a>
         </li>
@@ -26,7 +26,7 @@
         </li>
 
         <!-- Expenses -->
-        <li class="nav-list-item" [ngClass]="{'active': currentUrl==='/expense/expense-list'}"  routerLink="/expense/expense-list">
+        <li class="nav-list-item" [ngClass]="{'active': currentUrl==='/expense/expense-list' || currentUrl === '/expense/expense-add'}"  routerLink="/expense/expense-list">
             <i class="	fa fa-credit-card"></i>
             <a>Expenses</a>
         </li>

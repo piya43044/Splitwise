@@ -1,7 +1,7 @@
 /**
-   * User_register interface validate the data type of the user 
-   *  */
-export interface User_register{
+  * UserRegister interface validate the data type of the user
+  */
+export interface UserRegister{
     userName :string;
     emailAddress:string;
     password:string;

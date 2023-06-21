@@ -1,5 +1,5 @@
 <!-- Navbar Section -->
-<nav class="navbar navbar-expand-sm bg-body-tertiary sticky-top">
+<nav class="navbar navbar-expand-sm bg-body-tertiary fixed-top">
   <div class="container-fluid">
 
       <!-- Sidebar button -->
@@ -63,7 +63,7 @@
 <div class="main-container d-flex flex-row">
   <!-- Sidebar container -->
   <div class="sidebar" *ngIf="!isLoginSignupActive" [ngClass]="{'sidebar-open': sideNavStatus}">
-    <app-sidebar [sideNavStatus]="sideNavStatus"></app-sidebar>
+    <app-sidebar [sideNavStatus]="sideNavStatus" [currentUrl]="currentUrl"></app-sidebar>
   </div>
   
   <!-- Container for router components -->

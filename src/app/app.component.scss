@@ -8,18 +8,19 @@ img {
 /* Sidebar nav button*/
 .side-nav-button {
     cursor: pointer;
-    font-size: 20px;
+    font-size: $font-size-20;
     border: none;
 
     /* Sidebar icon */
     i {
-      font-size: 30px;
+      font-size: $font-size-30;
     }
 }
 
 /* Sidebar */
 .sidebar {
     position: absolute;
+    top: 72px;
     left: 0;
     width: 55px;
     height: calc(100% - 72px);
@@ -44,6 +45,7 @@ img {
     padding: 30px;
     width: calc(100% - 55px);
     position: absolute;
+    top: 72px;
     left: 55px;
     transition: left 250ms ease-in,width 250ms ease-in;
 }
@@ -84,6 +86,6 @@ img {
   
     /* Sidebar nav button*/
     .side-nav-button {
-      font-size: 16px;
+      font-size: $font-size-16;
     }
   }

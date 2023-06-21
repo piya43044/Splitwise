@@ -11,12 +11,25 @@
     <hr>
 
     <!-- Add expense form -->
-    <form>
+    <form [formGroup]="addExpenseForm" (ngSubmit)="onSubmit()">
+
+        <!-- Expense title -->
+        <div class="form-group mt-2">
+            <label for="expense_title">Expense Title:</label>
+            <input type="text" class="form-control" id="expense_title" formControlName="expense_title" placeholder="Enter a expense title" required>
+            
+            <!-- Custom validation for expense title -->
+            <div class="validation mb-3" *ngIf="expenseTitle?.invalid && expenseTitle?.touched">
+                <small *ngIf="expenseTitle?.hasError('required')">
+                    Expense title required
+                </small>
+            </div>
+        </div>
 
         <!-- description about expense -->
         <div class="form-group mt-2">
-            <label for="description">Description:</label>
-            <input type="text" class="form-control" id="description" name="description" placeholder="Enter a description" required>
+            <label for="expense_description">Expense Description:</label>
+            <input type="text" class="form-control" id="expense_description" formControlName="expense_description" placeholder="Enter a description">
         </div>
 
 
@@ -25,52 +38,51 @@
             <label for="amount">Amount:</label>
             <div class="input-group">
                 <div class="input-group-prepend">
-                    <select class="form-control" id="currency-type">
-                        <option value="₹">₹</option>
-                        <option *ngFor="let type of currency" [value]="type">{{type}}</option>
+                    <select class="form-control" id="currency-type" formControlName="currency">
+                        <option value="INR">INR</option>
                     </select>
                 </div>
-                <input type="number" class="form-control" id="amount" name="amount" min="0" placeholder="Enter amount" required>
+                <input type="number" class="form-control" id="amount" formControlName="expense_amount" min="0" placeholder="Enter amount"> 
+            </div>
+
+            <!-- Custom validation for expense amount -->
+            <div class="validation mb-3" *ngIf="expenseAmount?.invalid && expenseAmount?.touched">
+                <small *ngIf="expenseAmount?.hasError('required')">
+                    Expense amount is required
+                </small>
             </div>
         </div>
 
         <!-- Group selection -->
         <div class="form-group mt-2">
             <label for="group-type">Groups</label>
-            <select class="form-control" id="group-type">
-                <option value="no-group">No Group</option>
-                <option *ngFor="let group of groups" [value]="group">{{group}}</option>
+            <select class="form-control" id="group-type" formControlName="groupId">
+                <option value="" disabled selected>Select the group</option>
+                <option *ngFor="let group of groupItem" [value]="group.id">{{group.name}}</option>
             </select>
         </div>
 
 
-        <!-- split condition  -->
+        <!-- Split condition  -->
         <div class="form-group mt-2">
             <label for="split">Split:</label>
-            <select class="form-control" id="split" name="split">
-          <option value="equal">Split equally</option>
-          <option value="unequal">Split by amount</option>
-          <option value="shares">Split by %</option>
-        </select>
-        </div>
-
-        <!-- participants included -->
-        <div class="form-group mt-2">
-            <label for="participants">Participants:</label>
-            <!-- Participant name -->
-            <div>
-                <div *ngFor="let friend of friends">
-                    <input class="form-check-input" type="checkbox" value="{{friend.friendName}}" id="flexCheckChecked">
-                    <label class="form-check-label" for="flexCheckChecked">{{friend.friendName}}</label>
-                </div>
-            </div>
+            <select class="form-control" id="split" name="split" formControlName="split_as">
+                <option value="equal">Split equally</option>
+            </select>
         </div>
 
         <!-- Save and cancel button -->
-        <div class="d-flex justify-content-end">
-            <!-- Save button -->
-            <button type="submit" class="btn btn-success w-20 h-25" routerLink="/expense/expense-list">Save</button>
-    
+        <div class="d-flex justify-content-end mt-3">
+            <!-- Save button or update button -->
+            <div *ngIf="isExpenseAddActive; then expenseAddButton else expenseEditButton">
+            </div>
+            <ng-template #expenseAddButton>
+                <button type="submit" class="btn btn-success w-20 h-25" [disabled]="!addExpenseForm.valid">Save</button>
+            </ng-template>
+            <ng-template #expenseEditButton>
+                <button type="button" (click)="updateExpense()" class="btn btn-success w-20 h-25" [disabled]="!addExpenseForm.valid">Update</button>
+            </ng-template>
+
             <!-- Cancel button -->
             <button routerLink="/expense/expense-list" type="button" class="btn btn-danger w-20 h-25">Cancel</button>
         </div>
