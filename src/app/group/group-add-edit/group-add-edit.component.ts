@@ -19,6 +19,8 @@ export class GroupAddEditComponent implements OnInit {
   getActivatedRouteParam !: number;
   isGroupCreated: boolean = false;
 
+  groupId: string = '';
+
   GroupResult !: GroupResult;
   userProfile!: UserProfile;
 
@@ -64,7 +66,7 @@ export class GroupAddEditComponent implements OnInit {
 
     /** On click of group edit button it will set current details of group to textbox */
     if (this.getActivatedRouteParam != undefined) {
-      const data = this.getEditDataToEdit(this.getActivatedRouteParam );
+      const data = this.getEditDataToEdit(this.getActivatedRouteParam);
       this.addGroupForm.patchValue({
         groupName: data.name,
         about: data.about,
@@ -83,6 +85,7 @@ export class GroupAddEditComponent implements OnInit {
    **/
   addMembersToGroupForm(): FormGroup {
     return new FormGroup({
+      groupId: new FormControl(this.groupId),
       memberName: new FormControl(''),
       memberEmail: new FormControl('')
     })
@@ -132,23 +135,24 @@ export class GroupAddEditComponent implements OnInit {
       name: this.groupName?.value as string,
       about: this.about?.value as string,
       groupMembers: [{
-        userId: "3a0ba79a-0f40-0dd1-4e91-9ed501777180"
+        userId: "3a0ba7bc-382f-a3b4-2637-2522d5882429"
       }]
     }
 
     /**  Create group Api call from group service */
     this.groupsService.createGroup(data).subscribe(
       (res) => {
-      this.toastrService.success('Group created successfully!', 'Success', {
-        timeOut: 2000,
-      });
-      this.isGroupCreated = true;
-    },
-      (error) => {
-        this.toastrService.success(error.error.error.message, 'Error', {
+        this.groupId = res.id;
+        this.toastrService.success('Group created successfully!', 'Success', {
           timeOut: 2000,
         });
-       }
+        this.isGroupCreated = true;
+      },
+      (error) => {
+        this.toastrService.error(error.error.error.message, 'Error', {
+          timeOut: 2000,
+        });
+      }
     );
   }
 
