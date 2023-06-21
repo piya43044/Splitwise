@@ -15,6 +15,8 @@ export class UserService {
   private userOweToUrl = "https://localhost:44329/api/app/user-outstanding-details/payment-info-for-current-user";
   private userOweFromUrl = "https://localhost:44329/api/app/user-outstanding-details/who-will-give-to-current-user";
   userOutstandingList: UserOutstandingDetail[] = [];
+  noOweMessage: boolean = false;
+
   /**
    * constructor
    */
@@ -48,7 +50,7 @@ export class UserService {
    * @returns user detail
    */
   getUserDetail(id: string): Observable<UserDetail>{
-    return this.http.get<UserDetail>(`${this.baseUrl+'/api/identity/users'}/${id}`, { withCredentials: true })
+    return this.http.get<UserDetail>(`${this.baseUrl}/api/app/find-the-user-name/user-by-id/${id}`, { withCredentials: true })
 
   }
 

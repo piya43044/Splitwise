@@ -2,17 +2,14 @@
 
   <!-- If Group detail is not active then it shows group list -->
   <ng-container *ngIf="!isGroupDetailActive">
-    <div class="table-responsive">
+    <div class="table-responsive table-bordered">
 
-      <table class="table table-bordered table-hover">
+      <table class="table table-hover">
         <!-- Group header with add group button -->
         <thead class="table-secondary">
           <tr>
             <td colspan="5">
               <div class="d-flex justify-content-between align-items-center">
-
-                <!-- Back icon -->
-                <a routerLink="/dashboard"><i class="fa fa-arrow-circle-left"></i></a>
 
                 <!-- Group heading -->
                 <h4>Groups</h4>
@@ -69,8 +66,8 @@
   <!-- If group detail is active then it shows group detail with transaction and expense list -->
   <ng-container *ngIf="isGroupDetailActive">
 
-    <div class="table-responsive">
-      <table class="table table-bordered table-hover">
+    <div class="table-responsive table-bordered">
+      <table class="table table-hover">
 
         <!-- Group header with add group button -->
         <thead class="table-secondary">
