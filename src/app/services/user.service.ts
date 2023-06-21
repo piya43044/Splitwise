@@ -43,7 +43,7 @@ export class UserService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post<UserLoginResult>(url, logUserRequest, { headers, observe: 'response', withCredentials: true });
     }
-  
+
   /**
    * Get the user detail from the api
    * @param id of user for their detail
@@ -69,5 +69,4 @@ export class UserService {
   getUserOweFromDetail(): Observable<UserOutstandingDetail[]>{
     return this.http.get<UserOutstandingDetail[]>(this.userOweFromUrl);
   }
-
 }

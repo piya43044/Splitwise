@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
 import { DashboardService } from '../services/dashboard.service';
 import { Profile, BorrowedAmountDetails, DebtAmountDetails } from '../models/profile';
 import { throwError } from 'rxjs';
-
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,40 +17,61 @@ export class DashboardComponent implements OnInit {
   debtAmountList: DebtAmountDetails[] = [];
 
   userName !: string;
+  loading: boolean = true;
+
+  isBorrowedAmountCalculated: boolean = false;
+  isDebtAmountCalculated: boolean = false;
 
   totalOwe: number = 0;
   totalOwed: number = 0;
   totalBalance: number = 0;
+
   // constructor
   constructor(
-    private dashboardService: DashboardService
+    private dashboardService: DashboardService,
+    private toastrService: ToastrService
   ) { }
 
   /** ngOnInit method
    **/
   ngOnInit(): void {
-    //function call
+    //function call to get user's profile and owe/owed amount details
     this.getCurrentUserDetails();
     this.getBorrowedAmountList();
     this.getDebtAmountList();
 
-    setTimeout(() => {
-      this.totalOwe = this.calculateAmount(this.borrowedAmountList);
-      this.totalOwed = this.calculateAmount(this.debtAmountList);
-      this.totalBalance = this.totalOwed - this.totalOwe;
-    }, 1000);
+    // To calculate total spent amount of user
+    setInterval(() => {
+      if (this.isBorrowedAmountCalculated === true || this.isDebtAmountCalculated === true) {
+        this.totalOwe = this.calculateAmount(this.borrowedAmountList);
+        this.totalOwed = this.calculateAmount(this.debtAmountList);
+        this.totalBalance = this.totalOwed - this.totalOwe;
+      }
+    })
+
+    // to stop loader of dashboard
+    setInterval(() => {
+      if (this.isBorrowedAmountCalculated === true && this.isDebtAmountCalculated === true) {
+        this.loading = false;
+      }
+    }, 1000)
   }
 
   /** CurrentUser function to call get api
    * and get name of current user from server
    **/
   getCurrentUserDetails(): void {
-    this.dashboardService.getCurrentUserDetails().subscribe(data => {
+    this.dashboardService.getCurrentUserDetails().subscribe(
+      (data) => {
       this.dashboardService.userProfile = data;
       this.userProfile = this.dashboardService.userProfile;
       this.userName = this.dashboardService.userProfile.userName;
     },
-      (error) => { alert('Error in getting Profile details of user : ' + error.error.error.message); })
+      (error) => {
+        this.toastrService.error('Error in getting Profile details of user ', 'Error', {
+          timeOut: 2000,
+        });
+      })
 
   }
 
@@ -59,51 +79,72 @@ export class DashboardComponent implements OnInit {
    * of the user and calculate total borrowed amount.
    **/
   getBorrowedAmountList(): void {
-    let sum: number = 0
-    this.dashboardService.getBorrowedAmountList().subscribe(data => {
+    this.loading = true;
+    this.dashboardService.getBorrowedAmountList().subscribe(
+      (data) => {
 
       //  To get user name by user id and calculate amount
       for (let item of data) {
-        this.dashboardService.getUserNameById(item.whomeToGive).subscribe((res) => {
+        this.dashboardService.getUserNameById(item.whomeToGive).subscribe(
+          (res) => {
           if (res.userName != '' || null || undefined) {
             item.friendName = res.userName;
             this.borrowedAmountList.push(item);
-
           }
         },
-          (error) => { alert('No Borrowed amount of ' + this.userName); })
+          (error) => {
+            this.toastrService.error('No Borrowed amount of ' + this.userName, 'Error', {
+              timeOut: 2000,
+            });
+          })
       }
 
+    },
+    (error)=>{
+      this.toastrService.error('No Borrowed amount details of ' + this.userName, 'Error', {
+        timeOut: 2000,
+      });
     })
+    this.isBorrowedAmountCalculated = true;
+
   }
 
   /** getDebtAmountList function to calculate the total borrowed amount
    * of the user.
    **/
   getDebtAmountList(): void {
-
-    this.dashboardService.getDebtAmountList().subscribe(data => {
-      //this.debtAmountList = data;
-      let sum: number = 0;
+    this.loading = true;
+    this.dashboardService.getDebtAmountList().subscribe(
+      (data) => {
 
       //  To get user name by user id and
       for (let item of data) {
-        this.dashboardService.getUserNameById(item.owesFromYou).subscribe((res) => {
+        this.dashboardService.getUserNameById(item.owesFromYou).subscribe(
+          (res) => {
           if (res.userName !== '' || null || undefined) {
             item.friendName = res.userName;
             this.debtAmountList.push(item);
           }
         },
           (error) => {
-            alert('No debt amount of ' + this.userName);
+            this.toastrService.error('No debt amount of ' + this.userName, 'Error', {
+              timeOut: 2000,
+            });
           })
       }
+    },
+    (error)=>{
+      this.toastrService.error('No debt amount details of ' + this.userName, 'Error', {
+        timeOut: 2000,
+      });
     })
+    this.isDebtAmountCalculated = true;
+
 
   }
 
   /**  calculateAmount function to calculate owe/owed amount
-   * @param arr : array of type BorrowedAmountDetails or DebtAmountDetails
+   * @param listItems : array of type BorrowedAmountDetails or DebtAmountDetails
    * @returns sum : sum of the value of amount of the list
    **/
   calculateAmount(listItems: BorrowedAmountDetails[] | DebtAmountDetails[]): number {
