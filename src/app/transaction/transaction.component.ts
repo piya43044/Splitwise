@@ -56,11 +56,6 @@ export class TransactionComponent {
               this.transaction[i].ownedByName = data.userName;
             })
 
-            // Get the user detail by their user id
-            this.userService.getUserDetail(this.transaction[i].lastModifierId).subscribe( data => {
-              this.transaction[i].creatorName = data.userName;
-            })
-
             this.transactionList.push(this.transaction[i]);
           }
         }
