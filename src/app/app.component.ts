@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
+import { GroupsService } from './services/groups.service';
 
 @Component({
   selector: 'app-root',
@@ -12,9 +13,15 @@ export class AppComponent implements OnInit {
   isLoginSignupActive: Boolean = true;
   currentUrl: string = '';
   sideNavStatus: Boolean = false;
+  toastrService: any;
 
   // Constructor
-  constructor( private router: Router){};
+  constructor(
+    private router: Router,
+    private groupsService : GroupsService){
+
+
+    };
 
   // ngOnInit method
   ngOnInit(): void {
@@ -24,7 +31,7 @@ export class AppComponent implements OnInit {
       .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
             this.currentUrl = event.url;
-            
+
             if(this.currentUrl === '/login' || this.currentUrl === '/register' || this.currentUrl === '/'){
               this.isLoginSignupActive = true;
               this.sideNavStatus = false;
@@ -36,8 +43,12 @@ export class AppComponent implements OnInit {
     });
   }
 
-  // SideNavBar Toogle click
+  /**  SideNavBar Toogle click
+   **/
   sideNavToogle(): void{
     this.sideNavStatus =!this.sideNavStatus;
   }
+
+
+
 }
