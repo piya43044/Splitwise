@@ -1,40 +1,34 @@
 <div class="settle-up-container">
-    <div class="table-responsive table-bordered">
-      <table class="table table-hover">
-          <!-- expense header with add expense button -->
-          <thead class="table-secondary">
-            <tr>
-              <td colspan="7">
-                <div class="expense-header d-flex justify-content-between align-items-center">
-                  <!-- Back icon -->
-                  <a routerLink="/dashboard"><i class="fa fa-arrow-circle-left"></i></a>
-                  <!-- settle up Name -->
-                  <h4>Settle Up</h4>
-                </div>
-              </td>
-            </tr>
-            <!-- settle up table header -->
-            <tr>
-              <th>Name</th>
-              <th>Amount</th>
-              <th>Settle up</th>
-            </tr>
-          </thead>
-          <!-- settle up list -->
-          <tbody>
-              <tr *ngFor="let item of ownedDetails; let i=index">
-                <td>{{item.ownedByName}}</td>
-                <td>{{item.amount}}</td>
-                <td>
-                  <div class="d-flex justify-content-around">
-                    <button type="button"  class="btn btn-success" (click)="getPaymentID(item.paymentId)">Settle Up</button>
-                  </div>
-                </td>
-              </tr>
-          </tbody>
+  <div class="table-header">
+    <div class="d-flex justify-content-between settle-up-header">
+      <!-- Back icon -->
+      <a routerLink="/expense/expense-list"><i class="fa fa-arrow-circle-left p-2"></i></a>
+      <!-- settle up Name -->
+      <h4 class="settle-up-heading p-2">Settle Up</h4>
+    </div>
+    <!-- settle up table header -->
+    <div class="table-header-row">
+      <div class="header-cell">Name</div>
+      <div class="header-cell">Amount</div>
+      <div class="header-cell">Settle up</div>
+    </div>
+  </div>
+  <div class="list-container">
+    <div class="table-responsive">
+      <table class="table table-hover table-bordered">
+        <!-- settle up list -->
+        <tbody>
+          <tr *ngFor="let item of ownedDetails; let i=index">
+            <td>{{item.ownedByName}}</td>
+            <td>{{item.amount}}</td>
+            <td>
+              <div class="d-flex justify-content-around">
+                <button type="button" class="btn btn-success" (click)="getPaymentID(item.paymentId)">Settle Up</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
       </table>
     </div>
   </div>
-  
-
-  
+</div>
