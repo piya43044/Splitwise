@@ -3,6 +3,7 @@ import { SettleUpService } from '../services/settle-up.service';
 import { SettleUserData } from '../models/settleUp.model';
 import { OnInit } from '@angular/core'
 import { UserService } from '../services/user.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-settle-up',
   templateUrl: './settle-up.component.html',
@@ -15,7 +16,7 @@ export class SettleUpComponent implements OnInit {
    * constructor
    */
   constructor(private userAmount: SettleUpService,
-    private userService: UserService) {
+    private userService: UserService,private toastr: ToastrService) {
   }
 
   /**
@@ -47,7 +48,7 @@ export class SettleUpComponent implements OnInit {
    */
   paymentMethod(payID: string) {
     this.userAmount.settlePayment(payID).subscribe((x) => {
-      alert("Payment successful");
+      this.toastr.success('Payment successful.');
       this.unSettle();
     },
     )

@@ -3,41 +3,43 @@
 
 /* Transaction list container */
 .container {
-    width: 800px;
-    
-    /* table */
-    .table {
-        border: 1px solid $off-grey;
+  width: 800px;
+  margin: 0 auto; /* Center the container horizontally */
 
-        /* Heading */
-        h4 {
-            margin: auto;
-            text-align: center;
-        }
+  /* table */
+  .table {
+    border: 1px solid $off-grey;
+
+    /* Heading */
+    .transaction-list-heading {
+      margin: 0;
+      text-align: center;
+      padding: 10px;
     }
+  }
 }
 
-/* Media querys */
+/* Media queries */
 @media screen and (max-width: 1000px) {
-    .container {
-        width: 500px;
-    }
+  .container {
+    width: 500px;
+  }
 }
 
 @media screen and (max-width: 700px) {
-    .container {
-        width: 400px;
-    }
+  .container {
+    width: 400px;
+  }
 }
 
 @media screen and (max-width: 400px) {
-    .container {
-        width: 350px;
-    }
+  .container {
+    width: 350px;
+  }
 }
 
 @media screen and (max-width: 310px) {
-    .container {
-        width: 220px;
-    }
+  .container {
+    width: 220px;
+  }
 }

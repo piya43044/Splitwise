@@ -4,7 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserRegister } from 'src/app/models/register.model';
 import { UserService } from 'src/app/services/user.service';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -15,7 +15,7 @@ export class RegisterComponent implements OnInit {
   /**
    * Constructor
    */
-  constructor(private addUsers: UserService, private router: Router) { };
+  constructor(private addUsers: UserService, private router: Router ,private toastr: ToastrService) { };
 
   /**
    * ngOnInit method
@@ -63,29 +63,29 @@ export class RegisterComponent implements OnInit {
   addUser(newUser: UserRegister) {
     this.addUsers.addUsers(newUser).subscribe(
       () => {
-        alert("Registration Succesful");
+        this.toastr.success('Register successful.');
         this.router.navigate(['/login']);
       },
       // HttpErrorResponse
       // @param error store the error status
       (error: HttpErrorResponse) => {
-        if (error.status === 403) {
-          alert("User already exists");
+        if (error.status === 400) {
+          this.toastr.error('Invalid email or password. Please check your credentials and try again.');
+        }
+        else if (error.status === 403) {
+          this.toastr.error('User already exist');
         }
         else if (error.status === 401) {
-          alert("Unauthorized");
-        }
-        else if (error.status === 400) {
-          alert("Badrequest");
+          this.toastr.error('Unauthorized. Please check your email and password.');
         }
         else if (error.status === 404) {
-          alert("Not Found");
+          this.toastr.error('Resource not found. Please try again.');
         }
         else if (error.status === 500) {
-          alert("Server error");
+          this.toastr.error('Server error. Please try again later.');
         }
         else if (error.status === 501) {
-          alert("Server error");
+          this.toastr.error('Server error. Please try again later.');
         }
       }
     );
