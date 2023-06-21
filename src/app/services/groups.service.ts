@@ -16,6 +16,7 @@ export class GroupsService {
   group !: Groups;
   groupList : GroupList[] =[];
   friendList: FriendList[] = [];
+
   getSelectedGroupIndex !: number;
 
   constructor(
@@ -29,6 +30,7 @@ export class GroupsService {
   createGroup(data: Groups): Observable<GroupResult> {
     const createGroupURL: string = this.baseURL+'/api/app/group';
     return this.http.post<GroupResult>(createGroupURL, data, {withCredentials : true});
+
   }
 
   /** add members to group function to call post api
@@ -47,6 +49,7 @@ export class GroupsService {
     let id =''
     const groupListURL: string = this.baseURL+'/api/app/group';
     return this.http.get<GroupListResult>(groupListURL,{ withCredentials: true });
+
   }
 
   /** Group list function to call get api
@@ -56,6 +59,7 @@ export class GroupsService {
   getGroupMembers( id : string): Observable<GroupMembersResult[]> {
     const groupMembersListURL: string = this.baseURL+'/api/app/group-member/group-members/' +id;
     return this.http.get<GroupMembersResult[]>(groupMembersListURL,{ withCredentials: true });
+
   }
 
   /** Get the data of group by groupId on the api
@@ -63,6 +67,7 @@ export class GroupsService {
    **/
   getGroupDetailByGroupId(groupId: string): Observable<GroupItem>{
     return this.http.get<GroupItem>(this.baseURL+'/api/app/group/'+groupId,{ withCredentials: true });
+
   }
 
   /** delete group from list function to call delete api
@@ -73,6 +78,7 @@ export class GroupsService {
 
     const deleteGroupFromlistURL: string = this.baseURL+'/api/app/group/'+id;
     return this.http.delete<void>(deleteGroupFromlistURL,{ withCredentials: true });
+
   }
 
   /** getExpensesOfGroup function to call get api
@@ -103,6 +109,7 @@ export class GroupsService {
     return this.http.get<UserProfile>(currentUserDetailsURL, { withCredentials: true });
   }
 
+
   /** getUserList function to call get api
    * and get Current User details By user-id from server
    * @returns friend list
@@ -111,4 +118,5 @@ export class GroupsService {
     const userListURL = this.baseURL+'/api/app/find-the-user-name/user-list';
     return this.http.get<FriendList[]>(userListURL, { withCredentials: true });
   }
+
 }

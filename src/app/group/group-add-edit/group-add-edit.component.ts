@@ -18,6 +18,7 @@ export class GroupAddEditComponent implements OnInit {
   isGroupAddActive: Boolean = false;
   getActivatedRouteParam !: string;
   getSelectedGroupIndex !: number;
+
   isGroupCreated: boolean = false;
 
   groupId: string = '';
@@ -38,6 +39,7 @@ export class GroupAddEditComponent implements OnInit {
     // FriendList function call to get users list
     this.getUserList();
   }
+
 
   // ngOnInit method
   ngOnInit(): void {
@@ -61,6 +63,7 @@ export class GroupAddEditComponent implements OnInit {
       this.getActivatedRouteParam = param['routerParam'];
       this.getSelectedGroupIndex = Number(param['routerParam']);
 
+
       if (this.getActivatedRouteParam === undefined) {
         this.isGroupAddActive = true;
       }
@@ -72,6 +75,7 @@ export class GroupAddEditComponent implements OnInit {
     /** On click of group edit button it will set current details of group to textbox */
     if (this.getActivatedRouteParam != undefined) {
       const data = this.getEditDataToEdit(this.getSelectedGroupIndex);
+
       this.addGroupForm.patchValue({
         groupName: data.name,
         about: data.about,
@@ -189,6 +193,7 @@ export class GroupAddEditComponent implements OnInit {
           timeOut: 2000,
         });
       }
+
     );
   }
 
@@ -247,6 +252,7 @@ export class GroupAddEditComponent implements OnInit {
         });
       })
   }
+
 
 
 

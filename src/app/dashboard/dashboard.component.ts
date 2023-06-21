@@ -68,7 +68,7 @@ export class DashboardComponent implements OnInit {
       this.userName = this.dashboardService.userProfile.userName;
     },
       (error) => {
-        this.toastrService.success('Error in getting Profile details of user ', 'Error', {
+       this.toastrService.error('Error in getting Profile details of user ', 'Error', {
           timeOut: 2000,
         });
       })
@@ -93,7 +93,7 @@ export class DashboardComponent implements OnInit {
           }
         },
           (error) => {
-            this.toastrService.success('No Borrowed amount of ' + this.userName, 'Error', {
+            this.toastrService.error('No Borrowed amount of ' + this.userName, 'Error', {
               timeOut: 2000,
             });
           })
@@ -101,7 +101,7 @@ export class DashboardComponent implements OnInit {
 
     },
     (error)=>{
-      this.toastrService.success('No Borrowed amount details of ' + this.userName, 'Error', {
+      this.toastrService.error('No Borrowed amount details of ' + this.userName, 'Error', {
         timeOut: 2000,
       });
     })
@@ -127,14 +127,14 @@ export class DashboardComponent implements OnInit {
           }
         },
           (error) => {
-            this.toastrService.success('No debt amount of ' + this.userName, 'Error', {
+            this.toastrService.error('No debt amount of ' + this.userName, 'Error', {
               timeOut: 2000,
             });
           })
       }
     },
     (error)=>{
-      this.toastrService.success('No debt amount details of ' + this.userName, 'Error', {
+      this.toastrService.error('No debt amount details of ' + this.userName, 'Error', {
         timeOut: 2000,
       });
     })

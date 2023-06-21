@@ -46,6 +46,7 @@ export class GroupListComponent implements OnInit {
     this.activatedRoute.params.subscribe((param) => {
       this.getActivatedRouteParam = param['groupName'];
       this.getSelectedGroupIndex = param['index'];
+
       if (this.getActivatedRouteParam === undefined) {
         this.isGroupDetailActive = false;
       }

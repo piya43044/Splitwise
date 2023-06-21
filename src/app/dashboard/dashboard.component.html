@@ -7,7 +7,8 @@
 
 <!-- dashboard content -->
 
-<ng-container *ngIf="true">
+<ng-container *ngIf="!loading">
+
   <div class="dashboard-container">
 
     <div class="table-responsive">
@@ -98,45 +99,6 @@
       </div>
 
     </div>
-  </div>
-</ng-container>
 
-<ng-container *ngIf="loading">
-  <div class="dashboard-container">
-    <section>
-      <div class="dashboard-header row p-2">
-        <div class="col">
-          <h4>Dashboard</h4>
-        </div>
-        <div class="col text-end">
-          <h6>{{userName | uppercase}}</h6>
-        </div>
-      </div>
 
-      <div class="row text-center">
-        <div class="col">
-          <p>Total balance:</p>
 
-        </div>
-        <div class="col">
-          <p class="text-danger">You owe:</p>
-        </div>
-        <div class="col">
-          <p class="text-success">You are owed:</p>
-        </div>
-      </div>
-
-      <div class="row text-center table-bordered">
-        <div class="col">
-          <p>{{totalBalance | number: '.2-2'}}</p>
-        </div>
-        <div class="col">
-          <p class="text-danger">{{totalOwe | number: '.2-2'}}</p>
-        </div>
-        <div class="col">
-          <p class="text-success">{{totalOwed | number: '.2-2'}}</p>
-        </div>
-      </div>
-    </section>
-  </div>
-</ng-container>
