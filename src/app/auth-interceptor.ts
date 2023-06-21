@@ -20,10 +20,10 @@ export class AuthInterceptor implements HttpInterceptor {
      */
     const updatedRequest = request.clone({
       setHeaders: {
-        'RequestVerificationToken': xsrfToken
+        'RequestVerificationToken': xsrfToken,
       }
     });
-    
+
     /**
      * Pass the modified request to the next handler
      */

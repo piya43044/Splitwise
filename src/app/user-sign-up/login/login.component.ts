@@ -9,7 +9,7 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
-      password: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/)])
+      password: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/)]),
     })
   }
 
@@ -48,12 +48,11 @@ export class LoginComponent implements OnInit {
 
   /**
    * login method are used to subscribe data
-   * @param existing_user store the data of the user credential
+   * @param existingUser store the data of the user credential
    *  */
-  userLogin(existing_user: UserLogin)  {
-    this.loggedUSer.login(existing_user).subscribe(
+  userLogin(existingUser: UserLogin)  {
+    this.loggedUSer.login(existingUser).subscribe(
       (response) => {
-        console.log(response);
         if (response.body?.description === "Success") {
           this.toastr.success('Login successful.');
           this.router.navigate(['dashboard']);
@@ -92,6 +91,6 @@ export class LoginComponent implements OnInit {
     this.loginForm.reset();
     //userLogin method are used to subscribe data
     //@param user store the user credentail data
-    this.userLogin(user)
+    this.userLogin(user);
   }
 }
