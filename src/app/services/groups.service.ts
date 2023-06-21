@@ -95,5 +95,4 @@ export class GroupsService {
     const currentUserDetailsURL = 'https://localhost:44329/api/account/my-profile';
     return this.http.get<UserProfile>(currentUserDetailsURL, { withCredentials: true });
   }
-
 }
