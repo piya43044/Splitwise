@@ -14,5 +14,4 @@ export interface TransactionList {
     id: string,
     expenseName: string,
     ownedByName: string,
-    creatorName: string;
 }

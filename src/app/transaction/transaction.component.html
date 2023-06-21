@@ -1,6 +1,6 @@
 <div class="container">
-    <div class="table-responsive">
-        <table class="table table-hover table-bordered">
+    <div class="table-responsive table-bordered">
+        <table class="table table-hover">
             <!-- Transaction List header -->
             <thead class="table-secondary">
                 <tr>
@@ -16,7 +16,6 @@
                     <th>OwnedBy</th>
                     <th>Expense</th>
                     <th>CreationTime</th>
-                    <th>Last Modified Name</th>
                     <th>Amount</th>
                 </tr>
             </thead>
@@ -27,7 +26,6 @@
                     <td>{{transaction.ownedByName}}</td>
                     <td>{{transaction.expenseName}}</td>
                     <td>{{transaction.creationTime}}</td>
-                    <td>{{transaction.creatorName}}</td>
                     <td>{{transaction.amount}}</td>
                 </tr>
             </tbody>

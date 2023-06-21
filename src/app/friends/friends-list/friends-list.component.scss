@@ -3,7 +3,10 @@
 
 /* Friend container */
 .friend-container {
-    width: 700px;
+
+    .table-responsive {
+        height: 450px;
+    }
     
     /* Friend table */
     .table {
@@ -42,52 +45,5 @@
                 text-decoration: underline;
             }
         }
-    }
-}
-
-/* Media querys */
-@media screen and (max-width: 1000px) {
-    .friend-container {
-        width: 500px;
-    }
-}
-
-@media screen and (max-width: 750px) {
-    .friend-container {
-        width: 400px;
-
-        /* Friend header with group name, add expense button and settle up button */
-        .friend-header {
-            flex-direction: column;
-        }
-    }
-}
-
-@media screen and (max-width: 650px) {
-    .friend-container {
-        width: 300px;
-    }
-}
-
-@media screen and (max-width: 430px) {
-    .friend-container {
-        width: 310px;
-
-        /* Add expense and settle up button */
-        .expense-settleup {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            
-            .btn {
-                margin: 3px 0;
-            }
-        }
-    }
-}
-
-@media screen and (max-width: 300px) {
-    .friend-container {
-        width: 250px;
     }
 }
