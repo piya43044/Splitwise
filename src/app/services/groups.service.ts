@@ -26,7 +26,7 @@ export class GroupsService {
    **/
   createGroup(data: Groups): Observable<GroupResult> {
     const createGroupURL: string = this.baseURL+'/api/app/group';
-    return this.http.post<GroupResult>(createGroupURL, data);
+    return this.http.post<GroupResult>(createGroupURL, data, {withCredentials : true});
   }
 
   /** add members to group function to call post api
@@ -34,7 +34,7 @@ export class GroupsService {
    **/
   addMembersToGroup(data: GroupMembersToAdd): Observable<void> {
     const addGroupMembersURL = this.baseURL+'/api/app/group-member';
-    return this.http.post<void>(addGroupMembersURL, data);
+    return this.http.post<void>(addGroupMembersURL, data,{withCredentials : true});
   }
 
   /** Group list function to call get api
