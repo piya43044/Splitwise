@@ -52,4 +52,7 @@ export class DashboardService {
     const getUserNameByIdURL = 'https://localhost:44329/api/identity/users/'+id;
     return this.http.get<CurrentUserNameByIdResult>(getUserNameByIdURL , { withCredentials: true });
   }
+
+
+
 }

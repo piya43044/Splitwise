@@ -1,19 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
-import { Groups, GroupMembers, GroupMembersToAdd, GroupList, GroupListResult, UserProfile, GroupMembersResult, GroupResult } from '../models/groups';
+import { Groups, GroupMembers, GroupMembersToAdd, GroupList, GroupListResult, UserProfile, GroupMembersResult, GroupResult, FriendList } from '../models/groups';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ExpenseItem } from '../models/expenseItem.model';
 import { GroupItem } from '../models/groupItem.model';
+import { CurrentUserNameByIdResult } from '../models/profile';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class GroupsService {
-  baseURL : string = 'https://localhost:44329'
+  baseURL : string = 'https://localhost:44329';
 
   group !: Groups;
   groupList : GroupList[] =[];
+  friendList: FriendList[] = [];
   getSelectedGroupIndex !: number;
 
   constructor(
@@ -44,7 +46,7 @@ export class GroupsService {
   getGroupList(): Observable<GroupListResult> {
     let id =''
     const groupListURL: string = this.baseURL+'/api/app/group';
-    return this.http.get<GroupListResult>(groupListURL);
+    return this.http.get<GroupListResult>(groupListURL,{ withCredentials: true });
   }
 
   /** Group list function to call get api
@@ -53,22 +55,24 @@ export class GroupsService {
    **/
   getGroupMembers( id : string): Observable<GroupMembersResult[]> {
     const groupMembersListURL: string = this.baseURL+'/api/app/group-member/group-members/' +id;
-    return this.http.get<GroupMembersResult[]>(groupMembersListURL);
+    return this.http.get<GroupMembersResult[]>(groupMembersListURL,{ withCredentials: true });
   }
 
   /** Get the data of group by groupId on the api
    * @returns Group details
    **/
   getGroupDetailByGroupId(groupId: string): Observable<GroupItem>{
-    return this.http.get<GroupItem>(this.baseURL+'/api/app/group/'+groupId);
+    return this.http.get<GroupItem>(this.baseURL+'/api/app/group/'+groupId,{ withCredentials: true });
   }
 
   /** delete group from list function to call delete api
    * delete group from list in server
    **/
   deleteGroupFromlist(id: string): Observable<void> {
-    const deleteGroupFromlistURL: string = this.baseURL+'/api/app/group/' + id;
-    return this.http.get<void>(deleteGroupFromlistURL);
+    console.log(id);
+
+    const deleteGroupFromlistURL: string = this.baseURL+'/api/app/group/'+id;
+    return this.http.delete<void>(deleteGroupFromlistURL,{ withCredentials: true });
   }
 
   /** getExpensesOfGroup function to call get api
@@ -99,4 +103,12 @@ export class GroupsService {
     return this.http.get<UserProfile>(currentUserDetailsURL, { withCredentials: true });
   }
 
+  /** getUserList function to call get api
+   * and get Current User details By user-id from server
+   * @returns friend list
+   **/
+  getUserList(): Observable<FriendList[]> {
+    const userListURL = this.baseURL+'/api/app/find-the-user-name/user-list';
+    return this.http.get<FriendList[]>(userListURL, { withCredentials: true });
+  }
 }

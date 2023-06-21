@@ -76,3 +76,9 @@ export interface UserProfile {
     totalamount: number
   }
 }
+
+/** Friend list interface with the attributes of frienlist  */
+export interface FriendList{
+  id: string;
+  userName: string;
+}

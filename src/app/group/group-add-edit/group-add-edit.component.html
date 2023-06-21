@@ -32,6 +32,18 @@
         [readonly]="isGroupCreated">
     </div>
 
+    <!-- Group members -->
+      <div class="form-group d-flex flex-column mt-3">
+        <div formArrayName="groupMember">
+          <label>Add Members:</label>
+          <div *ngFor="let friend of friendList; let i = index">
+            <label>
+              <input type="checkbox" [formControlName]="i" (change)="onMemberSelectionChange($event, friend.id)"> {{ friend.userName }}
+            </label>
+          </div>
+        </div>
+      </div>
+
 
     <div class="d-flex justify-content-end">
       <!-- Save button -->
@@ -42,9 +54,10 @@
       <button routerLink="/group/group-list" type="button" class="btn btn-danger w-20 h-25"
         [hidden]="isGroupCreated">Cancel</button>
     </div>
+
   </form>
 
-  <ng-container *ngIf="isGroupCreated">
+  <ng-container *ngIf="false">
     <form [formGroup]="addMembersForm" (ngSubmit)="addMembersToGroup()">
       <!-- Group member -->
       <div class="group-member-container d-flex justify-content-between align-items-center mt-3 mb-3">
@@ -56,7 +69,7 @@
       <ng-container>
 
         <!-- Group member input fields -->
-        <div formArrayName="groupMembers" *ngFor="let member of groupMembers.controls; let i=index">
+        <div formArrayName="groupMembers" *ngFor="let member of groupMembers.controls; let i = index">
 
           <div class="group-member form-group d-flex justify-content-between" [formGroupName]="i">
             <!-- Group member name -->
