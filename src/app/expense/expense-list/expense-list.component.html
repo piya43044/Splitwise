@@ -1,12 +1,13 @@
 <div class="expense-container">
 
   <div class="table-responsive table-bordered">
-    <table class="table table-hover">
+    <table class="table table-hover table-bordered">
+      
         <!-- expense header with add expense button -->
-        <thead class="table-secondary">
+        <thead class="table-secondary sticky-header">
           <tr>
             <td colspan="7">
-              <div class="expense-header d-flex justify-content-between align-items-center">
+              <div class="expense-header d-flex justify-content-between align-items-center sticky-header">
                 
                 <!-- expense Name -->
                 <h4>Expenses</h4>
@@ -22,7 +23,7 @@
 
           <ng-container *ngIf="!noDataMessage">
             <!-- Expense table header -->
-            <tr>
+            <tr >
               <th>Expense Title</th>
               <th>Expense Description</th>
               <th>Amount</th>
@@ -34,9 +35,9 @@
         </thead>
   
         <!-- expense list -->
-        <tbody *ngIf="!noDataMessage">
+        <tbody class="expense-body" *ngIf="!noDataMessage">
           
-            <tr *ngFor="let item of expenseItem; let i=index">
+            <tr *ngFor="let item of expenseItem; let i=index" >
 
               <td>{{item.expense_title}}</td>
               <td>{{item.expense_description}}</td>
@@ -68,6 +69,7 @@
         </tbody>
     </table>
 
+    <!-- Message diplay when no expense in the list -->
     <ng-container *ngIf="noDataMessage">
       <div class="text-center">
         <strong>No expense yet..!</strong>

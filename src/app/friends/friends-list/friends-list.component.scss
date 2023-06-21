@@ -3,47 +3,56 @@
 
 /* Friend container */
 .friend-container {
-
+    
+    /* Table container */
     .table-responsive {
         height: 450px;
-    }
-    
-    /* Friend table */
-    .table {
-        border-left: 1px solid $off-grey;
-        border-right: 1px solid $off-grey;
 
-        /* Buttons */
-        .btn {
-            margin-right: 5px;
+        /* Head of the table */
+        .sticky-header {
+            position: sticky;
+            top: 0;
+            z-index: 1;
         }
 
-        /* Action button */
-        .btn-action {
-            padding: 5px;
-            border: none;
-        }
+        /* Friend table */
+        .table {
+            border-left: 1px solid $off-grey;
+            border-right: 1px solid $off-grey;
+            
+            /* Buttons */
+            .btn {
+                margin-right: 5px;
+            }
 
-        /* Edit / delete icon */
-        i {
-            font-size: $font-size-20;
-        }
+            /* Action button */
+            .btn-action {
+                padding: 5px;
+                border: none;
+            }
 
-        /* Friend name */
-        a {
-            text-decoration: none;
-            color: $black;
-
-            /* Back icon */
+            /* Edit / delete icon */
             i {
-                font-size: $font-size-24;
+                font-size: $font-size-20;
             }
-    
-            /* Friend name hover */
-            &:hover {
-                color: $green;
-                text-decoration: underline;
+
+            /* Friend name */
+            a {
+                text-decoration: none;
+                color: $black;
+
+                /* Back icon */
+                i {
+                    font-size: $font-size-24;
+                }
+        
+                /* Friend name hover */
+                &:hover {
+                    color: $green;
+                    text-decoration: underline;
+                }
             }
         }
     }
+    
 }
