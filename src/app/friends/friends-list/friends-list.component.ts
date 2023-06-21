@@ -24,6 +24,8 @@ export class FriendsListComponent implements OnInit {
   friendOweToList: UserOutstandingDetail[] = [];
   friendOweFromList: UserOutstandingDetail[] = [];
   friendOweList: UserOutstandingDetail[] = this.userService.userOutstandingList;
+  noDataMessage: boolean = false;
+  noOweMessage: boolean = this.userService.noOweMessage;
 
   /**
    * Constructor
@@ -83,6 +85,14 @@ export class FriendsListComponent implements OnInit {
     }
 
     this.userService.userOutstandingList = this.friendOweList;
+
+    if(this.userService.userOutstandingList.length === 0){
+      this.userService.noOweMessage = true;
+    }
+    else {
+      this.userService.noOweMessage = false;
+    }
+
     this.router.navigate(['friends','friends-list',name]);
   }
 
@@ -141,6 +151,13 @@ export class FriendsListComponent implements OnInit {
             });
           })
         }
+      }
+
+      if(this.friendList.length === 0){
+        this.noDataMessage = true;
+      }
+      else {
+        this.noDataMessage = false;
       }
     },
     (error) => {

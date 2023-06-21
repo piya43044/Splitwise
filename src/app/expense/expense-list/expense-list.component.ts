@@ -17,6 +17,7 @@ export class ExpenseListComponent implements OnInit {
   expenseItem!: ExpenseItem[];
   deleteExpenseName!: string;
   deleteExpenseId!: string;
+  noDataMessage: boolean = false;
 
   // Constructor
   constructor(private router: Router,
@@ -59,25 +60,34 @@ export class ExpenseListComponent implements OnInit {
       });
     });
   }
+
   /**
    * Get expense list from the api
    * @return void
    */
-
   getExpenseList(): void {
     this.expenseService.getExpenseList().subscribe(async data => {
       this.expense = data;
       this.expenseItem = this.expense.items;
-      for(let i=0;i<this.expenseItem.length;i++){
-        this.groupService.getGroupDetailByGroupId(this.expenseItem[i].groupId).subscribe( data => {
-          this.expenseItem[i].groupName= data.name;
-         },
-         (error) =>{
-          this.toastrService.error('Error caught, please try again!', '', {
-            timeOut: 2000,
-          });
-         })
+
+      if(this.expenseItem.length === 0){
+        this.noDataMessage = true;
       }
+      else {
+        this.noDataMessage = false;
+        
+        for(let i=0;i<this.expenseItem.length;i++){
+          this.groupService.getGroupDetailByGroupId(this.expenseItem[i].groupId).subscribe( data => {
+            this.expenseItem[i].groupName= data.name;
+           },
+           (error) =>{
+            this.toastrService.error('Error caught, please try again!', '', {
+              timeOut: 2000,
+            });
+           })
+        }
+      }
+
     },
     (error) => {
       this.toastrService.error('Error caught, please try again!', '', {
