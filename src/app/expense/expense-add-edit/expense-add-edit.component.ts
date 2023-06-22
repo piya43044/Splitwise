@@ -21,7 +21,7 @@ export class ExpenseAddEditComponent implements OnInit {
   groupItem!: GroupItem[];
 
   // Constructor
-  constructor( private router: Router, 
+  constructor( private router: Router,
     private activatedRoute: ActivatedRoute,
     private expenseService: ExpenseService,
     private groupService: GroupService,
@@ -30,7 +30,7 @@ export class ExpenseAddEditComponent implements OnInit {
   /**
    * ngOnInit method
    * @return void
-   *  */ 
+   *  */
   ngOnInit(): void {
 
     // get activatedRoute parameter using observable
@@ -56,7 +56,7 @@ export class ExpenseAddEditComponent implements OnInit {
     // Add expense form
     this.addExpenseForm = new FormGroup({
       groupId: new FormControl('', [Validators.required]),
-      paidBy: new FormControl('3a0bc563-5c01-4e7b-6d9d-ee5830a71997',[Validators.required]),
+      paidBy: new FormControl('3a0ba7bc-382f-a3b4-2637-2522d5882429',[Validators.required]),
       expense_title: new FormControl('',[Validators.required]),
       expense_description: new FormControl(''),
       expense_amount: new FormControl('',[Validators.required]),
@@ -85,7 +85,7 @@ export class ExpenseAddEditComponent implements OnInit {
    * onSubmit method
    */
   onSubmit(): void{
-    
+
     // Post the expense to the api
     this.expenseService.postExpense(this.addExpenseForm.value).subscribe((response) => {
       this.addExpenseForm.reset();
@@ -145,7 +145,7 @@ export class ExpenseAddEditComponent implements OnInit {
    * Update the expense detail by their expense id
    */
   updateExpense(): void{
-    
+
     this.expenseService.updateExpenseByID(this.getActivatedRouteParam, this.addExpenseForm.value).subscribe( data => {
       this.toastrService.success('Update successfully', '', {
         timeOut: 2000,

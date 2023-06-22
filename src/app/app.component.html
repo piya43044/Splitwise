@@ -5,7 +5,7 @@
       <!-- Sidebar button -->
       <div class="side-nav-button p-2 me-3 d-flex justify-content-center align-items-center btn btn-outline-success"
         *ngIf="!isLoginSignupActive" (click)="sideNavToogle()">
-        
+
         <!-- Check the sidebar whether it is open or close -->
         <div *ngIf="!sideNavStatus; then sidebarOpen else sidebarClose">
         </div>
@@ -15,8 +15,8 @@
         <ng-template #sidebarClose>
           <i class="fa fa-window-close-o"></i>
         </ng-template>
-      </div>  
-        
+      </div>
+
       <!-- Splitwise logo -->
       <a class="navbar-brand" href="#">
           <img src="../assets/splitwise-logo.png" alt="logo">
@@ -29,7 +29,7 @@
       </button>
 
       <!-- Navbar buttons shows according to the url status -->
-      <div *ngIf="isLoginSignupActive; then loginSignUp else logout">   
+      <div *ngIf="isLoginSignupActive; then loginSignUp else logout">
       </div>
 
       <!-- For login or Sign Up button -->
@@ -51,7 +51,7 @@
         <div class="collapse navbar-collapse" id="navbar-links">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <button class="btn" routerLink="/login" type="button">Logout</button>
+              <button class="btn" type="button" routerLink="/login">Logout</button>
             </li>
           </ul>
         </div>
@@ -65,7 +65,7 @@
   <div class="sidebar" *ngIf="!isLoginSignupActive" [ngClass]="{'sidebar-open': sideNavStatus}">
     <app-sidebar [sideNavStatus]="sideNavStatus" [currentUrl]="currentUrl"></app-sidebar>
   </div>
-  
+
   <!-- Container for router components -->
   <div class="router-container" [ngClass]="{'router-container-shrink': sideNavStatus}">
       <router-outlet></router-outlet>

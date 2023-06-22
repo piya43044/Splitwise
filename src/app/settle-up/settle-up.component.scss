@@ -7,40 +7,40 @@
   .table {
     border-left: 1px solid $off-grey;
     border-right: 1px solid $off-grey;
-    
+
     /* Make the table header sticky */
     thead {
       position: sticky;
       top: 0;
       z-index: 1;
     }
-    
+
     /* Buttons */
     .btn {
       margin-right: 5px;
     }
-    
+
     /* Action button */
     .btn-action {
       padding: 5px;
       border: none;
     }
-    
+
     /* Edit / delete icon */
     i {
       font-size: $font-size-20;
     }
-    
+
     /* Settle up name */
     a {
       text-decoration: none;
       color: $black;
-      
+
       /* Back icon */
       i {
         font-size: $font-size-24;
       }
-      
+
       /* Settle up name hover */
       &:hover {
         color: $green;
@@ -48,10 +48,10 @@
       }
     }
   }
-  
+
   /* Make the table scrollable */
   .table-responsive {
-    max-height: 600px; /* Adjust the height as needed */
+    max-height: 500px; /* Adjust the height as needed */
     overflow-y: auto;
   }
 }

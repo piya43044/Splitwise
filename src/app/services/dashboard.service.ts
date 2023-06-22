@@ -53,6 +53,15 @@ export class DashboardService {
     return this.http.get<CurrentUserNameByIdResult>(getUserNameByIdURL , { withCredentials: true });
   }
 
+  /** getDebtAmountList function to call get api
+   * and get Current User details By user-id from server
+   * @returns current user's debt Amount list
+   **/
+  userLogout(): Observable<CurrentUserNameByIdResult>{
+    const logoutURL = 'https://localhost:44329/api/account/logout';
+    return this.http.get<CurrentUserNameByIdResult>(logoutURL , { withCredentials: true });
+  }
+
 
 
 }

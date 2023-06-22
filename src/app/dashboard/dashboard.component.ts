@@ -3,6 +3,7 @@ import { DashboardService } from '../services/dashboard.service';
 import { Profile, BorrowedAmountDetails, DebtAmountDetails } from '../models/profile';
 import { throwError } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -29,6 +30,7 @@ export class DashboardComponent implements OnInit {
   // constructor
   constructor(
     private dashboardService: DashboardService,
+    private router : Router ,
     private toastrService: ToastrService
   ) { }
 
@@ -154,5 +156,17 @@ export class DashboardComponent implements OnInit {
     }
     return sum;
   }
+
+  /**log out function for user logout
+   **/
+  logout() : void{
+    this.dashboardService.userLogout().subscribe((res)=>{
+      this.toastrService.error('Logout...', 'success', {
+        timeOut: 2000,
+      });
+      this.router.navigateByUrl('login')
+    })
+      }
+
 
 }

@@ -33,7 +33,7 @@
     </div>
 
     <!-- Group members -->
-      <div class="form-group d-flex flex-column mt-3">
+      <div class="form-group d-flex flex-column mt-3" *ngIf="isGroupAddActive">
         <div formArrayName="groupMember">
           <label>Add Members:</label>
           <div *ngFor="let friend of friendList; let i = index">
@@ -47,12 +47,10 @@
 
     <div class="d-flex justify-content-end">
       <!-- Save button -->
-      <button type="button" class="btn btn-success w-20 h-25" [disabled]="!addGroupForm.valid" [hidden]="isGroupCreated"
-        (click)="createGroup()" *ngIf="isGroupAddActive">Save</button>
+      <button type="button" class="btn btn-success w-20 h-25" [disabled]="!addGroupForm.valid" (click)="createGroup()" *ngIf="isGroupAddActive">Save</button>
 
       <!-- edit button -->
-      <button type="button" class="btn btn-success w-20 h-25" [disabled]="!addGroupForm.valid" [hidden]="isGroupCreated"
-        (click)="editGroupData()" *ngIf="!isGroupAddActive">Edit</button>
+      <button type="button" class="btn btn-success w-20 h-25" [disabled]="!addGroupForm.valid" (click)="editGroupData()" *ngIf="!isGroupAddActive">Edit</button>
 
       <!-- Cancel button -->
       <button routerLink="/group/group-list" type="button" class="btn btn-danger w-20 h-25"
