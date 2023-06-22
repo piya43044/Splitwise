@@ -1,37 +1,34 @@
 <div class="container">
-    <div class="table-responsive">
-      <table class="table table-hover table-bordered">
-        <!-- Transaction List header -->
-        <thead class="table-secondary">
-          <tr>
-            <th colspan="6">
-              <div class="d-flex justify-content-center">
-                <h4 class="transaction-list-heading">Transaction List</h4>
-              </div>
-            </th>
-          </tr>
-          <!-- Transaction list header -->
-          <tr>
-            <th>Payment Id</th>
-            <th>OwnedBy</th>
-            <th>Expense</th>
-            <th>CreationTime</th>
-            <th>Last Modified Name</th>
-            <th>Amount</th>
-          </tr>
-        </thead>
-        <!-- Transaction list details -->
-        <tbody>
-          <tr *ngFor="let transaction of transactionList">
-            <td>{{transaction.id}}</td>
-            <td>{{transaction.ownedByName}}</td>
-            <td>{{transaction.expenseName}}</td>
-            <td>{{transaction.creationTime}}</td>
-            <td>{{transaction.creatorName}}</td>
-            <td>{{transaction.amount}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <div class="table-responsive">
+    <table class="table table-hover table-bordered">
+      <!-- Transaction List header -->
+      <thead class="table-secondary sticky-heading">
+        <tr>
+          <th colspan="6" class="sticky-column">
+            <div class="d-flex justify-content-center">
+              <h4 class="transaction-list-heading">Transaction List</h4>
+            </div>
+          </th>
+        </tr>
+        <!-- Transaction list header -->
+        <tr>
+          <th>Created By</th>
+          <th>Owned By</th>
+          <th>Expense Name</th>
+          <th>CreationTime</th>
+          <th class="sticky-column">Amount</th>
+        </tr>
+      </thead>
+      <!-- Transaction list details -->
+      <tbody>
+        <tr *ngFor="let transaction of transactionList">
+          <td>{{transaction.creatorId}}</td>
+          <td>{{transaction.ownedByName}}</td>
+          <td>{{transaction.expenseName}}</td>
+          <td>{{transaction.creationTime}}</td>
+          <td>{{transaction.amount}}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  
+</div>
