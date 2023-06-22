@@ -55,6 +55,9 @@ export class TransactionComponent {
             this.userService.getUserDetail(this.transaction[i].ownedBy).subscribe( data => {
               this.transaction[i].ownedByName = data.userName;
             })
+            this.userService.getUserDetail(this.transaction[i].ownedBy).subscribe( data => {
+              this.transaction[i].creatorId = data.userName;
+            })
 
             this.transactionList.push(this.transaction[i]);
           }

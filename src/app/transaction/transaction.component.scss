@@ -3,43 +3,44 @@
 
 /* Transaction list container */
 .container {
-  width: 800px;
+  // width: 800px;
   margin: 0 auto; /* Center the container horizontally */
+}
 
-  /* table */
-  .table {
-    border: 1px solid $off-grey;
+/* table */
+.table {
+  border: 1px solid $off-grey;
+}
 
-    /* Heading */
-    .transaction-list-heading {
-      margin: 0;
-      text-align: center;
-      padding: 10px;
-    }
+/* Sticky Heading */
+.sticky-heading {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+
+  th {
+    position: sticky;
+    top: 0;
+    background-color: $off-grey;
+    z-index: 1;
   }
 }
 
-/* Media queries */
-@media screen and (max-width: 1000px) {
-  .container {
-    width: 500px;
-  }
+/* Transaction list scrollable */
+.table-responsive {
+  max-height: 400px;
+  overflow-y: auto;
 }
 
-@media screen and (max-width: 700px) {
-  .container {
-    width: 400px;
-  }
+/* Heading Style */
+.transaction-list-heading {
+  margin: 0;
+  text-align: center;
+  padding: 10px;
 }
 
-@media screen and (max-width: 400px) {
-  .container {
-    width: 350px;
-  }
-}
-
-@media screen and (max-width: 310px) {
-  .container {
-    width: 220px;
-  }
+/* Sticky Columns */
+.sticky-column {
+  position: sticky;
+  z-index: 1;
 }
