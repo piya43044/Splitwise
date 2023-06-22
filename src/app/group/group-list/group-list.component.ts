@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ExpenseItem } from 'src/app/models/expenseItem.model';
 import { GroupItem } from 'src/app/models/groupItem.model';
 import { GroupList, GroupMembers, GroupMembersResult } from 'src/app/models/groups';
@@ -30,7 +31,8 @@ export class GroupListComponent implements OnInit {
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
     private groupsService: GroupsService,
-    private expenseService: ExpenseService
+    private expenseService: ExpenseService,
+    private toastrService: ToastrService
   ) {
     this.getGroupList();
   }
@@ -41,6 +43,7 @@ export class GroupListComponent implements OnInit {
     // get activatedRoute parameter using observable
     this.activatedRoute.params.subscribe((param) => {
       this.getActivatedRouteParam = param['groupName'];
+      this.getSelectedGroupIndex = param['index']
       if (this.getActivatedRouteParam === undefined) {
         this.isGroupDetailActive = false;
       }
@@ -76,7 +79,7 @@ export class GroupListComponent implements OnInit {
    * @param expenseName - string, expenseId -string
    * @returns void
    */
-  setDeleteGroup(groupName: string, groupId: number): void{
+  setDeleteGroup(groupName: string, groupId: number): void {
     this.deleteGroupName = groupName;
     this.deleteGroupId = groupId;
   }
@@ -97,21 +100,64 @@ export class GroupListComponent implements OnInit {
    **/
   getGroupList(): void {
     this.groupsService.getGroupList().subscribe(
-      (res) => { this.groupList = res.items; },
-      (error) => { alert(error); }
+      (res) => {
+        for (let groupListItem of res.items) {
+
+          // This api call for geting the name of user by user id
+          this.groupsService.getUserNameByID(groupListItem.createdBy).subscribe(
+            (res) => {
+              groupListItem.createdBy = res;
+            },
+            (error) => {
+              this.toastrService.success(error.error.error.message, 'Error', {
+                timeOut: 2000,
+              });
+            })
+
+          // This api call for geting members of this group
+          this.groupsService.getGroupMembers(groupListItem.id).subscribe(
+            (data) => {
+              if (data !== null) {
+                for (let groupMembersList of data) {
+
+                  // This api call for geting the name of user by user id
+                  this.groupsService.getUserNameByID(groupMembersList.userId).subscribe(
+                    (res) => {
+                    groupMembersList.name = res;
+                  },
+                  (error)=>{
+                    this.toastrService.success(error.error.error.message, 'Error', {
+                      timeOut: 2000,
+                    });
+                  })
+                  this.groupMembers.push(groupMembersList);
+                  groupListItem.groupMembers = this.groupMembers;
+                }
+
+                // Reset the groupmembers array values
+                this.groupMembers = [];
+              }
+            },
+            (error) => {
+              this.toastrService.success(error.error.error.message, 'Error', {
+                timeOut: 2000,
+              });
+            }
+          )
+          // save current group information to group list array
+          this.groupList.push(groupListItem)
+          this.groupsService.groupList.push(groupListItem)
+        }
+
+      },
+      (error) => {
+        this.toastrService.success(error.error.error.message, 'Error', {
+          timeOut: 2000,
+        });
+      }
     );
   }
 
-  /** Group list function to call get api
-   * and get group members details from server
-   * @returns GroupMembers list of group members
-   **/
-  getGroupMembers(): void {
-    this.groupsService.getGroupMembers().subscribe(
-      (res) => { this.groupMembers = res; },
-      (error) => { alert(error); }
-    );
-  }
 
   /** getExpensesOfGroup function to call get api
    * and get group expenses details from server
@@ -127,7 +173,11 @@ export class GroupListComponent implements OnInit {
           });
         }
       },
-      (error) => { alert(error); }
+      (error) => {
+        this.toastrService.success(error.error.error.message, 'Error', {
+          timeOut: 2000,
+        });
+      }
     );
   }
 
@@ -136,8 +186,14 @@ export class GroupListComponent implements OnInit {
    **/
   getCurrentUserDetails(): void {
     this.groupsService.getCurrentUserDetails().subscribe(
-      (res) => { this.currentUserName = res.userName; },
-      (error) => { alert(error); }
+      (res) => {
+        this.currentUserName = res.userName;
+      },
+      (error) => {
+        this.toastrService.success(error.error.error.message, 'Error', {
+          timeOut: 2000,
+        });
+      }
     );
   }
 }

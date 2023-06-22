@@ -1,12 +1,11 @@
 <!-- Loading message while click on invite button -->
-<div *ngIf="loading" class="toast show">
-    <div class="toast-body">
-        Loading.....
-    </div>
-</div>
+<div class="text-center" *ngIf="loading">
+    <strong>Loading...</strong>
+    <div class="spinner-border spinner-border-sm ms-auto" role="status" aria-hidden="true"></div>
+  </div>
 
 <!-- Friend container -->
-<div class="friend-container">
+<div class="friend-container m-auto">
     <!-- Friend heading -->
     <div *ngIf="!isFriendAddActive; then friendAdd else friendEdit">
     </div>
