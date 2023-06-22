@@ -8,7 +8,7 @@ import { ExpenseItem } from '../models/expenseItem.model';
   providedIn: 'root'
 })
 export class ExpenseService {
-  
+
   private baseUrl = "https://localhost:44329/api/app/expense";
 
   // constructor

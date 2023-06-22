@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
-import { GroupsService } from './services/groups.service';
+import { DashboardService } from './services/dashboard.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-root',
@@ -13,12 +14,12 @@ export class AppComponent implements OnInit {
   isLoginSignupActive: Boolean = true;
   currentUrl: string = '';
   sideNavStatus: Boolean = false;
-  toastrService: any;
 
   // Constructor
   constructor(
     private router: Router,
-    private groupsService : GroupsService){
+    private dashboardService : DashboardService,
+    private toastrService: ToastrService){
 
 
     };
@@ -48,7 +49,5 @@ export class AppComponent implements OnInit {
   sideNavToogle(): void{
     this.sideNavStatus =!this.sideNavStatus;
   }
-
-
 
 }
