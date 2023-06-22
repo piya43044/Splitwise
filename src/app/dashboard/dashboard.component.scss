@@ -3,13 +3,14 @@
 
 /* Dashboard container */
 .dashboard-container {
-  width: 750px;
+width : 100%;
 
   /* Dashboard body */
   .dashboard-body {
     overflow-y: scroll;
     max-height: 400px;
   }
+
 
   /* Dashboard table */
   .table {
@@ -45,6 +46,55 @@
       margin-bottom: 0;
     }
 
+  }
+}
+
+/* Media querys */
+@media screen and (max-width: 1000px) {
+  .dashboard-container {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .dashboard-container {
+    width: 100%;
+
+    /* Add expense and settle up button */
+    .dashboard-header {
+      display: flex;
+      flex-direction: column;
+      margin: auto;
+    }
+
+    /* Table element responsive */
+    .table,
+    .table tr,
+    .table td,
+    .table th {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .dashboard-container {
+    width: 100%;
+
+    /* Add expense and settle up button */
+    .expense-settleup {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      /* Button */
+      .btn {
+        margin: 3px 0;
+      }
+    }
   }
 }
 
@@ -96,3 +146,4 @@
     }
   }
 }
+

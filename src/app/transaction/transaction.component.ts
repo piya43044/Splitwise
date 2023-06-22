@@ -41,7 +41,7 @@ export class TransactionComponent {
 
         for(let i=0; i< this.transaction.length; i++){
           if(this.transaction[i].isSettled){
-            
+
             /**
              * Get expense detail by their id and set the values in the form
              */
@@ -49,8 +49,8 @@ export class TransactionComponent {
               const expenseDetail = data;
               this.transaction[i].expenseName = expenseDetail.expense_title;
             })
-            
-            
+
+
             // Get the user detail by their user id
             this.userService.getUserDetail(this.transaction[i].ownedBy).subscribe( data => {
               this.transaction[i].ownedByName = data.userName;
@@ -66,11 +66,17 @@ export class TransactionComponent {
       // @param error store the httpErrorResponse
       (error: HttpErrorResponse) => {
         if (error.status === 404) {
-          alert('Not Found');
+          this.toastrService.success('No Transactions yet', 'Success', {
+            timeOut: 2000,
+          });
         } else if (error.status === 403) {
-          alert('Forbidden');
+          this.toastrService.success('Error in Getting Data from server', 'error', {
+            timeOut: 2000,
+          });
         } else if (error.status === 500) {
-          alert('Server Error');
+          this.toastrService.success('Internal Server Error', 'error', {
+            timeOut: 2000,
+          });
         }
       }
     );

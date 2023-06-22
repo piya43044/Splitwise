@@ -35,6 +35,8 @@ export class GroupListComponent implements OnInit {
     private toastrService: ToastrService
   ) {
     this.getGroupList();
+    this.groupsService.getUserList();
+
   }
 
   // ngOnInit method
@@ -43,7 +45,7 @@ export class GroupListComponent implements OnInit {
     // get activatedRoute parameter using observable
     this.activatedRoute.params.subscribe((param) => {
       this.getActivatedRouteParam = param['groupName'];
-      this.getSelectedGroupIndex = param['index']
+      this.getSelectedGroupIndex = param['index'];
       if (this.getActivatedRouteParam === undefined) {
         this.isGroupDetailActive = false;
       }
@@ -54,6 +56,8 @@ export class GroupListComponent implements OnInit {
     })
     // function call to get total expense
     this.getExpensesOfGroup();
+
+
   }
 
   /** Group details show function use index and group name from group list
@@ -89,9 +93,14 @@ export class GroupListComponent implements OnInit {
    * @param index index of group from list to delete the selected group
    **/
   deleteGroup(index: number): void {
-    this.groupList.splice(index, 1); // delete row from table
+    //this.groupList.splice(index, 1); // delete row from table
     const id = this.groupList[index].id;
-    this.groupsService.deleteGroupFromlist(id).subscribe(res => { });
+    this.groupsService.deleteGroupFromlist(id).subscribe(
+      (res) => {
+        this.toastrService.success( 'Group Deleted', 'Deleted...', {
+          timeOut: 2000,
+        });
+      });
     this.router.navigate(['group', 'group-list']);
   }
 
@@ -106,7 +115,7 @@ export class GroupListComponent implements OnInit {
           // This api call for geting the name of user by user id
           this.groupsService.getUserNameByID(groupListItem.createdBy).subscribe(
             (res) => {
-              groupListItem.createdBy = res;
+              groupListItem.createdBy = res.userName;
             },
             (error) => {
               this.toastrService.success(error.error.error.message, 'Error', {
@@ -123,10 +132,10 @@ export class GroupListComponent implements OnInit {
                   // This api call for geting the name of user by user id
                   this.groupsService.getUserNameByID(groupMembersList.userId).subscribe(
                     (res) => {
-                    groupMembersList.name = res;
+                    groupMembersList.name = res.userName;
                   },
                   (error)=>{
-                    this.toastrService.success(error.error.error.message, 'Error', {
+                    this.toastrService.error(error.error.error.message, 'Error', {
                       timeOut: 2000,
                     });
                   })
@@ -196,5 +205,8 @@ export class GroupListComponent implements OnInit {
       }
     );
   }
+
+
+
 }
 

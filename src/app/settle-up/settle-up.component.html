@@ -1,3 +1,9 @@
+<ng-container *ngIf="ownedDetails.length === 0">
+  <h3 class="text-center">
+    No settle amount yet
+  </h3>
+</ng-container>
+<ng-container *ngIf="ownedDetails.length > 0">
 <div class="settle-up-container">
   <div class="table-responsive table-bordered">
     <table class="table table-hover">
@@ -26,12 +32,14 @@
           <td>{{item.ownedByName}}</td>
           <td>{{item.amount}}</td>
           <td>
-           
+
               <button type="button" class="btn btn-success" (click)="getPaymentID(item.paymentId)">Settle Up</button>
-            
+
           </td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
+</ng-container>
+

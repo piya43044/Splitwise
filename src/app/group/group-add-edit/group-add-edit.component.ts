@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { GroupMembersToAdd, GroupResult, Groups, UserProfile } from 'src/app/models/groups';
+import { EditGroup, FriendList, GroupMembers, GroupMembersToAdd, GroupResult, Groups, UserProfile } from 'src/app/models/groups';
+import { UserDetail } from 'src/app/models/userDetail.model';
 import { GroupsService } from 'src/app/services/groups.service';
 
 @Component({
@@ -16,32 +17,41 @@ export class GroupAddEditComponent implements OnInit {
   addMembersForm !: FormGroup;
 
   isGroupAddActive: Boolean = false;
-  getActivatedRouteParam !: number;
+  getActivatedRouteParam !: string;
+  getSelectedGroupIndex !: number;
   isGroupCreated: boolean = false;
+
+  groupId: string = '';
+  friendList: FriendList[] = []
 
   GroupResult !: GroupResult;
   userProfile!: UserProfile;
+  userId !: string;
+
+
 
   // Constructor
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private groupsService: GroupsService,
-    private toastrService: ToastrService
-  ) { }
+    private toastrService: ToastrService,
+    private formBuilder: FormBuilder
+  ) {
+
+    // FriendList function call to get users list
+    this.getUserList();
+  }
 
   // ngOnInit method
   ngOnInit(): void {
     /** Form group for add group page */
-    this.addGroupForm = new FormGroup({
+    this.addGroupForm = this.formBuilder.group({
       groupName: new FormControl('', [Validators.required]),
       about: new FormControl(''),
-      groupMember: new FormArray([
-        new FormGroup({
-          userId: new FormControl('3a0ba79a-0f40-0dd1-4e91-9ed501777180')
-        })
-      ]),
-    })
+      groupMember: this.buildGroupMembers()
+    });
+
 
     /** form group add members to group */
     this.addMembersForm = new FormGroup({
@@ -52,7 +62,8 @@ export class GroupAddEditComponent implements OnInit {
 
     /** get activatedRoute parameter using observable */
     this.activatedRoute.params.subscribe((param) => {
-      this.getActivatedRouteParam = Number(param['routerParam']);
+      this.getActivatedRouteParam = param['routerParam'];
+      this.getSelectedGroupIndex = Number(param['routerParam']);
 
       if (this.getActivatedRouteParam === undefined) {
         this.isGroupAddActive = true;
@@ -64,25 +75,35 @@ export class GroupAddEditComponent implements OnInit {
 
     /** On click of group edit button it will set current details of group to textbox */
     if (this.getActivatedRouteParam != undefined) {
-      const data = this.getEditDataToEdit(this.getActivatedRouteParam );
+      console.log(this.getSelectedGroupIndex);
+
+      const data = this.getEditDataToEdit(this.getSelectedGroupIndex);
+      console.log(data.groupMembers);
       this.addGroupForm.patchValue({
         groupName: data.name,
         about: data.about,
-        groupMember: [{
-          userId: data.createdBy
-        }]
       })
     }
 
-
+    this.friendList = this.groupsService.friendList;
 
   }// OnInit method end
+
+  buildGroupMembers(): FormArray {
+    const groupMembers = this.friendList.map(() => this.formBuilder.group({
+      userId: ''
+    }));
+    return this.formBuilder.array(groupMembers);
+  }
+
+
 
   /** Add member name and member email formgroup in add group form
    * @returns FormGroup
    **/
   addMembersToGroupForm(): FormGroup {
     return new FormGroup({
+      groupId: new FormControl(this.groupId),
       memberName: new FormControl(''),
       memberEmail: new FormControl('')
     })
@@ -105,24 +126,26 @@ export class GroupAddEditComponent implements OnInit {
   /** Get groupMember FromArray
    *  @returns FromArray returns groupMembers
    **/
-  get groupMembers(): FormArray {
-    return this.addMembersForm.get('groupMembers') as FormArray;
+  get groupMember(): FormArray {
+    return this.addGroupForm.get('groupMember') as FormArray;
   }
 
-  /** Add member field in form
-   *  on click of add menber button
-   **/
-  addMemberNameAndEmailField(): void {
-    this.groupMembers.push(this.addMembersToGroupForm());
+  onMemberSelectionChange(event: any, member: string) {
+    const selectedMembers = this.addGroupForm.get('groupMember') as FormArray;
+
+    if (event.target.checked) {
+      const newMember = this.formBuilder.group({
+        userId: member
+      });
+      selectedMembers.push(newMember);
+    } else {
+      const index = selectedMembers.controls.findIndex(control => control.value.userId === member);
+      if (index >= 0) {
+        selectedMembers.removeAt(index);
+      }
+    }
   }
 
-  /** Delete member field in form
-   *  on click of Delete button
-   *  @param index index of field which is selected to delete
-   **/
-  deleteMemberNameAndEmailField(i: number): void {
-    this.groupMembers.removeAt(i);
-  }
 
   /** create group method to get data from add group form
    * and send to post api call function
@@ -131,33 +154,59 @@ export class GroupAddEditComponent implements OnInit {
     const data: Groups = {
       name: this.groupName?.value as string,
       about: this.about?.value as string,
-      groupMembers: [{
-        userId: "3a0ba79a-0f40-0dd1-4e91-9ed501777180"
-      }]
+      groupMembers: this.groupMember?.value
     }
 
     /**  Create group Api call from group service */
     this.groupsService.createGroup(data).subscribe(
       (res) => {
-      this.toastrService.success('Group created successfully!', 'Success', {
-        timeOut: 2000,
-      });
-      this.isGroupCreated = true;
-    },
+        this.toastrService.success('Group created successfully!', 'Success', {
+          timeOut: 2000,
+        });this.router.navigate(['group/group-list'])
+
+      },
       (error) => {
-        this.toastrService.success(error.error.error.message, 'Error', {
+        this.toastrService.error(error.error.error.message, 'Error', {
           timeOut: 2000,
         });
-       }
+      }
     );
   }
 
+  /** editGroupData method
+   * to edit group data from
+   * and send to put api call function
+   **/
+
+  editGroupData(){
+    const data : EditGroup= {
+      name: this.groupName?.value as string,
+      about: this.about?.value as string,
+      createdBy: '3a0ba7bc-382f-a3b4-2637-2522d5882429'
+    }
+    const id = this.groupsService.groupList[this.getSelectedGroupIndex].id;
+    this.groupsService.editGroup(data , id).subscribe(
+      (res) => {
+        this.toastrService.success('Group details edited successfully!', 'Success', {
+          timeOut: 2000,
+        });
+        this.router.navigate(['group/group-list']);
+
+      },
+      (error) => {
+        this.toastrService.error(error.error.error.message, 'Error', {
+          timeOut: 2000,
+        });
+      }
+    );
+
+  }
   /** add Members method
    * to get data from add add members form
    * and send to post api call function
    **/
   addMembersToGroup() {
-    const data: GroupMembersToAdd = this.groupMembers.value;
+    const data: GroupMembersToAdd = this.groupMember.value;
 
     /** AddMembers api call from group service */
     this.groupsService.addMembersToGroup(data).subscribe(() => {
@@ -170,20 +219,6 @@ export class GroupAddEditComponent implements OnInit {
           timeOut: 2000,
         });
       });
-  }
-
-
-  /** current user method
-   * to get name of current user
-   * from server through api
-   * @returns string returns current user's name
-   * */
-  getCurrentUser(): string {
-    let currentUSerName: string = '';
-
-    // Current user api call to get current user's name
-    //this.groupsService.getCurrentUser().subscribe((val) => { currentUSerName = val; })
-    return currentUSerName;
   }
 
   /** current user by name method
@@ -205,7 +240,26 @@ export class GroupAddEditComponent implements OnInit {
   getEditDataToEdit(index: number) {
     return this.groupsService.groupList[index]
   }
+
+  /** getUserList method
+   * to get user's list
+   * from server
+   **/
+  getUserList() {
+    this.groupsService.getUserList().subscribe(
+      (res) => {
+        this.groupsService.friendList = res;
+      },
+      (error) => {
+        this.toastrService.error(error.error.error.message, 'Error', {
+          timeOut: 2000,
+        });
+      })
+  }
+
 }
+
+
 
 
 
