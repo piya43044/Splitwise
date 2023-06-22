@@ -29,6 +29,7 @@ export class GroupAddEditComponent implements OnInit {
   userId !: string;
 
 
+
   // Constructor
   constructor(
     private router: Router,
@@ -145,6 +146,7 @@ export class GroupAddEditComponent implements OnInit {
     }
   }
 
+
   /** create group method to get data from add group form
    * and send to post api call function
    **/
@@ -255,9 +257,9 @@ export class GroupAddEditComponent implements OnInit {
       })
   }
 
-
-
 }
+
+
 
 
 

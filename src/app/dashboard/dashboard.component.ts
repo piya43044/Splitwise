@@ -68,7 +68,7 @@ export class DashboardComponent implements OnInit {
       this.userName = this.dashboardService.userProfile.userName;
     },
       (error) => {
-        this.toastrService.error('Error in getting Profile details of user ', 'Error', {
+       this.toastrService.error('Error in getting Profile details of user ', 'Error', {
           timeOut: 2000,
         });
       })

@@ -4,6 +4,7 @@ import { Groups, GroupMembers, GroupMembersToAdd, GroupList, GroupListResult, Us
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ExpenseItem } from '../models/expenseItem.model';
 import { GroupItem } from '../models/groupItem.model';
+import { CurrentUserNameByIdResult } from '../models/profile';
 
 
 @Injectable({
