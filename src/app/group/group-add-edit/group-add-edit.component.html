@@ -33,7 +33,7 @@
     </div>
 
     <!-- Group members -->
-      <div class="form-group d-flex flex-column mt-3">
+      <div class="form-group d-flex flex-column mt-3" *ngIf="isGroupAddActive">
         <div formArrayName="groupMember">
           <label>Add Members:</label>
           <div *ngFor="let friend of friendList; let i = index">
@@ -48,7 +48,11 @@
     <div class="d-flex justify-content-end">
       <!-- Save button -->
       <button type="button" class="btn btn-success w-20 h-25" [disabled]="!addGroupForm.valid" [hidden]="isGroupCreated"
-        (click)="createGroup()">Save</button>
+        (click)="createGroup()" *ngIf="isGroupAddActive">Save</button>
+
+      <!-- edit button -->
+      <button type="button" class="btn btn-success w-20 h-25" [disabled]="!addGroupForm.valid" [hidden]="isGroupCreated"
+        (click)="editGroupData()" *ngIf="!isGroupAddActive">Edit</button>
 
       <!-- Cancel button -->
       <button routerLink="/group/group-list" type="button" class="btn btn-danger w-20 h-25"
@@ -56,48 +60,4 @@
     </div>
 
   </form>
-
-  <ng-container *ngIf="false">
-    <form [formGroup]="addMembersForm" (ngSubmit)="addMembersToGroup()">
-      <!-- Group member -->
-      <div class="group-member-container d-flex justify-content-between align-items-center mt-3 mb-3">
-        <label for="group-member">Group Members</label>
-        <button class="btn btn-success" type="button" (click)="addMemberNameAndEmailField()">+ Add member</button>
-      </div>
-
-      <!-- Dynamically group member add-->
-      <ng-container>
-
-        <!-- Group member input fields -->
-        <div formArrayName="groupMembers" *ngFor="let member of groupMembers.controls; let i = index">
-
-          <div class="group-member form-group d-flex justify-content-between" [formGroupName]="i">
-            <!-- Group member name -->
-            <div class="member-name">
-              <input type="text" class="form-control" placeholder="Name" formControlName="memberName">
-            </div>
-
-            <!-- Group member email -->
-            <div class="member-email">
-              <input type="email" class="form-control" placeholder="Email address" formControlName="memberEmail">
-            </div>
-
-            <!-- Delete group member -->
-            <div class="d-flex justify-content-center align-items-center" *ngIf="groupMembers.length>1">
-              <button class="btn btn-danger h-75" type="button" (click)="deleteMemberNameAndEmailField(i)"><i
-                  class='fa fa-trash'></i></button>
-            </div>
-          </div>
-        </div>
-      </ng-container>
-
-      <div class="d-flex justify-content-end">
-        <!-- Save button -->
-        <button type="submit" class="btn btn-success w-20 h-25" [disabled]="!addGroupForm.valid">Save</button>
-
-        <!-- Cancel button -->
-        <button routerLink="/group/group-list" type="button" class="btn btn-danger w-20 h-25">Cancel</button>
-      </div>
-    </form>
-  </ng-container>
 </div>

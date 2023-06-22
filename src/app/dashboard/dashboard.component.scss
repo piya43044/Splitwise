@@ -3,7 +3,7 @@
 
 /* Dashboard container */
 .dashboard-container {
-  width: 750px;
+width : 100%;
 
   /* Dashboard body */
   .dashboard-body {
@@ -51,13 +51,13 @@
 /* Media querys */
 @media screen and (max-width: 1000px) {
   .dashboard-container {
-    width: 500px;
+    width: 100%;
   }
 }
 
 @media screen and (max-width: 700px) {
   .dashboard-container {
-    width: 300px;
+    width: 100%;
 
     /* Add expense and settle up button */
     .dashboard-header {
@@ -81,7 +81,7 @@
 
 @media screen and (max-width: 300px) {
   .dashboard-container {
-    width: 200px;
+    width: 100%;
 
     /* Add expense and settle up button */
     .expense-settleup {

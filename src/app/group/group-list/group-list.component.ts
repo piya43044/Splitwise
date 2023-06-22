@@ -115,7 +115,7 @@ export class GroupListComponent implements OnInit {
           // This api call for geting the name of user by user id
           this.groupsService.getUserNameByID(groupListItem.createdBy).subscribe(
             (res) => {
-              groupListItem.createdBy = res;
+              groupListItem.createdBy = res.userName;
             },
             (error) => {
               this.toastrService.success(error.error.error.message, 'Error', {
@@ -132,10 +132,10 @@ export class GroupListComponent implements OnInit {
                   // This api call for geting the name of user by user id
                   this.groupsService.getUserNameByID(groupMembersList.userId).subscribe(
                     (res) => {
-                    groupMembersList.name = res;
+                    groupMembersList.name = res.userName;
                   },
                   (error)=>{
-                    this.toastrService.success(error.error.error.message, 'Error', {
+                    this.toastrService.error(error.error.error.message, 'Error', {
                       timeOut: 2000,
                     });
                   })

@@ -5,6 +5,13 @@ export interface Groups {
   groupMembers: GroupMembers[];
 }
 
+/** Group interface with attributes of group */
+export interface EditGroup {
+  name: string;
+  about: string;
+  createdBy : string;
+}
+
 /**  GroupGroupMembers interface with attributes of GroupMembers */
 export interface GroupMembers {
   userId: string;
@@ -35,6 +42,7 @@ export interface GroupMembersResult {
   extraProperties: {};
   concurrencyStamp: string;
   id: string;
+  isMember: boolean;
 }
 
 /** GroupMembersToAdd interface with attributes of Group Members of group */
@@ -81,4 +89,5 @@ export interface UserProfile {
 export interface FriendList{
   id: string;
   userName: string;
+  email: string;
 }

@@ -6,7 +6,7 @@
     border-radius: 15px;
     box-shadow: 0 5px 15px $off-black;
     padding: 20px;
-    width: 600px;
+
 
     /* Buttons */
     .btn {
@@ -16,7 +16,7 @@
 
 /* Media query */
 @media screen and (max-width: 900px) {
-    
+
     .group-container {
         width: auto;
     }
@@ -35,6 +35,6 @@
         .group-member {
             flex-direction: column;
         }
-        
+
     }
 }

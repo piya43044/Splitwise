@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
-import { Groups, GroupMembers, GroupMembersToAdd, GroupList, GroupListResult, UserProfile, GroupMembersResult, GroupResult, FriendList } from '../models/groups';
+import { Groups, GroupMembers, GroupMembersToAdd, GroupList, GroupListResult, UserProfile, GroupMembersResult, GroupResult, FriendList, EditGroup } from '../models/groups';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ExpenseItem } from '../models/expenseItem.model';
 import { GroupItem } from '../models/groupItem.model';
-import { CurrentUserNameByIdResult } from '../models/profile';
 
 
 @Injectable({
@@ -24,11 +23,22 @@ export class GroupsService {
 
   /**create group function to call post api
    * and send group details to server
+   * @param data of group to add
    * @returns Group details
    **/
   createGroup(data: Groups): Observable<GroupResult> {
     const createGroupURL: string = this.baseURL+'/api/app/group';
     return this.http.post<GroupResult>(createGroupURL, data, {withCredentials : true});
+  }
+
+  /**edit group function to call post api
+   * and send group details to server
+   * @param data of group to edit
+   * @returns Group details
+   **/
+  editGroup(data: EditGroup , id: string): Observable<GroupResult> {
+    const editGroupURL: string = this.baseURL+'/api/app/group/'+id;
+    return this.http.put<GroupResult>(editGroupURL, data, {withCredentials : true});
   }
 
   /** add members to group function to call post api
@@ -89,9 +99,9 @@ export class GroupsService {
    * @param id : user id to get name of user
    * @returns current user's name
    **/
-  getUserNameByID(id: string): Observable<string> {
-    const currentUserURL = this.baseURL+'/api/app/find-the-user-name/user-name-by-id/'+id;
-    return this.http.get(currentUserURL, { withCredentials: true, responseType: 'text' });
+  getUserNameByID(id: string): Observable<FriendList> {
+    const currentUserURL = this.baseURL+'/api/app/find-the-user-name/user-by-id/'+id;
+    return this.http.get<FriendList>(currentUserURL, { withCredentials: true });
   }
 
   /** CurrentUserDetails function to call get api
